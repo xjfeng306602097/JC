@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>用户日志</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">Search</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-row layui-form" lay-filter="userLogSearch" id="userLogSearch">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Time</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" name="createTime" id="createTime" placeholder="yyyy-MM-dd - yyyy-MM-dd" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Event</label>
+                                            <div class="layui-input-inline">
+                                                <select name="type" lay-filter="type">
+                                                    <option value="">ALL</option>
+                                                </select>
+                                            </div>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="content" placeholder="" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Username</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="userName" placeholder="Username" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">IP</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="userIp" placeholder="IP" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-userLog-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-userLog-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-row">
+                            <table class="layui-table" id="content-userLog-list" lay-filter="content-userLog-list"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.all.js?t={$js_timestamp}"></script>
+    <script src="../js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/user/log.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

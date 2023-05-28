@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dict</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="sys:dict:search">
+			<div class="layui-col-sm12">
+				<div class="layui-card">
+					<div class="layui-collapse">
+						<div class="layui-colla-item">
+		    				<h2 class="layui-colla-title">Search</h2>
+		    				<div class="layui-colla-content layui-show">
+			    				<div class="layui-row layui-form" lay-filter="dictSearch" id="dictSearch">
+                			        <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Lang</label>
+                                            <div class="layui-input-inline">
+                                                <div id="lang"></div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Status</label>
+                                            <div class="layui-input-inline">
+                                                <select name="status">
+                                                    <option value="">Select</option>
+                                                    <option value="1">1 ON</option>
+                                                    <option value="0">0 OFF</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Name</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="name" placeholder="Name" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Code</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="code" placeholder="Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-dict-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-dict-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15" permission="sys:dict:list">
+			<div class="layui-col-sm12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+                        <script type="text/html" id="dictToolbar">
+                            <div class="layui-btn-container">
+                                <button type="button" class="layui-btn" lay-event="add" permission="sys:dict:add">Add</button>
+                                <button type="button" class="layui-btn layui-btn-normal" lay-event="edit" permission="sys:dict:edit">Edit</button>
+                                <button type="button" class="layui-btn layui-btn-danger" lay-event="delete" permission="sys:dict:delete">Delete</button>
+                            </div>
+                        </script>
+                        <div class="layui-row">
+                            <table class="layui-table" id="content-dict-list" lay-filter="content-dict-list">
+                            <script type="text/html" id="content-dict-list-status">
+                                {{# if (layui.common.permission.verify('sys:dict:switchStatus')) { }}
+                                <input type="checkbox" name="status" {{ d.status == 1 ? 'checked' : '' }} value="{{d.id}}" lay-skin="switch" lay-filter="switchStatus" lay-text="ON|OFF">
+                                {{# } else { }}
+                                <input type="checkbox" name="status" {{ d.status == 1 ? 'checked' : '' }} value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" disabled>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-dict-list-child">
+                                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="child" permission="sys:dict:child">View</a>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+	<script src="../js/base.js?t={$js_timestamp}"></script>
+	<script src="../js/dict/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

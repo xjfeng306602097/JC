@@ -1,0 +1,39 @@
+{
+    "10101": "Selection Tool",
+    "10102": "Direct Selection Tool",
+    "10103": "Hand Tool",
+
+    "10104":"Rectangle Tool",
+    "10105":"Line Segment Tool",
+    "10106":"Arrow Tool",
+    "10107":"Ellipse Tool",
+    "10108":"Triangle Tool",
+    "10109":"Star Tool",
+    "10110":"Polygon Tool",
+
+    "10114":"Type Tool (T)",
+    "10115":"Picture (P)",
+    "10116":"Page No (D)",
+    "10117":"Backgroup Image",
+    "10118":"Price Tag",
+    "10119":"Symbol Image",
+    "10120":"Other Image",
+
+    
+
+
+    "10201": "Layer",
+
+    "10211": "Total Pages",
+    "10212": "New Page",
+
+
+
+    "10202": "Component",
+    "10203": "Label",
+    "10204": "Element",
+
+    "20001": "",
+    
+    "90001": ""
+} 

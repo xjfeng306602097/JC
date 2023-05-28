@@ -1,0 +1,1 @@
+对layui.layedit的拓展，基于layui v2.4.3. 增加了HTML源码模式，图片插入功能添加alt属性（layupload），视频插入功能，全屏功能，段落、字体颜色设置功能。

@@ -1,0 +1,130 @@
+/** 颜色选择器 **/
+.layui-coloreditor{width: 26px; height: 26px; border: 1px solid #eee; padding: 5px; border-radius: 2px; line-height: 24px; display: inline-block; cursor: pointer; transition: all .3s; -webkit-transition: all .3s;}
+.layui-coloreditor:hover{border-color: #d2d2d2;}
+.layui-coloreditor.layui-coloreditor-lg{width: 34px; height: 34px; line-height: 32px;}
+.layui-coloreditor.layui-coloreditor-sm{width: 24px; height: 24px; line-height: 22px;}
+.layui-coloreditor.layui-coloreditor-xs{width: 22px; height: 22px; line-height: 20px;}
+
+.layui-coloreditor-trigger-bgcolor{display: block; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==);  border-radius: 2px;}
+.layui-coloreditor-trigger-span{display: block; height: 100%; box-sizing: border-box; border: 1px solid rgba(0,0,0,.15); border-radius: 2px; text-align: center;}
+.layui-coloreditor-trigger-i{display: inline-block; color: #FFF; font-size: 12px;}
+.layui-coloreditor-trigger-i.layui-icon-close{color: #999;}
+
+.layui-coloreditor-main{position: absolute; left: -999999px; top: -999999px; z-index: 66666666; width: 280px; margin: 5px 0; padding: 7px; background: #FFF; border: 1px solid #d2d2d2; border-radius: 2px; box-shadow: 0 2px 4px rgba(0,0,0,.12);}
+.layui-coloreditor-main-wrapper{height: 180px; position: relative;}
+.layui-coloreditor-basis{width: 260px; height: 100%; position: relative;}
+.layui-coloreditor-basis-white{width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: linear-gradient(90deg, #FFF, hsla(0,0%,100%,0));}
+.layui-coloreditor-basis-black{width: 100%; height: 100%; position: absolute; top: 0; left: 0; background: linear-gradient(0deg, #000, transparent);}
+.layui-coloreditor-basis-cursor{width: 10px; height: 10px; border: 1px solid #FFF; border-radius: 50%; position: absolute; top: -3px; right: -3px; cursor: pointer;}
+.layui-coloreditor-side{position: absolute; top: 0; right: 0; width: 12px; height: 100%; background: linear-gradient(#F00, #FF0, #0F0, #0FF, #00F, #F0F, #F00);}
+.layui-coloreditor-side-slider{width: 100%; height: 5px; box-shadow: 0 0 1px #888888; box-sizing: border-box; background: #FFF; border-radius: 1px; border: 1px solid #f0f0f0; cursor: pointer; position: absolute; left: 0;}
+.layui-coloreditor-main-alpha{display: none; height: 12px; margin-top: 7px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)}
+.layui-coloreditor-alpha-bgcolor{height: 100%; position: relative;}
+.layui-coloreditor-alpha-slider{width: 5px; height: 100%; box-shadow: 0 0 1px #888888; box-sizing: border-box; background: #FFF; border-radius: 1px; border: 1px solid #f0f0f0; cursor: pointer; position: absolute; top: 0;}
+.layui-coloreditor-main-pre{padding-top: 7px; font-size: 0;}
+.layui-coloreditor-pre{width: 20px; height: 20px;  border-radius: 2px; display: inline-block; margin-left: 6px; margin-bottom: 7px; cursor: pointer;}
+.layui-coloreditor-pre:nth-child(11n+1){margin-left: 0;}
+.layui-coloreditor-pre-isalpha{background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)}
+.layui-coloreditor-pre.layui-this{box-shadow: 0 0 3px 2px rgba(0,0,0,.15);}
+.layui-coloreditor-pre > div{height: 100%; border-radius: 2px;}
+.layui-coloreditor-main-input{text-align: right; padding-top: 7px;}
+.layui-coloreditor-main-input .layui-btn-container .layui-btn{margin: 0 0 0 10px;}
+.layui-coloreditor-main-input div.layui-inline{float: left; margin-right: 10px; font-size: 14px;}
+.layui-coloreditor-main-input input.layui-input{width: 150px; height: 30px; color: #666;}
+
+.layui-coloreditor.layui-coloreditor-add {
+    width: 32px;
+    height: 32px;
+    border: 0px;
+    padding: 2px;
+    line-height: 34px;
+    border-radius: 0px;
+}
+
+.layui-coloreditor-main {
+    width: 500px;
+}
+
+.layui-coloreditor-basis {
+    width: 280px;
+}
+
+.layui-coloreditor-side {
+    left: 285px;
+    right: unset;
+    height: 249px;
+    top: 3px;
+}
+
+.layui-coloreditor-main-box {
+    width: 100%;
+    display: table;
+    position: relative;
+}
+
+.layui-coloreditor-title {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    color: #333;
+    text-align: left;
+    text-indent: 6px;
+    margin-bottom: 4px;
+}
+
+.layui-coloreditor-input-box {
+    display: inline-block;
+    width: 195px;
+    height: 240px;
+    overflow: hidden;
+    padding-top: 10px;
+}
+
+.layui-coloreditor-input-box .layui-form-label {
+    width: 20px;
+    padding: 5px;
+    text-align: center;
+}
+
+.layui-coloreditor-input-box .layui-input {
+    width: 64px;
+    height: 30px;
+    line-height: 30px;
+    display: inline-block;
+}
+
+.layui-coloreditor-input-box .layui-coloreditor-input-row {
+    margin-bottom: 10px;
+}
+
+.layui-coloreditor-input-box .layui-btn-container {
+    width: 100%;
+    margin-top: 50px;
+    text-align: right;
+}
+
+.layui-coloreditor-main-input {
+    display: none;
+}
+
+.layui-coloreditor-main-wrapper {
+    height: 250px;
+    border: 1px solid #ccc;
+    width: 295px;
+    padding: 2px;
+    display: inline-block;
+}
+
+.layui-coloreditor-trigger-span {
+    border: 0px;
+    color: #aa3130;
+    background-color: #fff;
+    font-weight: bold;
+}
+
+.layui-coloreditor-trigger-span:hover {
+    border: 0px;
+    background-color: #aa3130;
+    color: #fff;
+}

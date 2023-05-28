@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Marketing Analysis - Basic</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/layui_exts/xmSelect/xm-select.theme.css" media="all">
+    <link rel="stylesheet" href="../style/marketing/analysis.css" media="all">
+    <style type="text/css">
+        .moreSelect {
+            display: block;
+            line-height: normal;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .moreSelect xm-select {
+            border: none;
+        }
+        .moreSelect xm-select * {
+            font-size: 12px;
+        }
+        .moreSelect xm-select > .xm-select-default {
+            display: none;
+        }
+        .moreSelect xm-select > .xm-body {
+            padding: 0;
+        }
+        .moreSelect xm-select > .xm-body .xm-option {
+            display: inline-flex;
+            background-color: transparent !important;
+        }
+        .moreSelect xm-select > .xm-body .xm-option-content {
+            min-width: 30px;
+            padding-left: 5px;
+            overflow: visible;
+            color: #333;
+        }
+        .echarts-chart-tool {
+            position: absolute;
+            top: 0;
+            right: 0;
+            display: block;
+            width: 100%;
+            padding: 10px 5px;
+            box-sizing: border-box;
+            text-align: right;
+        }
+        /** echarts图表 */
+        #echarts-summaryPV-chart,
+        #echarts-summaryUV-chart,
+        #echarts-summaryNewUV-chart {
+            width: 100%;
+            height: 468px;
+        }
+        #echarts-summaryVisitPageTop5-chart,
+        #echarts-summaryItemClickPageTop5-chart {
+            width: 100%;
+            height: 200px;
+        }
+        #echarts-summaryCustomerType-chart,
+        #echarts-summaryChannel-chart {
+            width: 100%;
+            height: 300px;
+        }
+        #echarts-summaryAverageStay-chart,
+        #echarts-summaryFriends-chart {
+            width: 100%;
+            height: 360px;
+        }
+        #echarts-realTimeVisits-chart,
+        #echarts-realTimeVisitors-chart {
+            width: 100%;
+            height: 360px;
+        }
+        #echarts-summaryPV-chart > div,
+        #echarts-summaryUV-chart > div,
+        #echarts-summaryNewUV-chart > div,
+        #echarts-summaryVisitPageTop5-chart > div,
+        #echarts-summaryItemClickPageTop5-chart > div,
+        #echarts-summaryCustomerType-chart > div,
+        #echarts-summaryChannel-chart > div,
+        #echarts-summaryAverageStay-chart > div,
+        #echarts-summaryFriends-chart > div,
+        #echarts-realTimeVisits-chart > div,
+        #echarts-realTimeVisitors-chart > div {
+            margin: 0 auto !important;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="layui-fluid">
+        <div class="layui-card-group">
+            <div class="layui-card-group-header">
+                <span>Summary</span>
+            </div>
+            <div class="layui-card-group-body">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-lg12">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-body">
+                                <div class="layui-row layui-form" lay-filter="analysisAccessSearch" id="analysisAccessSearch">
+                                    <div class="layui-form-item" style="margin-bottom: 0;">
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" lay-verify="time" name="summaryDate" id="time" placeholder="yyyy-MM-dd - yyyy-MM-dd" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingAnalysisSummary-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingAnalysisSummary-front-export" id="LAY-marketingAnalysisSummary-front-export">
+                                                    Export
+                                                    <i class="layui-icon layui-icon-down layui-font-12"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg8">
+                        <div class="layui-card">
+                            <div class="layui-tab layui-tab-brief" lay-filter="summaryVisitTab">
+                                <ul class="layui-tab-title">
+                                    <li lay-item="summaryPV" class="layui-this">Total visits</li>
+                                    <li lay-item="summaryUV">Unique visits</li>
+                                    <li lay-item="summaryNewUV">New Unique visits</li>
+                                </ul>
+                                <div class="layui-tab-content">
+                                    <div class="layui-tab-item layui-show">
+                                        <div id="echarts-summaryPV-chart"></div>
+                                    </div>
+                                    <div class="layui-tab-item">
+                                        <div id="echarts-summaryUV-chart"></div>
+                                    </div>
+                                    <div class="layui-tab-item">
+                                        <div id="echarts-summaryNewUV-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg4">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">
+                                Top 5 visit page
+                                <div class="layui-card-header-right">
+                                    <div class="sort-tool" title="most" data-chart="echarts-summaryVisitPageTop5-chart" data-sort="desc">
+                                        <span>Sort</span>
+                                        <i class="layui-icon layui-icon-down"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-card-body">
+                                <div id="echarts-summaryVisitPageTop5-chart"></div>
+                            </div>
+                        </div>
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">
+                                Top 5 item click page
+                                <div class="layui-card-header-right">
+                                    <div class="sort-tool" title="most" data-chart="echarts-summaryItemClickPageTop5-chart" data-sort="desc">
+                                        <span>Sort</span>
+                                        <i class="layui-icon layui-icon-down"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-card-body">
+                                <div id="echarts-summaryItemClickPageTop5-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg6">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">Customer Type</div>
+                            <div class="layui-card-body">
+                                <div id="echarts-summaryCustomerType-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg6">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">Channel</div>
+                            <div class="layui-card-body">
+                                <div id="echarts-summaryChannel-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-lg12">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">
+                                Clicks Data
+                                <div class="layui-card-header-right" style="margin-top: 5px;margin-right: -10px;">
+                                    <div class="moreSelect" id="choose-summaryOfClicks-channel"></div>
+                                </div>
+                            </div>
+                            <div class="layui-card-body">
+                                <table id="summary-clicks-list" lay-filter="summary-clicks-list"></table>
+                                <script type="text/html" id="summary-clicks-list-action">
+                                    {if !empty($mmCode)}
+                                    <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="detail">Details</a>
+                                    {/if}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    {if !empty($mmCode)}
+                    <div class="layui-col-lg6">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">Page stay time</div>
+                            <div class="layui-card-body">
+                                <div class="echarts-chart-tool">
+                                    <div class="moreSelect" id="choose-summaryAverageStay-customerType"></div>
+                                    <div class="moreSelect" id="choose-summaryAverageStay-channel"></div>
+                                </div>
+                                <div id="echarts-summaryAverageStay-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {/if}
+                    <div class="layui-col-lg6">
+                        <div class="layui-card" id="">
+                            <div class="layui-card-header">Customer Type Clicks</div>
+                            <div class="layui-card-body">
+                                <div class="echarts-chart-tool">
+                                    <div class="moreSelect" id="choose-summaryFriends-channel"></div>
+                                </div>
+                                <div id="echarts-summaryFriends-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card" id="stat">
+            <div class="layui-card-header">
+                Statistical data
+                <div class="layui-card-header-right">Data updated to <span class="update-time">{:date('Y-m-d 02:05:00')}</span></div>
+            </div>
+            <div class="layui-card-body">
+                <div class="STATS">
+                    <div class="layui-row layui-col-space15">
+                        <div class="layui-col-md4">
+                            <div class="STATS-item layui-bg-gray" stats-item="pv">
+                                <div class="STATS-title">PV</div>
+                                <!-- <div class="STATS-count">0</div> -->
+                                <div class="item-column">
+                                    <div class="item-column-title"></div>
+                                    <div class="item-column-title">Number</div>
+                                    <div class="item-column-title">Chain <br>Difference</div>
+                                    <div class="item-column-title">Chain <br>Ratio</div>
+                                </div>
+                                <div class="item-column" stats-type="yesterday">
+                                    <div class="item-column-label"><i></i>Yesterday</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="week">
+                                    <div class="item-column-label"><i></i>This day last week</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="last_14_days">
+                                    <div class="item-column-label"><i></i>This day last 14 days</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <div class="STATS-item layui-bg-gray" stats-item="uv">
+                                <div class="STATS-title">UV</div>
+                                <!-- <div class="STATS-count">0</div> -->
+                                <div class="item-column">
+                                    <div class="item-column-title"></div>
+                                    <div class="item-column-title">Number</div>
+                                    <div class="item-column-title">Chain <br>Difference</div>
+                                    <div class="item-column-title">Chain <br>Ratio</div>
+                                </div>
+                                <div class="item-column" stats-type="yesterday">
+                                    <div class="item-column-label"><i></i>Yesterday</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="week">
+                                    <div class="item-column-label"><i></i>This day last week</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="last_14_days">
+                                    <div class="item-column-label"><i></i>This day last 14 days</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <div class="STATS-item layui-bg-gray" stats-item="productClick">
+                                <div class="STATS-title">Product clicks</div>
+                                <!-- <div class="STATS-count">0</div> -->
+                                <div class="item-column">
+                                    <div class="item-column-title"></div>
+                                    <div class="item-column-title">Number</div>
+                                    <div class="item-column-title">Chain <br>Difference</div>
+                                    <div class="item-column-title">Chain <br>Ratio</div>
+                                </div>
+                                <div class="item-column" stats-type="yesterday">
+                                    <div class="item-column-label"><i></i>Yesterday</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="week">
+                                    <div class="item-column-label"><i></i>This day last week</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                                <div class="item-column" stats-type="last_14_days">
+                                    <div class="item-column-label"><i></i>This day last 14 days</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                    <div class="item-column-value">-</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card-group">
+            <div class="layui-card-group-header">
+                <span>Real-time</span>
+            </div>
+            <div class="layui-card-group-body">
+                {if !empty($mmCode)}
+                <div class="layui-card" id="">
+                    <div class="layui-card-body">
+                        <div class="layui-row layui-form" lay-filter="analysisAccessSearch" id="analysisAccessSearch">
+                            <div class="layui-form-item" style="margin-bottom: 0;">
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">Current</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="currentMM" value="" placeholder="Current" disabled>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" lay-verify="required" name="currentDate" placeholder="yyyy-MM-dd" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">Compare</label>
+                                    <div class="layui-input-inline">
+                                        <select name="compareMM" lay-verify="required">
+                                            <option value="">None</option>
+                                        </select>
+                                    </div>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" lay-verify="required" name="compareDate" placeholder="yyyy-MM-dd" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-input-inline">
+                                        <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingAnalysisAccess-front-search">
+                                            Compare
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {/if}
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md6">
+                        <div class="layui-card" id="realtime-pv">
+                            <div class="layui-card-header">
+                                PV
+                                <div class="layui-card-header-right">Data updated to <span class="update-time">{:date('Y-m-d H:00:00', strtotime('-1 hour'))}</span></div>
+                            </div>
+                            <div class="layui-card-body">
+                                <div id="echarts-realTimeVisits-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-card" id="realtime-uv">
+                            <div class="layui-card-header">
+                                UV
+                                <div class="layui-card-header-right">Data updated to <span class="update-time">{:date('Y-m-d H:00:00', strtotime('-1 hour'))}</span></div>
+                            </div>
+                            <div class="layui-card-body">
+                                <div id="echarts-realTimeVisitors-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../layuiadmin/echarts/echarts.common.min.js"></script>
+    <script src="../layuiadmin/echarts/echarts.config.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/analysis/panel.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

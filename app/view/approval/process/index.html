@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Approval List</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/layui_exts/xmSelect/xm-select.theme.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="approval:process:search">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">Search</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-row layui-form" lay-filter="approvalProcessSearch" id="approvalProcessSearch">
+                                    <!-- 
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">Workflow</label>
+                                        <div class="layui-input-block">
+                                            <div class="xm-theme-select" id="type"></div>
+                                        </div>
+                                    </div><div class="layui-form-item">
+                                        <label class="layui-form-label">Status</label>
+                                        <div class="layui-input-block">
+                                            <div class="xm-theme-flat" id="status"></div>
+                                        </div>
+                                    </div> -->
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Workflow</label>
+                                            <div class="layui-input-inline">
+                                                <div class="xm-theme-select" id="type"></div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Status</label>
+                                            <div class="layui-input-inline">
+                                                <select name="status">
+                                                    <option value="">Select</option>
+                                                    <option value="0">0 Pending</option>
+                                                    <option value="1">1 Approved</option>
+                                                    <option value="2">2 Reject</option>
+                                                    <option value="99">99 Completed</option>
+                                                    <option value="999">999 Auto Completed</option>
+                                                    <option value="100">100 Closed</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Name</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="name" placeholder="Name" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Code</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="code" placeholder="Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Description</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="description" placeholder="Description" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Apply Time</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" name="createTime" id="createTime" placeholder="yyyy-MM-dd - yyyy-MM-dd" autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-approvalProcess-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-approvalProcess-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15" permission="approval:process:list">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <script type="text/html" id="approvalProcessToolbar">
+                            <div class="layui-btn-container">
+
+                            </div>
+                        </script>
+                        <div class="layui-row">
+                            <table class="layui-table" id="content-approvalProcess-list" lay-filter="content-approvalProcess-list"></table>
+                            <script type="text/html" id="content-approvalProcess-list-status">
+                                {{# if (d.status == '0'){ }}
+                                <span style="color: #1E9FFF;">Pending</span>
+                                {{# } else if (d.status == '1'){ }}
+                                <span style="color: #5FB878;">Approved</span>
+                                {{# } else if (d.status == '2'){ }}
+                                <span style="color: #FF5722;">Reject</span>
+                                {{# } else if (d.status == '99'){ }}
+                                <span style="color: #FFB800;">Completed</span>
+                                {{# } else if (d.status == '999'){ }}
+                                <span style="color: #FFB800;">Auto Completed</span>
+                                {{# } else if (d.status == '100'){ }}
+                                <span style="color: #FFA689;">Closed</span>
+                                {{# } else { }}
+                                <span style="color: #999;">Unknown</span>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-approvalProcess-list-operate">
+                                {{# if (d.status == '999'){ }}
+                                <a class="layui-btn layui-btn-xs layui-btn-primary" lay-event="approve" permission="approval:process:approve">View Detail</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="approve" permission="approval:process:approve">Approve</a>
+                                {{# } }}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/approval/process/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

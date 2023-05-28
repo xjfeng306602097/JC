@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Edit Workflow</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/bootstrap/bootstrap.min.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/layui_exts/xmSelect/xm-select.theme.css" media="all">
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+        html, body {
+            background: #F5F5F7;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .main {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+            overflow-x: scroll;
+            overflow-y: auto;
+            padding-top: 60px;
+            padding-bottom: 30px;
+        }
+        .main * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            padding: 10px 40px;
+            text-align: right;
+        }
+        .zoom {
+            display: flex;
+            position: fixed;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: justify;
+            justify-content: space-between;
+            height: 40px;
+            width: 140px;
+            right: 40px;
+            bottom: 30px;
+            margin-top: 30px;
+            z-index: 10;
+            font-size: 25px;
+        }
+        .zoom span {
+            display: inline-block;
+            width: 40px;
+            line-height: 40px;
+            text-align: center;
+            color: #c1c1cd;
+            background: #FFFFFF;
+            cursor: pointer;
+            border-radius: 5px;
+            user-select: none;
+        }
+        .zoom strong {
+            width: 60px;
+            font-size: 16px;
+            line-height: 40px;
+            color: #484848;
+            text-align: center;
+        }
+        .node-wrap {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0 50px;
+            position: relative;
+        }
+        .node-wrap-box {
+            width: 240px;
+            display: inline-flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: #FFFFFF;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            cursor: pointer;
+            /*border: 1px solid #F5F5F5;*/
+            position: relative;
+        }
+        .btnRemove {
+            position: absolute;
+            top: 8px;
+            right: 5px;
+            display: none;
+            line-height: 1;
+        }
+        #box-all>div:first-child .btnRemove {
+            display: none;
+        }
+        .node-wrap-box:hover {
+            border-color: rgb(50, 150, 250);
+            transition: all .3s;
+        }
+        .node-wrap-box::before {
+            content: "";
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            width: 0;
+            height: 4px;
+            border-style: solid;
+            border-width: 8px 6px 4px;
+            border-color: #cacaca transparent transparent;
+            background: #f5f5f7;
+        }
+        .node-wrap-box.start-node::before {
+            display: none;
+        }
+        .node-wrap-box:hover .btnRemove {
+            display: block;
+        }
+        .node-wrap-box .userEdit {
+            display: inline-block;
+            border-top: 1px solid transparent;
+            border-bottom: 1px dashed transparent;
+        }
+        .node-wrap-box:hover .userEdit {
+            border-bottom: 1px dashed #FFFFFF;
+        }
+        .node-wrap-box .title {
+            border-radius: 4px 5px 0 0;
+        }
+        .node-wrap-box .title i {
+            font-size: inherit;
+            line-height: 1;
+        }
+        .node-wrap-box>div {
+            width: 100%;
+        }
+        .node-wrap-box>div:nth-of-type(1) {
+            padding: 7px 10px;
+            color: white;
+            font-size: 12px;
+            position: relative;
+        }
+        .node-wrap-box>div:nth-of-type(2) {
+            padding: 15px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .node-wrap-box>div p {
+            margin-bottom: 0;
+        }
+        .node-add-btn-box {
+            position: relative;
+        }
+        .node-add-btn-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            margin: auto;
+            width: 2px;
+            height: 100%;
+            background-color: #cacaca;
+        }
+        .add-node-btn {
+            padding: 30px 0;
+        }
+        .top-left-cover-line {
+            position: absolute;
+            height: 3px;
+            width: 50%;
+            background-color: #f5f5f7;
+            top: -2px;
+            left: -1px;
+        }
+        .bottom-left-cover-line {
+            position: absolute;
+            height: 3px;
+            width: 50%;
+            background-color: #f5f5f7;
+            bottom: -2px;
+            left: -1px;
+        }
+        .top-right-cover-line {
+            position: absolute;
+            height: 3px;
+            width: 50%;
+            background-color: #f5f5f7;
+            top: -2px;
+            right: -1px;
+        }
+        .bottom-right-cover-line {
+            position: absolute;
+            height: 3px;
+            width: 50%;
+            background-color: #f5f5f7;
+            bottom: -2px;
+            right: -1px;
+        }
+        .add-node-btn button {
+            border-radius: 50%;
+            background: rgb(50, 150, 250);
+            font-size: 25px;
+            border-color: rgb(50, 150, 250);
+            width: 35px;
+            line-height: 33px;
+            padding: 0;
+            margin: 0;
+        }
+        .add-node-btn button:hover {
+            background: rgb(50, 150, 250);
+            border-color: rgb(50, 150, 250);
+            transform: scale(1.2);
+            transition: all .3s
+        }
+        .branch-box-wrap {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .branch-box {
+            display: flex;
+            border-bottom: 2px solid #cccccc;
+            border-top: 2px solid #cccccc;
+            position: relative;
+        }
+        .add-branch {
+            position: absolute;
+            display: inline-block;
+            left: 50%;
+            top: -15px;
+            z-index: 1;
+            border-radius: 15px;
+            color: rgb(50, 150, 250);
+            border: none;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            background: #FFFFFF;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            line-height: 20px;
+            transform: translateX(-50%);
+        }
+        .col-box {
+            display: inline-flex;
+            background: #f5f5f7;
+            ;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .col-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            margin: auto;
+            width: 2px;
+            height: 100%;
+            background-color: #cacaca;
+        }
+        .condition-node-box {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 30px 50px 0 50px;
+        }
+        .auto-judge {
+            background-color: #FFFFFF;
+            border-radius: 5px;
+            width: 220px;
+            position: relative;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+            cursor: pointer;
+            border: 1px solid #FFFFFF;
+        }
+        .auto-judge:hover {
+            border-color: rgb(50, 150, 250);
+            transition: all .3s;
+        }
+        .title-wrapper {
+            padding: 5px 0;
+            background-color: #ffffff;
+            border-radius: 5px 5px 0 0;
+            color: #15bc83;
+            font-size: 12px;
+            position: relative;
+        }
+        .auto-judge:hover .btnRemove {
+            display: block;
+        }
+        .auto-judge>div:nth-of-type(2) {
+            padding: 15px 10px;
+        }
+        .condition-node-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 2px;
+            height: 100%;
+            background-color: #cacaca;
+        }
+        .condition-input {
+            line-height: 19px;
+            height: 18px;
+            display: inline-block;
+            width: 135px;
+            padding: 0;
+            padding-left: 5px;
+            font-size: 12px;
+            border: none;
+        }
+        .end-node {
+            border-radius: 50%;
+            font-size: 14px;
+            color: rgba(25, 31, 37, .4);
+            text-align: left;
+        }
+        .end-node-circle {
+            width: 10px;
+            height: 10px;
+            margin: auto;
+            border-radius: 50%;
+            background: #dbdcdc;
+        }
+        .end-node-text {
+            margin-top: 5px;
+            text-align: center;
+        }
+        .contene-open-choose {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+        }
+        .add-node-btn-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            margin: auto;
+            width: 2px;
+            height: 100%;
+            background-color: #cacaca;
+        }
+        .item-wrapper {
+            cursor: pointer;
+            border: 1px solid #e2e2e2;
+            border-radius: 50%;
+        }
+        .item-wrapper:hover {
+            transform: scale(1.15);
+            transition: all .3s
+        }
+        .item-wrapper span {
+            display: inline-block;
+            padding: 16px;
+            font-size: 30px;
+            line-height: 1;
+        }
+        .item-user {
+            padding: 0;
+            margin: 0;
+            padding-top: 5px;
+        }
+        #addtooltip-box {
+            display: flex;
+            text-align: center;
+        }
+        #addtooltip-box>div:nth-of-type(1) span {
+            color: #ff943e;
+        }
+        #addtooltip-box>div:nth-of-type(2) span {
+            color: #3296fa;
+        }
+        #addtooltip-box>div:nth-of-type(3) span {
+            color: #15bc83;
+        }
+        #addtooltip-box>div {
+            padding: 10px 15px;
+        }
+        #addtooltip-warpper {
+            z-index: 999;
+            display: none;
+            position: fixed;
+            background: #FFFFFF;
+            border: 1px solid #EBEEF5;
+            border-radius: 5px;
+            box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+        }
+        #addtooltip-pointer::after {
+            content: "";
+            border: 8px solid transparent;
+            border-right-color: #FFFFFF;
+            position: absolute;
+            left: -17px;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+       <section>
+            <!-- 工具栏 -->
+            <div class="toolbar">
+                <button class="layui-btn layui-btn-warm" id="saveWorkflow" permission="approval:workflow:flowchart:save">Save</button>
+            </div>
+            <!-- 这里是缩放 -->
+            <div class="zoom" data-zoom="10">
+                <span onclick="zoomOut();"> - </span>
+                <strong class="zoom-scale">100%</strong>
+                <span onclick="zoomIn();"> + </span>
+            </div>
+            <div id="box-all" style="transform: scale(1); transform-origin: 50% 0px 0px;">
+                <!-- 流程制作开始 -->
+                <div>
+                    <!-- 发起人 -->
+                    <div class="node-wrap">
+                        <div class="node-wrap-box start-node">
+                            <div class="title" style="background: #5FB878;">
+                                <i class="layui-icon layui-icon-circle"></i>
+                                <span class="node-title">Start</span>
+                            </div>
+                            <div>
+                                <span>ALL</span>
+                                <i class="layui-icon layui-icon-right"></i>
+                            </div>
+                        </div>
+                        <div class="node-add-btn-box">
+                            <div class="add-node-btn">
+                                <button class="btn btn-primary btn-sm addNodeClick" permission="approval:workflow:flowchart:save">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 流程结束 -->
+                <div class="end-node">
+                    <div class="end-node-circle"></div>
+                    <div class="end-node-text">
+                        End
+                    </div>
+                </div>
+            </div>
+       </section>
+    </div>
+    <div id="addtooltip-warpper">
+        <div id="addtooltip-box">
+            <div>
+                <div class="item-wrapper" data-addType="1">
+                    <span class="layui-icon layui-icon-friends"></span>
+                </div>
+                <p class="item-user">Reviewer</p>
+            </div>
+        </div>
+        <!-- 三角指针 -->
+        <div id="addtooltip-pointer">
+
+        </div>
+    </div>
+    <script type="text/html" id="addNodeTpl">
+        <div>
+            <div class="node-wrap">
+                <div class="node-wrap-box {{ d.step == 1 ? 'start-node' : '' }}">
+                    <div class="title" style="background: {{ d.color || 'rgb(255, 148, 62)' }};">
+                        <i class="layui-icon layui-icon-{{ d.icon || 'friends' }}"></i>
+                        <span class="node-title">{{ d.title }}</span>
+                        <i class="layui-icon layui-icon-close btnRemove" permission="approval:workflow:flowchart:save"></i>
+                    </div>
+                    <div>
+                        <span class="node-user">{{ d.user }}</span>
+                        <i class="layui-icon layui-icon-right"></i>
+                    </div>
+                </div>
+                <!-- 朝下剪头 -->
+                <div class="node-add-btn-box">
+                    <div class="add-node-btn">
+                        <button class="btn btn-primary btn-sm addNodeClick" permission="approval:workflow:flowchart:save">+</button>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </script>
+    <script type="text/html" id="editNodeTpl">
+        <div class="layui-fluid">
+            <div class="layui-form" lay-filter="processNode" id="processNode">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Title</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="required" placeholder="Title" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Role</label>
+                    <div class="layui-input-inline">
+                        <select name="role" lay-verify="required">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                </div>
+                {{# if(d.step == 1){ }}
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Initiate Permission</label>
+                    <div class="layui-input-block">
+                        <div id="choosePermission"></div>
+                        <input type="hidden" name="relatePermission" placeholder="Permission" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                {{# } }}
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Remarks</label>
+                    <div class="layui-input-block">
+                        <textarea name="remark" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-hide">
+                    <button class="layui-btn" lay-submit lay-filter="LAY-processNode-edit-submit" id="LAY-processNode-edit-submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </script>
+    
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../js/jquery/jquery-3.6.0.min.js"></script>
+    <script src="../layuiadmin/bootstrap/bootstrap.min.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/approval/workflow/flowchart.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

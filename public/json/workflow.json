@@ -1,0 +1,25 @@
+{
+	"code": "0000",
+	"data": {
+		"current": 0,
+		"pages": 0,
+		"records": [
+			{
+				"id": 1,
+				"name": "测试",
+				"status": 0,
+				"applicantRole": "MKT",
+				"reviewerRole": "MKT Manager",
+				"deleted": 0,
+				"creator": "zhou",
+				"lastUpdater": "zhou",
+				"gmtCreate": "2022-04-13 12:00:00",
+				"gmtModified": "2022-04-13 12:00:00"
+			}
+		],
+		"size": 0,
+		"total": 0
+	},
+	"msg": "请求成功",
+	"success": true
+}

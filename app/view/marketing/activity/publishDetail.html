@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Marketing Activity Publish Detail</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        html {
+            background-color: #FFF;
+        }
+        #publishList {
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        #publishList .layui-colla-content {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        #publishList .item-tile {
+            float: left;
+        }
+        #publishList .item-content {
+            display: block;
+            padding-left: 10px;
+            border-left: 1px solid #EEE;
+            margin-left: 80px;
+        }
+        #publishList .item-content .layui-btn {
+            vertical-align: bottom;
+        }
+        #publishList .item-content .rebuild-btn,
+        #publishList .item-content .setAppTitle-btn {
+            margin-left: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-collapse" lay-filter="publishList" id="publishList" lay-accordion></div>
+    </div>
+    <script type="text/html" id="channelTpl">
+        {{# if (d.mediaType == 'h5') { }}
+        <div class="layui-colla-item">
+            <div class="layui-colla-title">H5</div>
+            <div class="layui-colla-content">
+                <div class="layui-row layui-col-space10">
+                    {{# if (d.filePath) { }}
+                    <div class="layui-col-sm12">
+                        <div class="item-tile">URL</div>
+                        <div class="item-content">
+                            <a target="_blank" href="{{d.filePath}}">{{d.filePath}}</a>
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Status</div>
+                        <div class="item-content">
+                            {{# if (d.publishStatus == 0 && d.buildTime && ((new Date()).getTime() - Date.parse(d.buildTime)) > 15 * 60 * 1000) { }}
+                            <!-- 超过15分钟显示超时 -->
+                            <span style="color: #FF5722;">Timeout</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 0) { }}
+                            <span>Building</span>
+                            {{# } else if(d.publishStatus == 1) { }}
+                            <span style="color: #5FB878;">Successed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 2) { }}
+                            <span style="color: #FF5722;">Failed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } }}
+                        </div>
+                    </div>
+                    {{# if (d.buildTime) { }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Last Build Time</div>
+                        <div class="item-content" style="margin-left: 110px;">
+                            {{d.buildTime}}
+                        </div>
+                    </div>
+                    {{# } }}
+                    {{# if (layui.common.permission.exist(['marketing:activity:push:email', 'marketing:activity:push:line', 'marketing:activity:push:sms', 'marketing:activity:push:log']) > 0) { }}
+                    <div class="layui-col-sm12">
+                        <div class="item-tile">Push</div>
+                        <div class="item-content">
+                            {{# if(d.sendByEmail == 1) { }}
+                            <span class="layui-btn layui-btn-warm layui-btn-xs pushEmail-btn" data-jobid="{{d.id}}" permission="marketing:activity:push:email">Push Email</span>
+                            {{# } }}
+                            {{# if(d.sendByLine == 1) { }}
+                            <span class="layui-btn layui-btn-warm layui-btn-xs pushLine-btn" data-jobid="{{d.id}}" permission="marketing:activity:push:line">Push LINE</span>
+                            {{# } }}
+                            {{# if(d.sendBySms == 1) { }}
+                            <span class="layui-btn layui-btn-warm layui-btn-xs pushSms-btn" data-jobid="{{d.id}}" permission="marketing:activity:push:sms">Push SMS</span>
+                            {{# } }}
+                            <span class="layui-btn layui-btn-primary layui-btn-xs pushLog-btn" data-jobid="{{d.id}}" permission="marketing:activity:push:log">Logs</span>
+                        </div>
+                    </div>
+                    {{# } }}
+                </div>
+            </div>
+        </div>
+        {{# } else if (d.mediaType == 'app') { }}
+        <div class="layui-colla-item">
+            <div class="layui-colla-title">APP</div>
+            <div class="layui-colla-content">
+                <div class="layui-row layui-col-space10">
+                    {{# if (d.filePath) { }}
+                    <div class="layui-col-sm12">
+                        <div class="item-tile">URL</div>
+                        <div class="item-content">
+                            <a target="_blank" href="{{d.filePath}}">{{d.filePath}}</a>
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Status</div>
+                        <div class="item-content">
+                            {{# if (d.publishStatus == 0 && d.buildTime && ((new Date()).getTime() - Date.parse(d.buildTime)) > 15 * 60 * 1000) { }}
+                            <!-- 超过15分钟显示超时 -->
+                            <span style="color: #FF5722;">Timeout</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 0) { }}
+                            <span>Building</span>
+                            {{# } else if(d.publishStatus == 1) { }}
+                            <span style="color: #5FB878;">Successed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 2) { }}
+                            <span style="color: #FF5722;">Failed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } }}
+                        </div>
+                    </div>
+                    {{# if (d.buildTime) { }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Last Build Time</div>
+                        <div class="item-content" style="margin-left: 110px;">
+                            {{d.buildTime}}
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Title</div>
+                        <div class="item-content">
+                            {{# if(d.appTitle) { }}
+                            {{d.appTitle}}
+                            <a class="layui-btn layui-btn-primary layui-btn-xs setAppTitle-btn" data-jobid="{{d.id}}" data-apptitle="{{d.appTitle}}">change</a>
+                            {{# } else { }}
+                            <a class="layui-btn layui-btn-xs setAppTitle-btn" data-jobid="{{d.id}}" data-apptitle="{{d.appTitle}}">set</a>
+                            {{# } }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{# } else if (d.mediaType == 'pdf') { }}
+        <div class="layui-colla-item">
+            <div class="layui-colla-title">PDF</div>
+            <div class="layui-colla-content">
+                <div class="layui-row layui-col-space10">
+                    {{# if (d.filePath) { }}
+                    <div class="layui-col-sm12">
+                        <div class="item-tile">URL</div>
+                        <div class="item-content">
+                            <a target="_blank" href="{{d.filePath}}">{{d.filePath}}</a>
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Status</div>
+                        <div class="item-content">
+                            {{# if (d.publishStatus == 0 && d.buildTime && ((new Date()).getTime() - Date.parse(d.buildTime)) > 15 * 60 * 1000) { }}
+                            <!-- 超过15分钟显示超时 -->
+                            <span style="color: #FF5722;">Timeout</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 0) { }}
+                            <span>Building</span>
+                            {{# } else if(d.publishStatus == 1) { }}
+                            <span style="color: #5FB878;">Successed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 2) { }}
+                            <span style="color: #FF5722;">Failed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } }}
+                        </div>
+                    </div>
+                    {{# if (d.buildTime) { }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Last Build Time</div>
+                        <div class="item-content" style="margin-left: 110px;">
+                            {{d.buildTime}}
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Size</div>
+                        <div class="item-content">
+                            {{# if (d.pdfSize == 'OS') { }}
+                            Original size
+                            {{# } else { }}
+                            {{d.pdfSize.replace('_', ' x ')}} px
+                            {{# } }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{# } else if (d.mediaType == 'pdf-printing') { }}
+        <div class="layui-colla-item">
+            <div class="layui-colla-title">PDF Printing</div>
+            <div class="layui-colla-content">
+                <div class="layui-row layui-col-space10">
+                    {{# if (d.filePath) { }}
+                    <div class="layui-col-sm12">
+                        <div class="item-tile">URL</div>
+                        <div class="item-content">
+                            <a target="_blank" href="{{d.filePath}}">{{d.filePath}}</a>
+                        </div>
+                    </div>
+                    {{# } }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Status</div>
+                        <div class="item-content">
+                            {{# if (d.publishStatus == 0 && d.buildTime && ((new Date()).getTime() - Date.parse(d.buildTime)) > 15 * 60 * 1000) { }}
+                            <!-- 超过15分钟显示超时 -->
+                            <span style="color: #FF5722;">Timeout</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 0) { }}
+                            <span>Building</span>
+                            {{# } else if(d.publishStatus == 1) { }}
+                            <span style="color: #5FB878;">Successed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } else if(d.publishStatus == 2) { }}
+                            <span style="color: #FF5722;">Failed</span>
+                            <a class="layui-btn layui-btn-primary layui-btn-xs rebuild-btn" data-jobid="{{d.id}}" permission="marketing:activity:publish:rebuild">re build</a>
+                            {{# } }}
+                        </div>
+                    </div>
+                    {{# if (d.buildTime) { }}
+                    <div class="layui-col-sm6">
+                        <div class="item-tile">Last Build Time</div>
+                        <div class="item-content" style="margin-left: 110px;">
+                            {{d.buildTime}}
+                        </div>
+                    </div>
+                    {{# } }}
+                </div>
+            </div>
+        </div>
+        {{# } }}
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/publishDetail.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+.analysis-menu .analysis-menu-search {
+    margin-top: 10px;
+}
+
+.analysis-menu .search-empty {
+    display: none;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.analysis-page {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.product-frame>.layui-side,
+.product-frame>.layui-side .layui-menu {
+    width: 240px;
+}
+
+.product-frame>.layui-side .layui-side-scroll {
+    width: 260px;
+}
+
+.product-frame>.layui-side+.layui-body {
+    left: 240px;
+}
+
+/* 统计数据 */
+.STATS {
+    display: block;
+    padding: 5px 0;
+}
+
+.STATS .STATS-item {
+    position: relative;
+    display: block;
+    border-radius: 4px;
+}
+
+.STATS .STATS-item:nth-child(3n+1) {
+    margin-left: 0;
+}
+
+.STATS .STATS-item .STATS-title {
+    display: block;
+    padding: 10px 15px;
+    border-bottom: 1px solid #F3F3F3;
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+    color: #333;
+}
+
+.STATS .STATS-item .STATS-count {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    display: block;
+    padding: 10px 0;
+    font-size: 18px;
+    line-height: 25px;
+    color: #73DF92;
+}
+
+.STATS .STATS-item .item-column {
+    display: block;
+    padding: 0 15px;
+}
+
+.STATS .STATS-item .item-column:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.STATS .STATS-item .item-column .item-column-title,
+.STATS .STATS-item .item-column .item-column-label,
+.STATS .STATS-item .item-column .item-column-value {
+    float: left;
+    width: 25%;
+    padding: 5px 0;
+}
+
+.STATS .STATS-item .item-column .item-column-title {
+    padding: 8px 0;
+    line-height: 18px;
+    color: #666;
+    text-align: right;
+}
+
+.STATS .STATS-item .item-column .item-column-label {
+    white-space: nowrap;
+    color: #999;
+}
+
+.STATS .STATS-item .item-column .item-column-label i {
+    display: inline;
+    margin-right: 6px;
+    color: #CCCCCC;
+}
+
+.STATS .STATS-item .item-column .item-column-value {
+    text-align: right;
+    color: #666;
+}
+
+/* 颜色  */
+.color-green {
+    color: #73DF92;
+}
+
+.color-red {
+    color: red;
+}
+
+.color-gray {
+    color: #999;
+}
+
+/* 排序工具 */
+.sort-tool {
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    padding-right: 40px;
+    margin-right: -15px;
+    user-select: none;
+    cursor: pointer;
+    background-color: #F9F9F9;
+}
+
+.sort-tool i {
+    font-size: 14px;
+}
+
+/* 时间选择btn  */
+.time-select {
+    font-size: 0;
+}
+
+.time-select button {
+    border: none;
+    background-color: #F6F6F6;
+}
+
+.time-select button.layui-btn-checked {
+    background-color: #EEF2FF;
+    color: #5470C6;
+}
+
+.date-range {
+    display: block;
+    padding: 3px 0;
+    text-align: right;
+}
+
+.date-range .date-range-group {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+}
+
+.date-range .date-range-group:first-child {
+    margin-left: 0;
+}
+
+.date-range .date-range-item {
+    width: 100px;
+}
+
+.date-range .date-range-item.date-range-item-large {
+    width: 180px;
+}
+
+.date-range .date-range-item .layui-input {
+    height: 32px;
+}
+
+.date-range .date-range-item .layui-input[disabled] {
+    border-color: transparent !important;
+}
+
+.date-range .date-range-item .layui-form-select {
+    text-align: left;
+}
+
+.date-range span {
+    display: inline-block;
+    margin: 0 2px;
+}

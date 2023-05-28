@@ -1,0 +1,133 @@
+FROM shaw1993/php8-fpm:latest
+
+COPY start.sh /opt/sh/start.sh
+
+RUN chmod +x /opt/sh/start.sh
+
+# 构建环境开始
+# 备份apt-get官方源
+# RUN cp /etc/apt/sources.list /etc/apt/sources.list.back
+# 恢复apt-get官方源
+RUN (curl http://deb.debian.org/debian --connect-timeout 0.2 && mv /etc/apt/sources.list.back /etc/apt/sources.list && echo '恢复官方源') || echo '使用清华大学源'
+# apt-get国内清华大学源（默认的，UAT环境、生产环境无法使用）
+# RUN echo 'deb http://mirrors.tuna.tsinghua.edu.cn/debian buster main' > /etc/apt/sources.list.d/tsinghua.list
+
+RUN apt-get update
+RUN apt update
+# 更新所有的包
+# RUN apt -y upgrade
+
+# 设置nginx端口
+RUN sed -i '2s/.*listen.*/    listen       8888;/' /etc/nginx/vhost/site.conf
+
+# 查看文件指定行数内容：sed -n '323p' /usr/local/etc/php/php.ini
+# 设置php的禁用函数
+RUN sed -i '323s/disable_functions.*/disable_functions = passthru,system,chroot,chgrp,chown,shell_exec,popen,pcntl_exec,ini_alter,ini_restore,dl,openlog,syslog,readlink,popepassthru,pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,imap_open,apache_setenv/' /usr/local/etc/php/php.ini
+
+# 安装zlib、libpng、jpeg-9e、GD库
+# --安装zlib
+RUN cd /home && \
+curl https://dev-file.makrogo.com/package/zlib-1.2.13.tar.gz -o zlib.tar.gz && \
+tar -xvzf zlib.tar.gz && \
+cd zlib-1.2.13 && \
+./configure && \
+make && make install && \
+# --安装libpng
+cd /home && \
+curl https://dev-file.makrogo.com/package/libpng-1.6.37.tar.gz -o libpng.tar.gz && \
+tar -xvzf libpng.tar.gz && \
+cd libpng-1.6.37 && \
+./configure && \
+make check && \
+make install && \
+ldconfig && \
+# --安装jpeg-9e
+cd /home && \
+curl https://dev-file.makrogo.com/package/jpegsrc.v9e.tar.gz -o jpegsrc.v9e.tar.gz && \
+tar -xf jpegsrc.v9e.tar.gz && \
+cd jpeg-9e && \
+./configure && \
+make && make install && \
+# --链接库
+ranlib /usr/local/lib/libjpeg.a && \
+ldconfig /usr/local/lib && \
+# --安装GD库
+docker-php-ext-install gd && \
+# --清除无用文件
+cd /home && \
+rm -rf zlib-1.2.13 && \
+rm -rf libpng-1.6.37 && \
+rm -rf jpeg-9e && \
+rm -rf zlib.tar.gz && \
+rm -rf libpng.tar.gz && \
+rm -rf jpegsrc.v9e.tar.gz
+
+# 安装libzip
+RUN cd /home && \
+curl https://dev-file.makrogo.com/package/libzip-1.3.2.tar.gz -o libzip.tar.gz && \
+tar -xvzf libzip.tar.gz && \
+cd libzip-1.3.2 && \
+./configure && \
+make && make install && \
+# --清除无用文件
+cd /home && \
+rm -rf libzip-1.3.2 && \
+rm -rf libzip.tar.gz && \
+# --安装zip扩展
+docker-php-ext-install zip
+
+# 方便的zip与unzip
+# RUN apt-get install -y zip unzip
+
+# 安装lcms2开发工具包和ghostscript
+RUN apt-get install -y liblcms2-dev ghostscript
+#  || (cd /home && \
+# curl http://deb.debian.org/debian/pool/main/l/lcms2/liblcms2-2_2.9-3_amd64.deb -o liblcms2-2_2.9-3_amd64.deb && \
+# dpkg -i liblcms2-2_2.9-3_amd64.deb && \
+# curl http://deb.debian.org/debian/pool/main/l/lcms2/liblcms2-dev_2.9-3_amd64.deb -o liblcms2-dev_2.9-3_amd64.deb && \
+# dpkg -i liblcms2-dev_2.9-3_amd64.deb)
+
+# 安装ImageMagick和imagick扩展
+# --安装ImageMagick7.1.0-54版本
+RUN cd /home && \
+curl https://dev-file.makrogo.com/package/ImageMagick-7.1.0-54.tar.gz -o ImageMagick.tar.gz && \
+tar -xvzf ImageMagick.tar.gz && \
+cd ImageMagick-7.1.0-54 && \
+./configure --prefix=/usr/local/imagemagick --disable-hdri && \
+make && make install && \
+cd /home && \
+rm -rf ImageMagick-7.1.0-54 && \
+# --ImageMagick 6.8以上版本目录为/usr/local/include/ImageMagick-X，创建链接
+ln -s /usr/local/imagemagick/include/ImageMagick-7 /usr/local/imagemagick/include/ImageMagick && \
+# --安装imagick-3.7.0版本
+cd /home && \
+curl https://dev-file.makrogo.com/package/imagick-3.7.0.tgz -o imagick.tar.gz && \
+tar -xvzf imagick.tar.gz && \
+mkdir -p /usr/src/php/ext && \
+cd /home && \
+mv imagick-3.7.0 /usr/src/php/ext/imagick && \
+cd /usr/src/php/ext/imagick && \
+/usr/local/bin/phpize && \
+docker-php-ext-configure imagick --with-php-config=/usr/local/bin/php-config --with-imagick=/usr/local/imagemagick && \
+docker-php-ext-install -j$(nproc) imagick && \
+# --清除无用文件
+cd /home && \
+rm -rf ImageMagick.tar.gz && \
+rm -rf imagick.tar.gz && \
+rm -rf package.xml
+
+# RUN kill -USR2 1
+
+# 构建环境结束
+
+ADD . /app/www/site
+
+WORKDIR /app/www/site
+
+RUN chown -R www-data:www-data /app/www/site
+
+RUN chmod a+rwx -R /app/www/site/public
+
+RUN chmod a+rwx -R /app/www/site/runtime
+
+CMD ["/bin/bash"]

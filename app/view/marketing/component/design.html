@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Design Component</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="fileserver" content="{$file_server}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../style/marketing/design.css" media="all">
+
+    <link rel="stylesheet" href="../style/marketing/5.fcc21e7468aaf3d61d8f.css?tn=1" media="all">
+    <link rel="stylesheet" href="../style/marketing/7.fcc21e7468aaf3d61d8f.css?tn=1" media="all">
+    <link rel="stylesheet" href="../style/marketing/9.fcc21e7468aaf3d61d8f.css?tn=1" media="all">
+
+    <link rel="stylesheet" href="../style/marketing/newUI.css" media="all">
+
+</head>
+<body  style="background-color: #fff;"  onselectstart="return false;" unselectable="on"  oncontextmenu="return false;" > 
+<div id="menu" class="menu-x"> 
+    <div class="menu-li" onclick="showGuides()">
+        <span class="menu-name">Smart guides</span> <span class="menu-key">⌘ U</span>
+    </div>
+    <div class="menu-li" onclick="zoomScale(true,-2)">Refresh this page</div>
+    <div class="menu-li" onclick="zoomScale(true,-1)">Fit on screen</div>
+    <div class="menu-li" onclick="zoomScale(false,50)">50%</div>
+    <div class="menu-li" onclick="zoomScale(false,75)">75%</div>
+    <div class="menu-li" onclick="zoomScale(false,100)">100%</div>
+    <div class="menu-li" onclick="zoomScale(false,150)">150%</div>
+    <div class="menu-li" onclick="zoomScale(false,200)">200%</div>
+</div>
+    <!-- 顶部菜单开始 --> 
+    <div class="layui-fluid createTemplatePageTop pageParm" data="">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-row">
+                    <div class="layui-col-xs3">
+                        <div class="grid-demo grid-demo-bg1">
+                            <!-- <div class="appTitle">Component</div> -->
+                            <div class="designTitle">
+                                <div class="mmName">Name</div>
+                         
+                                <div class="line" style="vertical-align: middle;height: 28px;float:none;display: inline-flex;margin-left: 5px;margin-right: 5px;"></div>
+                                <div class="zoomOperate">
+                                    <div class="currentZoom" id="scaleNumber"></div>
+
+                                    <div data-eventkey="" class="_1dJFM _9r-RK _34ZCy _1otVf zoomIcon" style="pointer-events: auto;">
+                                        <div class="_11XjX afPna _2iU7h eg-t6 _2xmCT _3_E0k svgBox" style="pointer-events: none;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <g opacity="1" transform="translate(0 0)  rotate(0 8 8)">
+                                                    <path id="矩形 1 (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(4.869552607606693 4.224633491377972)  rotate(-45 3.125 3.125)" opacity="1" d="M6.25,6.25L6.25,5.25L1,5.25L1,0L0,0L0,5.55C0,5.74 0.07,5.91 0.21,6.04C0.34,6.18 0.51,6.25 0.7,6.25L6,6.25L6.25,6.25Z "></path>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- zoomMenu start -->
+                                    <div class="zoomMenu" id="zoomMenu">
+                                        <div class="">
+                                            <div class="optionInput" >
+                                                <input class="" placeholder="Please enter a zoom ratio" id="zoomInputProcess" value="">
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoomIn">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">Zoom In</div>
+                                                            </div>
+                                                            <div class="menuKey">+</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoomOut">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">Zoom Out</div>
+                                                            </div>
+                                                            <div class="menuKey">-</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="50">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">50%</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>   
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="75">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">75%</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="100">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">100%</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="150">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">150%</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="200">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">200%</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="guides" data-value="true">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">Smart guides</div>
+                                                            </div>
+                                                            <div class="menuKey" style="font-size:12px;">⌘ U</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                            <div class="">
+                                                <div>
+                                                    <div style="padding: 0px 6px;">
+                                                        <div class="menuOption" data-type="zoom" data-value="Fit">
+                                                            <div class="pre"></div>
+                                                            <div class="mentText">
+                                                                <div class="text">Fit on screen</div>
+                                                            </div>
+                                                            <div class="menuKey"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                    <!-- zoomMenu end -->
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="layui-col-xs6">
+                        <div class="grid-demo grid-demo-bg1 fileBtnBox">
+                            <div class="dispelBtn noneClick" id="unDo">
+                            </div>
+                            <div class="redoBtn noneClick" id="toDo">
+                            </div>
+                            <div class="pageButton" id="DesignLine">
+                                <i class="layui-icon layui-icon-slider" title="Reference line"></i>
+                            </div>
+<!--                             <div class="pageEvent RefreshPage">
+                                <i class="layui-icon layui-icon-refresh" title="Refresh this page"></i>
+                            </div>
+                            <div class="pageEvent pageLevel">
+                                <i class="layui-icon layui-icon layui-icon-template-1" title="Level"></i>
+                            </div> -->
+                            
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <div class="grid-demo pageTopBtn">
+                            <button type="button" class="layui-btn layui-btn-danger layui-btn-sm mmBtn" id="saveComponent">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 顶部菜单结束 -->
+
+    <!-- 设计区域开始 -->
+    <div class="design-edit-content">
+        <!-- 左则菜单开始 -->
+        <!--tap模式    -->
+        <div class="edit-tool-panel panel_height"  style="left:38px;">
+            <div class="layui-tab" style="margin-bottom:0px;margin-top: 0px;">
+                <ul class="layui-tab-title">
+                    <li  id="layerTool">Layers</li>
+                    <li id="productElementTool" class="layui-this" style="">Label</li>
+                    <li id="elementTool" style="">Element</li>
+                </ul>
+                <div class="layui-tab-content"  id="tabContent">
+
+                    <div class="layui-tab-item layerTabContent" id="layerTabContent">
+                                            
+                            <div class="panelBox">
+                                <div class="panelContent">
+
+                                    <div class="_3WAhP layerHead" style="height:10px;border-top:0px;">
+                    
+                                    </div>
+
+                                    <div class=" leftMenuListPanel" style="display: ;">
+                                        <div class="layerList">
+                                            <div aria-label="grid" aria-readonly="true" class="ReactVirtualized__Grid ReactVirtualized__List listContent" id="fileMenuList" role="grid" >
+                                                <div class="ReactVirtualized__Grid__innerScrollContainer listGrid" id="pageLayer" role="rowgroup" style="width: auto; max-width: 233px; overflow: hidden; position: relative;">
+
+                                                    <!-- list start -->
+ 
+                                                    <!-- list end -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <!-- page Menu Window Start -->
+
+                            <div class="pageMenu menuWin">
+
+                                <div class="menuOption unlock" data-action="newPage">
+                                    <div class="optionTitle">New Page</div>
+                                </div>
+                                <div class="menuOption unlock" data-action="importPage">
+                                    <div class="optionTitle">Import Page</div>
+                                </div>
+                                <div class="menuOption unlock" data-action="copyPage">
+                                    <div class="optionTitle">Copy Page</div>
+                                </div>
+                                <div class="menuOption unlock dividingLine" data-action="deletePage">
+                                    <div class="optionTitle">Delete Page</div>
+                                </div>
+                                <div class="menuOption unlock" id="pagesDuplicate" data-action="pagesDuplicate">
+                                    <div class="optionTitle">History Version</div>
+                                </div>
+                                <div class="menuOption unlock" id="createDuplicate" data-action="createDuplicate">
+                                    <div class="optionTitle">Create Version</div>
+                                </div>
+
+                            </div>
+
+                            <!-- page Menu Window End -->
+
+
+                        
+
+                        <!-- Layer Area Start -->
+
+
+                        <!-- Layer Area End -->
+
+                    </div>
+                    <div class="layui-tab-item layui-show" id="productElement"></div>
+                    <div class="layui-tab-item">
+                        <div class="menuContent_Title">Base</div>
+                        <div class="baseElement">
+
+                            <div class="layui-col-xs6">
+                                <div class="grid-demo grid-demo-bg1">
+                                    <div class="elementOption insertElement" dname="Picture" dfile="" dtype="Picture">
+                                        <div class="componetTitle">Picture</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6">
+                                <div class="grid-demo grid-demo-bg1">
+                                    <div class="elementOption insertElement" dname="IconElement" dfile="" dtype="IconElement">
+                                        <div class="componetTitle">Icon</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="menuContent_Title">Shape</div>
+                        <div id="shapeElement"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW UX/UI TOOLBAR START -->
+
+        <div id="toolBar" class="lightTheme" >
+
+            <div id="vectorToolsProcess" class="a_c drawToolMenu">
+
+
+                <!-- 鼠标选择工具 -->
+                <div>
+                    <div class="toolOption updateLang act" id="mouseSelection"  data-langCode="10101" data-renderType="2" currentTool="selectComponent" >
+
+                        <div data-eventkey="" class="iconBox"  style="pointer-events: auto;">
+                            <div class="svgBox selectedToolIcon" >
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(0.9400682848031465 1.5265503690643527)  rotate(-10 6.831454581593501 7.040820691408236)" opacity="1" d="M16.4,9.1L4.8,2.8C4.6,2.7,4.4,2.7,4.2,2.7C4,2.7,3.8,2.7,3.6,2.9C3.5,3,3.4,3.1,3.3,3.3    C3.2,3.5,3.2,3.7,3.2,3.9l2.4,13c0,0.2,0.1,0.4,0.3,0.6c0.2,0.2,0.4,0.3,0.6,0.3c0.2,0,0.4,0,0.6-0.1s0.4-0.2,0.5-0.4l2.9-5    l5.7-1.2c0.2,0,0.4-0.2,0.6-0.3c0.2-0.2,0.2-0.4,0.3-0.6c0-0.2,0-0.4-0.1-0.7C16.8,9.3,16.6,9.2,16.4,9.1z"></path></g></g></svg>
+                            </div>
+                        </div>
+                        <div data-eventkey="" class="topMenuPoint" style="pointer-events: auto;">
+                            <div class="pointBox" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 6 6)">
+                                        <path id="✏️" fill-rule="evenodd" fill="currentColor" transform="translate(4 4)  rotate(0 2 2)" opacity="1" d="M4,0L0,4L4,4L4,0Z "></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <!-- push menu window -->
+                        <div class="toolSubMenu" >
+                            <div class="subOption" id="selectComponent">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;">
+                                        <!-- 打勾 -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <g opacity="1" transform="translate(0 0)  rotate(0 8 8)">
+                                                <g opacity="1" transform="translate(2 2)  rotate(0 6 6)">
+                                                    <path id="形状结合" fill-rule="evenodd" fill="currentColor" transform="translate(0.6366642549999142 1.9602259944999787)  rotate(0 5.363335745 4.039774005500001)" opacity="1" d="M3.57,5.82L1.59,3.84C1.3,3.55 0.82,3.55 0.53,3.84L0.53,3.84C0.39,3.98 0.31,4.17 0.31,4.37C0.31,4.57 0.39,4.76 0.53,4.9L3,7.37C3.39,7.76 4.02,7.76 4.41,7.37L10.2,1.59C10.49,1.3 10.49,0.82 10.2,0.53L10.2,0.53C10.06,0.39 9.87,0.31 9.67,0.31C9.47,0.31 9.28,0.39 9.14,0.53L3.85,5.82C3.77,5.9 3.65,5.9 3.57,5.82Z "></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+
+                                <div data-eventkey="move" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(0.9400682848031465 1.5265503690643527)  rotate(-10 6.831454581593501 7.040820691408236)" opacity="1" d="M16.4,9.1L4.8,2.8C4.6,2.7,4.4,2.7,4.2,2.7C4,2.7,3.8,2.7,3.6,2.9C3.5,3,3.4,3.1,3.3,3.3    C3.2,3.5,3.2,3.7,3.2,3.9l2.4,13c0,0.2,0.1,0.4,0.3,0.6c0.2,0.2,0.4,0.3,0.6,0.3c0.2,0,0.4,0,0.6-0.1s0.4-0.2,0.5-0.4l2.9-5    l5.7-1.2c0.2,0,0.4-0.2,0.6-0.3c0.2-0.2,0.2-0.4,0.3-0.6c0-0.2,0-0.4-0.1-0.7C16.8,9.3,16.6,9.2,16.4,9.1z"></path></g></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10101" data-renderType="1">选择工具</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >V</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="subOption" id="mouseGroupBtnTool">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;">
+                                        -- 打勾 --
+                                    </div>
+                                </div>
+
+                                <div data-eventkey="move" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <defs>
+                                                        <rect id="path_0" x="0" y="0" width="20" height="20"></rect>
+                                                    </defs>
+                                                    <g opacity="1" transform="translate(0 0)  rotate(0 10 10)">
+                                                        <g>
+                                                            <path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(0.9400682848031465 1.5265503690643527)  rotate(-36 6.831454581593501 7.040820691408236)" opacity="1" d="M13.55 12.52L7.8 0.61C7.71 0.42 7.58 0.28 7.41 0.17C7.23 0.06 7.04 0 6.83 0C6.63 0 6.44 0.06 6.26 0.17C6.09 0.28 5.95 0.42 5.86 0.6L0.11 12.53C0.01 12.73 -0.02 12.94 0.01 13.17C0.05 13.4 0.15 13.6 0.32 13.76C0.48 13.92 0.67 14.02 0.89 14.06C1.11 14.1 1.32 14.08 1.53 13.99L6.83 11.63L12.14 13.99C12.34 14.08 12.55 14.1 12.78 14.06C13 14.02 13.19 13.92 13.35 13.76C13.51 13.6 13.61 13.4 13.65 13.17C13.68 12.94 13.65 12.73 13.55 12.52ZM1.33 12.76L6.83 1.36L12.33 12.76L6.83 10.31L1.33 12.76Z"></path>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10102" data-renderType="1">直接选择工具</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >A</span>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                            <div class="subOption" id="handCanvas">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                    <g opacity="1" transform="translate(0 0)  rotate(0 10 10)">
+                                                        <path id="并集 (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(2.7375321203776366 1.952768318935341)  rotate(0 6.940252332414139 8.062149999999999)" opacity="1" d="M0.93 10.55L2.64 13.05L3.07 13.64C3.59 14.35 4.22 14.91 4.99 15.34C5.57 15.67 6.19 15.89 6.84 16L6.84 16.03L6.88 16.04L6.88 16.08L7.46 16.08L8.03 16.12L8.03 16.1C8.67 16.08 9.3 15.97 9.9 15.75C10.67 15.47 11.35 15.06 11.95 14.5C12.55 13.95 13.02 13.3 13.35 12.56C13.7 11.79 13.87 10.97 13.87 10.12L13.87 8.14L13.88 8.14L13.88 4.31C13.88 4.25 13.88 4.19 13.87 4.13L13.87 3.7L13.76 3.7C13.76 3.69 13.75 3.68 13.75 3.66C13.66 3.46 13.54 3.29 13.38 3.13C13.06 2.81 12.67 2.64 12.2 2.64C12.01 2.64 11.83 2.67 11.66 2.73C11.58 2.47 11.44 2.23 11.23 2.02C10.9 1.69 10.5 1.53 10.04 1.53Q9.785 1.53 9.56 1.59C9.55 1.4 9.51 1.21 9.43 1.02C9.34 0.82 9.22 0.64 9.06 0.49C8.74 0.16 8.35 0 7.88 0C7.65 0 7.44 0.04 7.23 0.13C7.03 0.22 6.85 0.34 6.7 0.49C6.55 0.64 6.43 0.82 6.34 1.02C6.27 1.18 6.23 1.35 6.22 1.53L5.13 1.53L5.13 1.64C5.11 1.65 5.1 1.65 5.08 1.66C4.88 1.75 4.7 1.87 4.55 2.02C4.22 2.35 4.06 2.75 4.06 3.21L4.06 8.11L2.5 7.25C2.13 7.04 1.75 6.98 1.35 7.06C0.99 7.13 0.68 7.31 0.43 7.59C0.18 7.87 0.04 8.2 0.01 8.56C-0.03 8.96 0.08 9.34 0.32 9.68L0.93 10.55ZM7.55 1.34C7.64 1.25 7.75 1.2 7.88 1.2C8.01 1.2 8.13 1.24 8.22 1.33C8.31 1.43 8.36 1.54 8.36 1.67L8.36 8.16L9.56 8.16L9.56 3.17C9.57 3.05 9.61 2.95 9.7 2.87C9.79 2.78 9.9 2.73 10.04 2.73C10.17 2.73 10.29 2.78 10.38 2.87C10.47 2.96 10.52 3.08 10.52 3.21L10.52 8.16L11.72 8.16L11.72 8.14L11.73 8.14L11.73 4.31C11.73 4.18 11.78 4.07 11.87 3.98C11.96 3.89 12.07 3.84 12.2 3.84C12.33 3.84 12.45 3.89 12.54 3.98C12.61 4.05 12.65 4.13 12.67 4.22L12.67 10.12C12.67 10.8 12.53 11.45 12.26 12.07C11.99 12.66 11.62 13.18 11.14 13.62C10.66 14.07 10.11 14.4 9.5 14.62C9.04 14.78 8.57 14.88 8.08 14.89L8.08 14.88L7.5 14.88C6.82 14.82 6.18 14.63 5.57 14.29C4.96 13.95 4.45 13.5 4.05 12.94L3.62 12.35L1.93 9.87L1.3 8.98C1.23 8.88 1.19 8.77 1.2 8.67C1.21 8.57 1.25 8.47 1.33 8.39C1.4 8.31 1.49 8.26 1.59 8.23C1.7 8.21 1.81 8.23 1.92 8.29L4.29 9.61L4.34 9.63C4.5 9.68 4.65 9.68 4.81 9.63L4.94 9.58L5.04 9.48C5.19 9.34 5.26 9.17 5.26 8.98L5.26 3.21C5.26 3.08 5.31 2.96 5.4 2.87C5.46 2.81 5.53 2.77 5.6 2.75C5.85 2.77 6.01 2.81 6.07 2.87C6.16 2.96 6.21 3.08 6.21 3.21L6.21 8.14L7.41 8.14L7.41 1.67C7.41 1.54 7.46 1.43 7.55 1.34Z"></path>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10103" data-renderType="1">移动视图</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >H</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+           
+                        <!-- push menu window end -->
+
+
+
+                    </div>
+                </div>
+
+                <!-- 绘制图形工具 -->
+                <div>
+                    <div class="toolOption updateLang" id="drawShape" data-langCode="10104" data-renderType="2" currentTool="drawRect">
+
+                        <div  data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                            <div class="svgBox selectedToolIcon" style="/* pointer-events: none; */">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <defs>
+                                        <rect id="path_0" x="0" y="0" width="20" height="20"></rect>
+                                    </defs>
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 10 10)">
+                                        <g>
+                                            <path id="✏️ (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(3.150000000000091 3.150000000000091)  rotate(0 6.8500000000000005 6.8500000000000005)" opacity="1" d="M0 1.6C0 1.16 0.16 0.78 0.47 0.47C0.78 0.16 1.16 0 1.6 0L12.1 0C12.54 0 12.92 0.16 13.23 0.47C13.54 0.78 13.7 1.16 13.7 1.6L13.7 12.1C13.7 12.54 13.54 12.92 13.23 13.23C12.92 13.54 12.54 13.7 12.1 13.7L1.6 13.7C1.16 13.7 0.78 13.54 0.47 13.23C0.16 12.92 0 12.54 0 12.1L0 1.6ZM1.6 12.5L12.1 12.5C12.21 12.5 12.3 12.46 12.38 12.38C12.46 12.3 12.5 12.21 12.5 12.1L12.5 1.6C12.5 1.49 12.46 1.4 12.38 1.32C12.3 1.24 12.21 1.2 12.1 1.2L1.6 1.2C1.49 1.2 1.4 1.24 1.32 1.32C1.24 1.4 1.2 1.49 1.2 1.6L1.2 12.1C1.2 12.21 1.24 12.3 1.32 12.38C1.4 12.46 1.49 12.5 1.6 12.5Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div data-eventkey="" class="topMenuPoint" style="pointer-events: auto;">
+                            <div class="pointBox" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 6 6)">
+                                        <path id="✏️" fill-rule="evenodd" fill="currentColor" transform="translate(4 4)  rotate(0 2 2)" opacity="1" d="M4,0L0,4L4,4L4,0Z "></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <!-- push menu window -->
+                        <div class="toolSubMenu" >
+
+
+                            <div class="subOption" id="drawRect">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;">
+                                        <!-- 打勾 -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <g opacity="1" transform="translate(0 0)  rotate(0 8 8)">
+                                                <g opacity="1" transform="translate(2 2)  rotate(0 6 6)">
+                                                    <path id="形状结合" fill-rule="evenodd" fill="currentColor" transform="translate(0.6366642549999142 1.9602259944999787)  rotate(0 5.363335745 4.039774005500001)" opacity="1" d="M3.57,5.82L1.59,3.84C1.3,3.55 0.82,3.55 0.53,3.84L0.53,3.84C0.39,3.98 0.31,4.17 0.31,4.37C0.31,4.57 0.39,4.76 0.53,4.9L3,7.37C3.39,7.76 4.02,7.76 4.41,7.37L10.2,1.59C10.49,1.3 10.49,0.82 10.2,0.53L10.2,0.53C10.06,0.39 9.87,0.31 9.67,0.31C9.47,0.31 9.28,0.39 9.14,0.53L3.85,5.82C3.77,5.9 3.65,5.9 3.57,5.82Z "></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div data-eventkey="move" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.150000000000091 3.150000000000091)  rotate(0 6.8500000000000005 6.8500000000000005)" opacity="1" d="M0 1.6C0 1.16 0.16 0.78 0.47 0.47C0.78 0.16 1.16 0 1.6 0L12.1 0C12.54 0 12.92 0.16 13.23 0.47C13.54 0.78 13.7 1.16 13.7 1.6L13.7 12.1C13.7 12.54 13.54 12.92 13.23 13.23C12.92 13.54 12.54 13.7 12.1 13.7L1.6 13.7C1.16 13.7 0.78 13.54 0.47 13.23C0.16 12.92 0 12.54 0 12.1L0 1.6ZM1.6 12.5L12.1 12.5C12.21 12.5 12.3 12.46 12.38 12.38C12.46 12.3 12.5 12.21 12.5 12.1L12.5 1.6C12.5 1.49 12.46 1.4 12.38 1.32C12.3 1.24 12.21 1.2 12.1 1.2L1.6 1.2C1.49 1.2 1.4 1.24 1.32 1.32C1.24 1.4 1.2 1.49 1.2 1.6L1.2 12.1C1.2 12.21 1.24 12.3 1.32 12.38C1.4 12.46 1.49 12.5 1.6 12.5Z"></path></g></g></svg>
+
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10104" data-renderType="1">矩形</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >R</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawLine">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.141064359914708 3.141064359914253)  rotate(0 6.858914 6.858914000000001)" opacity="1" d="M13.29,1.27L13.29,1.27L13.29,1.27L13.72,0.85L12.87,0L12.46,0.41C12.46,0.41 12.45,0.42 12.44,0.42L6.43,6.43L0.42,12.44C0.42,12.45 0.41,12.46 0.41,12.46L0,12.87L0.85,13.72L1.27,13.29L1.27,13.29L1.27,13.29L7.28,7.28L13.29,1.27Z "></path></g></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10105" data-renderType="1">直线</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >L</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawArrow"  style="display:none;">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.575735999999779 4.575735999999779)  rotate(0 5.924282000000002 5.924282000000002)" opacity="1" d="M0.85,11.85L11.85,0.85L11,0L0,11L0.85,11.85Z "></path><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(11.000209124458706 3.7954512879664435)  rotate(0 2.575 2.585)" opacity="1" d="M0,0L0,1.2L3.95,1.2L3.95,5.17L5.15,5.17L5.15,0L0,0Z "></path></g></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10106" data-renderType="1">箭头</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >⇧ L</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawCircle">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.149999000000207 3.1499989956600984)  rotate(0 6.850000500000001 6.850000500000001)" opacity="1" d="M2.01 11.69C2.64 12.33 3.36 12.81 4.18 13.16Q5.455 13.7 6.85 13.7Q8.245 13.7 9.52 13.16C10.34 12.81 11.06 12.33 11.69 11.69C12.33 11.06 12.81 10.34 13.16 9.52Q13.7 8.245 13.7 6.85Q13.7 5.455 13.16 4.18C12.81 3.36 12.33 2.64 11.69 2.01C11.06 1.38 10.34 0.89 9.52 0.54Q8.245 0 6.85 0Q5.455 0 4.18 0.54C3.36 0.89 2.64 1.38 2.01 2.01C1.38 2.64 0.89 3.36 0.54 4.18Q0 5.455 0 6.85Q0 8.245 0.54 9.52C0.89 10.34 1.38 11.06 2.01 11.69ZM4.65 12.06C3.98 11.77 3.38 11.37 2.86 10.84C2.33 10.32 1.93 9.72 1.64 9.05C1.35 8.35 1.2 7.62 1.2 6.85C1.2 6.08 1.35 5.35 1.64 4.65C1.93 3.98 2.33 3.38 2.86 2.86C3.38 2.33 3.98 1.93 4.65 1.64C5.35 1.35 6.08 1.2 6.85 1.2C7.62 1.2 8.35 1.35 9.05 1.64C9.72 1.93 10.32 2.33 10.84 2.86C11.37 3.38 11.77 3.98 12.06 4.65C12.35 5.35 12.5 6.08 12.5 6.85C12.5 7.62 12.35 8.35 12.06 9.05C11.77 9.72 11.37 10.32 10.84 10.84C10.32 11.37 9.72 11.77 9.05 12.06C8.35 12.35 7.62 12.5 6.85 12.5C6.08 12.5 5.35 12.35 4.65 12.06Z"></path></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10107" data-renderType="1">圆形</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span >O</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawTriangle">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.2411893136099934 3.949999999999818)  rotate(0 6.75881688165651 6.325000000000001)" opacity="1" d="M0.13 11.03L0.12 11.04C0.04 11.21 0 11.39 0 11.57C0 11.76 0.05 11.94 0.15 12.1L0.15 12.12C0.25 12.29 0.39 12.42 0.56 12.51C0.72 12.6 0.9 12.65 1.1 12.65L12.42 12.65C12.61 12.65 12.79 12.6 12.96 12.51C13.13 12.42 13.26 12.29 13.36 12.12L13.37 12.11L13.37 12.1C13.47 11.94 13.51 11.76 13.52 11.57C13.52 11.39 13.48 11.21 13.4 11.04L13.39 11.03L7.73 0.57C7.63 0.4 7.49 0.25 7.32 0.15C7.14 0.05 6.96 0 6.76 0C6.56 0 6.37 0.05 6.2 0.15C6.03 0.25 5.89 0.39 5.8 0.57L0.13 11.03ZM6.76 1.31L12.25 11.45L1.27 11.45L6.76 1.31Z"></path></g></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10108" data-renderType="1">三角形</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span ></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawStar" style="display:none;">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><defs><rect id="path_0" x="0" y="0" width="20" height="20"></rect></defs><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><g><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(2.456668415832155 2.1100000000001273)  rotate(0 7.543340466911823 7.207013769670959)" opacity="1" d="M11.74 14.41C11.9 14.42 12.04 14.38 12.17 14.3L12.18 14.29L12.19 14.28C12.31 14.19 12.39 14.08 12.44 13.94C12.5 13.78 12.5 13.63 12.44 13.47L11.09 9.05L14.8 6.23C14.91 6.15 14.99 6.05 15.04 5.91C15.09 5.77 15.1 5.63 15.07 5.49C15.03 5.34 14.94 5.21 14.82 5.11C14.69 5.02 14.55 4.97 14.39 4.97L9.73 4.87L8.17 0.39L8.13 0.33C8.08 0.25 8.02 0.19 7.96 0.14C7.83 0.05 7.69 0 7.54 0C7.39 0 7.25 0.05 7.13 0.14C7.06 0.19 7 0.25 6.95 0.33L6.91 0.39L5.35 4.87L0.68 4.97C0.53 4.97 0.4 5.02 0.27 5.11C0.14 5.21 0.06 5.34 0.02 5.49C-0.01 5.63 -0.01 5.77 0.05 5.91C0.1 6.05 0.18 6.15 0.29 6.23L3.99 9.05L2.65 13.47C2.59 13.63 2.59 13.78 2.65 13.94C2.69 14.08 2.78 14.19 2.89 14.28L2.91 14.29L2.92 14.3C3.05 14.38 3.19 14.42 3.35 14.41C3.5 14.4 3.63 14.35 3.74 14.26L7.54 11.62L11.34 14.26C11.46 14.35 11.59 14.4 11.74 14.41ZM5.25 9.04L5.26 9.03C5.29 8.88 5.28 8.73 5.22 8.59C5.17 8.47 5.09 8.37 4.99 8.3L2.15 6.14L5.72 6.06C5.86 6.06 5.99 6.02 6.1 5.94C6.2 5.88 6.28 5.78 6.34 5.67L6.36 5.63L7.54 2.23L8.73 5.63L8.75 5.67C8.8 5.78 8.88 5.88 8.99 5.94C9.1 6.02 9.23 6.06 9.36 6.06L12.94 6.14L10.1 8.3C10 8.37 9.92 8.47 9.87 8.59C9.81 8.73 9.79 8.88 9.83 9.03L9.83 9.04L10.88 12.48L7.95 10.44C7.83 10.35 7.69 10.31 7.54 10.31C7.39 10.31 7.26 10.35 7.13 10.44L4.21 12.48L5.25 9.04Z"></path></g></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10109" data-renderType="1">星形</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span ></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption" id="drawPolygon" style="display:none;">
+                                <div data-eventkey="" class="activeSelectBox" style="pointer-events: auto;">
+                                    <div class="svgBox" style="pointer-events: none;"></div>
+                                </div>
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none"><g opacity="1" transform="translate(0 0)  rotate(0 10 10)"><path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(2.758965099924808 2.417500000000018)  rotate(0 7.241049863830671 6.92125)" opacity="1" d="M14.43 5.7C14.49 5.57 14.5 5.43 14.46 5.29C14.42 5.13 14.34 4.99 14.2 4.89L7.65 0.14C7.53 0.05 7.39 0 7.24 0C7.09 0 6.95 0.05 6.83 0.14L0.29 4.89C0.15 4.99 0.06 5.13 0.02 5.29C-0.01 5.43 0 5.57 0.05 5.7L2.53 13.35C2.57 13.5 2.66 13.62 2.79 13.71C2.91 13.8 3.05 13.84 3.2 13.84L11.28 13.84C11.43 13.84 11.57 13.8 11.69 13.71C11.83 13.62 11.91 13.5 11.96 13.35L14.43 5.7ZM7.53 1.11C7.54 1.11 7.54 1.1 7.54 1.1L7.53 1.11ZM6.95 1.11L6.96 1.12C6.96 1.11 6.95 1.11 6.95 1.11ZM13.19 5.64L10.92 12.64L3.56 12.64L1.29 5.64L7.24 1.32L13.19 5.64Z"></path></g></svg>
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10110" data-renderType="1">多边形</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                        <span ></span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+           
+                        <!-- push menu window end -->
+
+
+
+                    </div>
+                </div>
+
+                <!-- 钢笔绘制工具 -->
+                <div style="display: none;">
+                    <div class="toolOption "  id="drawPath">
+
+                        <div data-eventkey="" class="iconBox"  style="pointer-events: auto;">
+                            <div class="svgBox selectedToolIcon" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <defs>
+                                        <rect id="path_0" x="0" y="0" width="20" height="20"></rect>
+                                    </defs>
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 10 10)">
+                                        <g>
+                                            <path id="✏️ (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(3.0385124723939043 3.5486741247623286)  rotate(0 6.96007919483733 6.960002937618712)" opacity="1" d="M13.82 9.45C13.84 9.48 13.86 9.51 13.87 9.55C13.89 9.59 13.9 9.62 13.91 9.66C13.92 9.7 13.92 9.74 13.92 9.78C13.92 9.82 13.92 9.86 13.91 9.9C13.9 9.93 13.89 9.97 13.87 10.01C13.86 10.05 13.84 10.08 13.82 10.11C13.8 10.15 13.77 10.18 13.75 10.2L10.22 13.74L10.21 13.74C10.19 13.77 10.16 13.8 10.12 13.82C10.09 13.84 10.06 13.86 10.02 13.87C9.98 13.89 9.95 13.9 9.91 13.91C9.87 13.92 9.83 13.92 9.79 13.92C9.75 13.92 9.71 13.92 9.67 13.91C9.63 13.9 9.6 13.89 9.56 13.87C9.52 13.86 9.49 13.84 9.46 13.82C9.42 13.8 9.39 13.77 9.37 13.74L7.03 11.41L2.67 10.79C2.61 10.79 2.55 10.77 2.49 10.74C2.44 10.72 2.39 10.68 2.34 10.64C2.3 10.6 2.26 10.55 2.23 10.5C2.2 10.45 2.18 10.39 2.16 10.33L0.01 0.73C0 0.65 0 0.56 0.01 0.48L0.01 0.47C0.04 0.36 0.09 0.26 0.18 0.18C0.21 0.14 0.25 0.11 0.29 0.08C0.34 0.06 0.38 0.04 0.43 0.02C0.48 0.01 0.53 0 0.58 0C0.63 0 0.67 0 0.72 0.01L0.73 0.01L10.33 2.16C10.39 2.18 10.45 2.2 10.5 2.23C10.55 2.26 10.6 2.3 10.64 2.34C10.68 2.38 10.71 2.43 10.74 2.49C10.77 2.54 10.78 2.6 10.79 2.66L11.49 7.2L13.74 9.35L13.74 9.36C13.77 9.38 13.8 9.41 13.82 9.45ZM12.46 9.79L10.52 7.92C10.42 7.83 10.36 7.72 10.34 7.58L9.67 3.25L2.49 1.64L5.96 5.12C5.99 5.14 6.02 5.17 6.04 5.21C6.06 5.24 6.08 5.27 6.09 5.31C6.11 5.35 6.12 5.38 6.13 5.42C6.14 5.46 6.14 5.5 6.14 5.54C6.14 5.58 6.14 5.62 6.13 5.66C6.12 5.7 6.11 5.73 6.09 5.77C6.08 5.81 6.06 5.84 6.04 5.87C6.02 5.91 5.99 5.94 5.96 5.96C5.94 5.99 5.91 6.02 5.87 6.04C5.84 6.06 5.81 6.08 5.77 6.09C5.73 6.11 5.7 6.12 5.66 6.13C5.62 6.14 5.58 6.14 5.54 6.14C5.5 6.14 5.46 6.14 5.42 6.13C5.38 6.12 5.35 6.11 5.31 6.09C5.27 6.08 5.24 6.06 5.21 6.04C5.17 6.02 5.14 5.99 5.12 5.96L1.64 2.49L3.24 9.66L7.39 10.25C7.53 10.26 7.64 10.32 7.73 10.42L9.79 12.47L12.46 9.79Z"></path>
+                                            <path id="✏️" fill-rule="evenodd" fill="currentColor" transform="translate(7.56174749999991 8.070557499999722)  rotate(0 1.5000012500000004 1.4999962500000015)" opacity="1" d="M0.44,0.44C-0.15,1.03 -0.15,1.97 0.44,2.56C1.03,3.15 1.97,3.15 2.56,2.56C3.15,1.97 3.15,1.03 2.56,0.44C1.97,-0.15 1.03,-0.15 0.44,0.44Z "></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div data-eventkey="" class="topMenuPoint" style="pointer-events: auto;">
+                            <div class="pointBox" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 6 6)">
+                                        <path id="✏️" fill-rule="evenodd" fill="currentColor" transform="translate(4 4)  rotate(0 2 2)" opacity="1" d="M4,0L0,4L4,4L4,0Z "></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 插入文本工具 -->
+                <div>
+                    <div class="toolOption updateLang" id="drawText" data-langCode="10114" data-renderType="2" currentTool="drawText">
+
+                        <div data-eventkey="" class="iconBox"  style="pointer-events: auto;">
+                            <div class="svgBox selectedToolIcon" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path id="路径 1" fill-rule="evenodd" fill="currentColor" transform="translate(3.600000000000364 3.2160250000001724)  rotate(0 6.400000000000001 1.6717605879577038)" opacity="1" d="M12.8,0.59C12.8,0.27 12.56,0 12.27,0L0.53,0C0.24,0 0,0.27 0,0.59L0,3.34L1.07,3.34L1.07,1.2L11.73,1.2L11.73,3.34L12.8,3.34L12.8,0.59Z "></path>
+                                    <path id="矩形 1" fill-rule="evenodd" fill="currentColor" transform="translate(9.400000000000546 4.309975000000122)  rotate(0 0.6 6.236999999999999)" opacity="1" d="M0,12.47L1.2,12.47L1.2,0L0,0L0,12.47Z "></path>
+                                    <path id="路径 8 (轮廓)" fill-rule="evenodd" fill="currentColor" transform="translate(7.5300000000002 15.971775000000207)  rotate(0 2.475 0.6)" opacity="1" d="M0,1.2L4.95,1.2L4.95,0L0,0L0,1.2Z "></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 插入图片工具 -->
+                <div>
+                    <div class="toolOption updateLang" id="drawPicture" data-langCode="10115" data-renderType="2" currentTool="drawPicture">
+
+                        <div id="uploadImage-btn"></div>
+                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                            <div class="svgBox selectedToolIcon" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <defs>
+                                        <rect id="path_0" x="0" y="0" width="20" height="20"></rect>
+                                    </defs>
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 10 10)">
+                                        <g>
+                                            <path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(2.9000111500004095 3.150011158680627)  rotate(0 7.1000000000000005 6.8500000000000005)" opacity="1" d="M12.6 0L1.6 0C1.16 0 0.78 0.16 0.47 0.47C0.16 0.78 0 1.16 0 1.6L0 12.1C0 12.54 0.16 12.92 0.47 13.23C0.78 13.54 1.16 13.7 1.6 13.7L12.6 13.7C13.04 13.7 13.42 13.54 13.73 13.23C14.04 12.92 14.2 12.54 14.2 12.1L14.2 1.6C14.2 1.16 14.04 0.78 13.73 0.47C13.42 0.16 13.04 0 12.6 0ZM12.6 1.2C12.71 1.2 12.8 1.24 12.88 1.32C12.96 1.4 13 1.49 13 1.6L13 12.1C13 12.21 12.96 12.3 12.88 12.38C12.8 12.46 12.71 12.5 12.6 12.5L1.6 12.5C1.49 12.5 1.4 12.46 1.32 12.38C1.24 12.3 1.2 12.21 1.2 12.1L1.2 1.6C1.2 1.49 1.24 1.4 1.32 1.32C1.4 1.24 1.49 1.2 1.6 1.2L12.6 1.2Z"></path>
+                                            <path id="✏️ (轮廓)" fill-rule="evenodd" fill="rgba(32, 32, 32, 1)" transform="translate(3.04648656412337 8.971425845529211)  rotate(0 6.675602 3.5540879080121726)" opacity="1" d="M13.35 6.31L10.21 2.75C10.1 2.63 9.97 2.55 9.82 2.5C9.65 2.45 9.49 2.46 9.32 2.52L7.14 3.32L4.54 0.29C4.41 0.13 4.24 0.04 4.03 0.01C3.83 -0.02 3.66 0.02 3.49 0.12L3.48 0.13L0 2.54L0.68 3.52L3.85 1.33L6.41 4.31C6.51 4.43 6.64 4.52 6.79 4.56C6.96 4.61 7.13 4.6 7.29 4.54L9.48 3.74L12.45 7.11L13.35 6.31ZM7.31 3.52C7.31 3.52 7.31 3.53 7.32 3.53L7.31 3.52Z"></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div data-eventkey="" class="topMenuPoint" style="pointer-events: auto;">
+                            <div class="pointBox" style="pointer-events: none;">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <g opacity="1" transform="translate(0 0)  rotate(0 6 6)">
+                                        <path id="✏️" fill-rule="evenodd" fill="currentColor" transform="translate(4 4)  rotate(0 2 2)" opacity="1" d="M4,0L0,4L4,4L4,0Z "></path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+
+
+                        <!-- push menu window -->
+                        <div class="toolSubMenu" >
+
+<!--                             <div class="subOption uploadDrawImage" data-type="uploadBackgroupImage" type-code="1" >
+    
+                                <div data-eventkey="move" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                     
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10117" data-renderType="1">Backgroup Image</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                      
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="subOption uploadDrawImage" data-type="PriceTag"  type-code="2" >
+              
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10118" data-renderType="1">Price Tag</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption uploadDrawImage" data-type="SymbolImage"  type-code="3" >
+              
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10119" data-renderType="1">Symbol Image</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="subOption uploadDrawImage" data-type="Other"  type-code="4" >
+              
+                                <div data-eventkey="handMove" class="menuOption">
+                                    <div style="display: flex;">
+                                        <div data-eventkey="" class="iconBox" style="pointer-events: auto;">
+                                            <div class="icon" style="pointer-events: none;">
+                                            </div>
+                                        </div>
+                                        <div class="menuName updateLang" data-langCode="10120" data-renderType="1">Other Image</div>
+                                    </div>
+                                    <div class="quickKeys">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+           
+                        <!-- push menu window end -->
+
+
+                    </div>
+                </div>
+
+
+
+
+                <!-------------------------------->
+
+
+
+            </div>
+            <div class="a_c _1ojxG" id="toolBarProcess" style="display: none;">
+                <div data-eventkey="" class="a_c _1dJFM _9r-RK _34ZCy " style="pointer-events: auto;">
+                    <div class="_11XjX afPna _2iU7h _3siWf _1OUWP eg-t6 _2xmCT Ef_eO" style="pointer-events: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <defs>
+                                <rect id="path_0" x="0" y="0" width="15.999999999999998" height="15.999999999999998"></rect>
+                            </defs>
+                            <g opacity="1" transform="translate(0 0)  rotate(0 7.999999999999999 7.999999999999999)">
+                                <g mask="url(#bg-mask-0)">
+                                    <path id="矩形 1" fill-rule="evenodd" fill="#000000" transform="translate(1 6.5)  rotate(0 1.5 1.5)" opacity="1" d="M2.56 2.56C2.84 2.28 3 1.9 3 1.5C3 1.1 2.84 0.72 2.56 0.44C2.28 0.16 1.9 0 1.5 0C1.1 0 0.72 0.16 0.44 0.44C0.16 0.72 0 1.1 0 1.5C0 1.9 0.16 2.28 0.44 2.56C0.72 2.84 1.1 3 1.5 3C1.9 3 2.28 2.84 2.56 2.56Z"></path>
+                                    <path id="矩形 1" fill-rule="evenodd" fill="#000000" transform="translate(6.5 6.5)  rotate(0 1.5 1.5)" opacity="1" d="M0.44 2.56C0.72 2.84 1.1 3 1.5 3C1.9 3 2.28 2.84 2.56 2.56C2.84 2.28 3 1.9 3 1.5C3 1.1 2.84 0.72 2.56 0.44C2.28 0.16 1.9 0 1.5 0C1.1 0 0.72 0.16 0.44 0.44C0.16 0.72 0 1.1 0 1.5C0 1.9 0.16 2.28 0.44 2.56Z"></path>
+                                    <path id="矩形 1" fill-rule="evenodd" fill="#000000" transform="translate(12 6.5)  rotate(0 1.5 1.5)" opacity="1" d="M1.5 0C1.1 0 0.72 0.16 0.44 0.44C0.16 0.72 0 1.1 0 1.5C0 1.9 0.16 2.28 0.44 2.56C0.72 2.84 1.1 3 1.5 3C1.9 3 2.28 2.84 2.56 2.56C2.84 2.28 3 1.9 3 1.5C3 1.1 2.84 0.72 2.56 0.44C2.28 0.16 1.9 0 1.5 0Z"></path>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NEW UX/UI TOOLBAR END -->
+
+        <!-- 画布开始 -->
+        <div class="workArea">
+
+            <!-- 所有页面列表 -->
+            <div class="pageList">
+                <div class="listDl"></div>
+                <div class="listBg"></div>
+            </div>
+            <div class="drawPanel" id="drawPanel">
+                <!-- 画布区 -->
+                <div id="draw-wrapper" class="componentDesign" ng-controller="CanvasControls" style="">
+                    <canvas id="paperArea" width="800" height="800"></canvas> 
+                </div>
+                <!-- 页面设计辅助线 -->
+                <div id="hLine"></div>
+                <div id="vLine"></div>
+                <div class="horizontalLine"></div>
+                <div class="verticalLine"></div>
+            </div>
+        </div>
+        <!-- 页面缩放 -->
+        <div class="editor-tool-bar">
+            <div class="helpIcon" title="History Version" style="position:relative;display:none;">
+                <i class="layui-icon layui-icon-app" style="position:absolute;left:12px;"></i>
+            </div>
+            <div class="sizeScale">
+                <span id="decreaseScale" title="Zoom Out">-</span>
+                <span id="amplifyScale" title="Zoom In">+</span>
+                <span id="scaleNumber">100%</span>
+            </div>
+        </div>
+        <!-- 画布结束 -->
+        <!-- 右则属性区开始 -->
+        <div class="edit-attribute-panel panel_height inputBox">
+            <div class="panelTitle">Page config</div>
+            <div class="attribute-btn qkey">
+                <div class="pageButton copyComponent noneClick componentSelected">
+                    <i class="layui-icon layui-icon-templeate-1" title="Copy"></i>
+                </div>
+                <div class="pageButton copyStyleBtn noneClick componentSelected">
+                    <i class="layui-icon layui-icon-fonts-clear" title="Text formatter"></i>
+                </div>
+                <div class="pageButton LockBtn noneClick componentSelected">
+                    <i class="layui-icon layui-icon-password" title="Locking components"></i>
+                </div>
+                <div class="pageButton deleteBtn noneClick componentSelected">
+                    <i class="layui-icon layui-icon-delete" title="Delete"></i>
+                </div>
+            </div>
+
+            <!-- 多组件选中面板开始 -->
+            <div class="composingConfig attribute-panel">
+                <div class="composing-btn" style="margin-top:10px;margin-bottom:10px;">
+                    <div class="vLine"></div>
+                    <div class="styleButton elementAlignMode" data="align-v-up">
+                        <img src="/img/v-t-icon.png">
+                    </div>
+                    <div class="styleButton  elementAlignMode" data="align-v-centered">
+                        <img src="/img/v-m-icon.png">
+                    </div>
+                    <div class="styleButton elementAlignMode" data="align-v-bottom">
+                        <img src="/img/v-b-icon.png">
+                    </div>
+                    <div class="styleButton r elementAlignMode" data="align-h-right">
+                        <img src="/img/h-r-icon.png">
+                    </div>
+                    <div class="styleButton r elementAlignMode" data="align-h-center">
+                        <img src="/img/h-c-icon.png">
+                    </div>
+                    <div class="styleButton r elementAlignMode" data="align-h-left">
+                        <img src="/img/h-l-icon.png">
+                    </div>
+                </div>
+
+                <!--框选文本框处理面板开始 -->
+                <div class="moreSetText layui-form ">
+                    <div class="rowLine fontStyle preViewMoreFont">
+                        <div class="rowTitle" style="margin-top:0px;padding-top:0px;">
+                            <div class="left">Font</div>
+                        </div>
+                        <div class="Left layui-form-item">
+                            <select name="textFont" placeholder="select" lay-filter="textFont">
+                            </select>
+                        </div>
+                        <div class="Right">
+                            <input type="number" name="textSize" value="" minlength="6" maxlength="3" placeholder="pt" lay-verify="required" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="rowLine" style="display:none;">
+                        <select name="textAlign" class="wForm textAlign">
+                            <option value="left">Align left</option>
+                            <option value="center">Align center</option>
+                            <option value="right">Align right</option>
+                        </select>
+                    </div>
+                    <div class="textAlign-btn">
+                        <div class="styleButton textAlignMode" data="align-left">
+                            <img src="/img/alignLeft.png">
+                        </div>
+                        <div class="styleButton textAlignMode" data="align-center">
+                            <img src="/img/alignCenter.png">
+                        </div>
+                        <div class="styleButton textAlignMode" data="align-right">
+                            <img src="/img/alignRight.png">
+                        </div>
+                        <div class="vLine"></div>
+                        <div class="styleButton textAlignMode r" data="align-fontAngle">
+                            <img src="/img/textAglin.png">
+                        </div>
+                        <div class="styleButton textAlignMode r" data="align-lineSpace">
+                            <img src="/img/textLineSpace.png">
+                        </div>
+                        <div class="styleButton textAlignMode r" data="align-fontSpace">
+                            <img src="/img/fontSpace.png">
+                        </div>
+                        <!-- 滑块 -->
+                        <div class="sliderTextBox">
+                            <div id="moreTextLineSpace" class="demo-slider"></div>
+                            <div id="moreTextFontSpace" class="demo-slider"></div>
+                            <div id="moreTextFontAglin" class="demo-slider"></div>
+                        </div>
+                    </div>
+                    <div class="layui-tab" style="margin-bottom:0px;">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this" style="width:35px;min-width:auto;">Style</li>
+                            <li style="width:40px;min-width:auto;">Stroke</li>
+                            <li style="width:40px;min-width:auto;">Shadow</li>
+                            <li style="width:40px;min-width:auto;">Bg</li>
+                        </ul>
+                        <div class="layui-tab-content" style="padding-bottom: 5px;">
+                            <div class="layui-tab-item layui-show">
+                                <div class="rowLine">
+                                    <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;display:none;">
+                                        <input type="text" name="moreTextColor" value="" placeholder="Select color" class="layui-input" id="test-form-input">
+                                    </div>
+                                    <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                        <div id="more-test-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                    <div class="layui-inline">
+                                        <div class="layui-fontStyle Bold" data="Bold">T</div>
+                                        <div class="layui-fontStyle Regualar" data="Regualar">T</div>
+                                        <div class="layui-fontStyle Italic" data="Italic">T</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="rowLine" style="margin-bottom:0px;">
+                                    <div id="moreTextStrokeColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                        <span></span>
+                                    </div>
+                                    <input type="number" name="moreTextStroke" value="" minlength="2" maxlength="2" placeholder="pt" autocomplete="off" title="stroke width" class="layui-input textStroke" style="float:left;margin-right:14px">
+                                </div>
+                                <div class="rowLine" style="margin-bottom:0px;display:none;">
+                                    <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;">
+                                        <input type="text" value="" name="moreStrokeColor" placeholder="Select color" class="layui-input" id="moreTextStrokeColor-form-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="rowLine moreComponentShadow" style="margin-bottom:0px;">
+                                    <div id="moreShadow-form" class="colorPreview" style="float: left;margin-right:10px;width:40px;">
+                                        <span></span> 
+                                    </div>
+                                    <div class="moreAngleBox">
+                                        <div class="moreRoundShape">
+                                            <div class="pointer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="moreAngleNum">0</div>
+                                    <div class="moreAngleFilter" style="display:none;">
+                                        <input type="text" name="moreFilterBlur" value="0">
+                                    </div>
+                                    <div class="moreAngleFilter">
+                                        <span>Offset</span>
+                                        <input type="text" name="moreFilterDistance" value="0">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="rowLine" style="margin-bottom:0px;">
+                                    <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                        <div id="moreTextBackgroundColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--框选文本框处理面板结束 -->
+
+
+            </div>
+            <!-- 多组件选中面板结束 -->
+
+            <div class="attribute-btn elementLever">
+                <div class="rowTitle">
+                    <div class="left">Layer</div>
+                </div>
+                <div class="rowLine">
+                    <input type="number" name="objzIndex" value="" minlength="6" maxlength="100" title="" placeholder="" autocomplete="off" class="layui-input" style="display:none;">
+
+                    <span class="levelSpan">
+                        <span class="levelBtn " id="layerToForward" title="Layer Forward">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M12.75 5.82v8.43a.75.75 0 1 1-1.5 0V5.81L8.99 8.07A.75.75 0 1 1 7.93 7l2.83-2.83a1.75 1.75 0 0 1 2.47 0L16.06 7A.75.75 0 0 1 15 8.07l-2.25-2.25zM15 10.48l6.18 3.04a1 1 0 0 1 0 1.79l-7.86 3.86a3 3 0 0 1-2.64 0l-7.86-3.86a1 1 0 0 1 0-1.8L9 10.49v1.67L4.4 14.4l6.94 3.42c.42.2.9.2 1.32 0l6.94-3.42-4.6-2.26v-1.67z"></path></svg>                            
+                        </span>
+                        <span class="levelBtn " id="layerToBackward" title="Layer Backward">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.75 18.12V9.75a.75.75 0 1 0-1.5 0v8.37l-2.26-2.25a.75.75 0 0 0-1.06 1.06l2.83 2.82c.68.69 1.79.69 2.47 0l2.83-2.82A.75.75 0 0 0 15 15.87l-2.25 2.25zM15 11.85v1.67l6.18-3.04a1 1 0 0 0 0-1.79l-7.86-3.86a3 3 0 0 0-2.64 0L2.82 8.69a1 1 0 0 0 0 1.8L9 13.51v-1.67L4.4 9.6l6.94-3.42c.42-.2.9-.2 1.32 0L19.6 9.6 15 11.85z"></path></svg>                           
+                        </span>
+                        <span class="levelBtn " id="layerToTop" title="Layer Top">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M12.75 3.82v9.43a.75.75 0 1 1-1.5 0V3.81L8.99 6.07A.75.75 0 1 1 7.93 5l2.83-2.83a1.75 1.75 0 0 1 2.47 0L16.06 5A.75.75 0 0 1 15 6.07l-2.25-2.25zM15 8.48l6.18 3.04a1 1 0 0 1 0 1.79l-7.86 3.86a3 3 0 0 1-2.64 0l-7.86-3.86a1 1 0 0 1 0-1.8L9 8.49v1.67L4.4 12.4l6.94 3.42c.42.2.9.2 1.32 0l6.94-3.42-4.6-2.26V8.48zm4.48 7.34 1.7.83a1 1 0 0 1 0 1.8l-7.86 3.86a3 3 0 0 1-2.64 0l-7.86-3.86a1 1 0 0 1 0-1.8l1.7-.83 1.7.83-1.82.9 6.94 3.41c.42.2.9.2 1.32 0l6.94-3.41-1.82-.9 1.7-.83z"></path></svg>                          
+                        </span>
+                        <span class="levelBtn " id="layerToBottom" title="Layer Bottom">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m19.48 10.82 1.7.83a1 1 0 0 1 0 1.8L15 16.49V14.8l4.6-2.26-1.82-.9 1.7-.83zm-14.96 0-1.7.83a1 1 0 0 0 0 1.8L9 16.49V14.8l-4.6-2.26 1.82-.9-1.7-.83zm8.23 9.5L15 18.07a.75.75 0 0 1 1.06 1.06l-2.83 2.83c-.68.68-1.79.68-2.47 0l-2.83-2.83a.75.75 0 0 1 1.06-1.06l2.26 2.26V6.9a.75.75 0 1 1 1.5 0v13.43zM15 11.35V9.68l4.6-2.27L12.66 4c-.42-.2-.9-.2-1.32 0L4.4 7.4 9 9.68v1.67L2.82 8.3a1 1 0 0 1 0-1.8l7.86-3.86a3 3 0 0 1 2.64 0l7.86 3.87a1 1 0 0 1 0 1.79L15 11.35z"></path></svg>                     
+                        </span>
+
+                    </span>
+
+                </div>
+            </div>
+            <!-- 页面配置设置开始 -->
+            <div class="pageConfig attribute-panel">
+                <div class="rowTitle">
+                    <div class="left">Size (pt)</div>
+                </div>
+                <div class="templateSizeBox">
+                    <div class="sizeWidth">
+                        <span class="number">0</span>
+                        <span class="unit">W</span>
+                    </div>
+                    <div class="sizeHeight">
+                        <span class="number">0</span>
+                        <span class="unit">H</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 页面配置设置结束 -->
+            <!-- 色块Rect配置开始 -->
+            <div class="rectConfig attribute-panel">
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:100%;">Size & position (pt)</div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objWidth" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">W</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objHeight" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">H</div>
+                    </div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objLeft" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">X</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objTop" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">Y</div>
+                    </div>
+                </div>
+                <div class="layui-tab">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" id="shapeScale" style="width:35px;min-width:auto;">Scale</li>
+                        <li  id="shapeStroke" style="width:35px;min-width:auto;">Stroke</li>
+                        <li  id="shapeFill" style="width:35px;min-width:auto;">Fill</li>
+                    </ul>
+                    <div class="layui-tab-content" style="padding-bottom: 0px;">
+
+                        <div class="layui-tab-item layui-show">
+                            <div class="rowLine fontStyle " style="margin-bottom:10px;">
+                                <div class="Left layui-form-item" style="position:relative;">
+                                    <input type="number" name="objScaleX" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                                    <div class="ztip">%</div>
+                                </div>
+                                <div class="Right" style="position:relative;">
+                                    <input type="number" name="objScaleY" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                                    <div class="ztip">%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item ">
+                            <div class="rowLine" style="margin-bottom:10px;">
+                                <div id="rectColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                    <span></span>
+                                </div>
+                                <input type="number" name="rectStroke" value="" minlength="2" maxlength="2" title="" placeholder="pt" autocomplete="off" class="layui-input rectStroke">
+                                <input type="text" value="" placeholder="Select color" class="layui-input" id="rectColor-form-input">
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine">
+                                <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                    <div id="rectBackgroundColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rowTitle roundedCorners" style="padding-top:0px">
+                    <div class="left" style="width:100%;height:18px;line-height:20px;">Corners (pt)</div>
+                </div>
+                <div class="rowLine fontStyle roundedCorners">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="rectRx" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">rx/ry</div>
+                    </div>
+                    <div class="Right" style="position:relative;display:none;">
+                        <input type="number" name="rectRy" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">ry</div>
+                    </div>
+                </div>
+
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:100%;height:18px;line-height:20px;">strokeDash (pt)</div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="lineLen" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">part</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="lineSpace" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">space</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 色块Rect配置结束 -->
+            <!-- 商品配置开始 -->
+            <div class="productConfig attribute-panel">
+                <div class="rowTitle" style="padding-top:0px;">
+                    <div class="left" style="width:100%;">Size & position (pt)</div>
+                </div>
+                <div class="templateSizeBox" style="display:table;">
+                    <div class="sizeWidth">
+                        <span class="number">0</span>
+                        <span class="unit">W</span>
+                    </div>
+                    <div class="sizeHeight">
+                        <span class="number">0</span>
+                        <span class="unit">H</span>
+                    </div>
+                </div>
+                <div class="rowLine fontStyle" style="margin-top:16px;">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objLeft" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">X</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objTop" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">Y</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 商品配置结束 -->
+            <!-- 非划线文本配置开始 -->
+            <div class="textConfig attribute-panel layui-form textBox">
+                <div class="rowTitle" style="margin-top:0px;padding-top:0px;">
+                    <div class="left">Font</div>
+                </div>
+                <div class="rowLine fontStyle preViewFont">
+                    <div class="Left layui-form-item">
+                        <select name="textFont" lay-filter="textFont">
+                        </select>
+                    </div>
+                    <div class="Right">
+                        <input type="number" name="textSize" value="" minlength="6" maxlength="3" placeholder="pt" lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="rowLine" style="display:none;">
+                    <select name="textAlign" class="wForm textAlign">
+                        <option value="left">Align left</option>
+                        <option value="center">Align center</option>
+                        <option value="right">Align right</option>
+                    </select>
+                </div>
+                <div class="textAlign-btn">
+                    <div class="styleButton textAlignMode" data="align-left">
+                        <img src="/img/alignLeft.png">
+                    </div>
+                    <div class="styleButton textAlignMode" data="align-center">
+                        <img src="/img/alignCenter.png">
+                    </div>
+                    <div class="styleButton textAlignMode" data="align-right">
+                        <img src="/img/alignRight.png">
+                    </div>
+                    <div class="vLine"></div>
+                    <div class="styleButton textAlignMode r" data="align-fontAngle">
+                        <img src="/img/textAglin.png">
+                    </div>
+                    <div class="styleButton textAlignMode r" data="align-lineSpace">
+                        <img src="/img/textLineSpace.png">
+                    </div>
+                    <div class="styleButton textAlignMode r" data="align-fontSpace">
+                        <img src="/img/fontSpace.png">
+                    </div>
+                    <!-- 滑块 -->
+                    <div class="sliderTextBox">
+                        <div id="textLineSpace" class="demo-slider"></div>
+                        <div id="textFontSpace" class="demo-slider"></div>
+                        <div id="textFontAglin" class="demo-slider"></div>
+                    </div>
+                </div>
+                <div class="layui-tab" style="margin-bottom:0px;">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" style="width:35px;min-width:auto;">Style</li>
+                        <li style="width:40px;min-width:auto;">Stroke</li>
+                        <li style="width:40px;min-width:auto;">Shadow</li>
+                        <li style="width:40px;min-width:auto;">Bg</li>
+                    </ul>
+                    <div class="layui-tab-content" style="padding-bottom: 5px;">
+                        <div class="layui-tab-item layui-show">
+                            <div class="rowLine">
+                                <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;display:none;">
+                                    <input type="text" name="textColor" value="" placeholder="Select color" class="layui-input" id="test-form-input">
+                                </div>
+                                <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                    <div id="test-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-fontStyle Bold" data="Bold">T</div>
+                                    <div class="layui-fontStyle Regualar" data="Regualar">T</div>
+                                    <div class="layui-fontStyle Italic" data="Italic">T</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine" style="margin-bottom:0px;">
+                                <div id="textStrokeColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                    <span></span>
+                                </div>
+                                <input type="number" name="textStroke" value="" minlength="2" maxlength="2" placeholder="pt" autocomplete="off" title="stroke width" class="layui-input textStroke" style="float:left;margin-right:14px">
+                            </div>
+                            <div class="rowLine" style="margin-bottom:0px;display:none;">
+                                <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;">
+                                    <input type="text" value="" name="strokeColor" placeholder="Select color" class="layui-input" id="textStrokeColor-form-input">
+                                </div>
+                                <!--
+                                        <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;" >
+                                            <div id="textStrokeColor-form"></div>
+                                        </div>
+                                        -->
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine componentShadow" style="margin-bottom:0px;">
+                                <div id="shadow-form" class="colorPreview" style="float: left;margin-right:10px;width:40px;">
+                                    <span></span>
+                                </div>
+                                <div class="angleBox">
+                                    <div class="roundShape">
+                                        <div class="pointer"></div>
+                                    </div>
+                                </div>
+                                <div class="angleNum">0</div>
+                                <div class="angleFilter" style="display:none;">
+                                    <input type="text" name="filterBlur" value="0">
+                                </div>
+                                <div class="angleFilter">
+                                    <span>Offset</span>
+                                    <input type="text" name="filterDistance" value="0">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine" style="margin-bottom:0px;">
+                                <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                    <div id="textBackgroundColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:99%">Text content<span  id="textBoxAttributes-dataFiled"></span></div>
+                </div>
+                <div class="rowLine">
+                    <input type="text" name="objText" value="" minlength="6" maxlength="100" title="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+
+                <div class="rowTitle linkItemClass" style="padding-top:0px">
+                    <div class="left" style="width:99%">Link Item Sort</div>
+                </div>
+                <div class="rowLine linkItemClass">
+                    <input type="number" name="lkSort" value="" minlength="6" maxlength="100" title="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:100%;">Size & position (pt)</div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objWidth" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">W</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objHeight" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">H</div>
+                    </div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objLeft" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">X</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objTop" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">Y</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 非划线文本配置结束 -->
+
+
+            <!-- 划线文本配置开始 -->
+            <div class="underlineTextConfig attribute-panel layui-form textBox">
+                <div class="rowTitle" style="margin-top:0px;padding-top:0px;">
+                    <div class="left">Font</div>
+                </div>
+                <div class="rowLine fontStyle preViewFont">
+                    <div class="Left layui-form-item">
+                        <select name="textFont" lay-filter="underlineTextFont">
+                        </select>
+                    </div>
+                    <div class="Right">
+                        <input type="number" name="textSize" value="" minlength="6" maxlength="3" placeholder="pt" lay-verify="required" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="textAlign-btn" >
+                    <div class="styleButton textAlignMode" data="align-left">
+                        <img src="/img/alignLeft.png">
+                    </div>
+                    <div class="styleButton textAlignMode" data="align-center">
+                        <img src="/img/alignCenter.png">
+                    </div>
+                    <div class="styleButton textAlignMode" data="align-right">
+                        <img src="/img/alignRight.png">
+                    </div>
+                    <div class="vLine"></div>
+                    <div class="styleButton textAlignMode noneClick r" data="" >
+                        <img src="/img/textAglin.png">
+                    </div>
+                    <div class="styleButton textAlignMode noneClick r" data="">
+                        <img src="/img/textLineSpace.png">
+                    </div>
+                    <div class="styleButton textAlignMode noneClick r" data="">
+                        <img src="/img/fontSpace.png">
+                    </div>
+                    <!-- 滑块 -->
+                    <div class="sliderTextBox" style="display: none;">
+                        <div id="textLineSpace" class="demo-slider"></div>
+                        <div id="textFontSpace" class="demo-slider"></div>
+                        <div id="textFontAglin" class="demo-slider"></div>
+                    </div>
+                </div>
+                <div class="layui-tab" style="margin-bottom:0px;">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" style="width:35px;min-width:auto;">Style</li>
+                        <li style="width:40px;min-width:auto;">Stroke</li>
+                        <li style="width:60px;min-width:auto;">Underline</li>
+                    </ul>
+                    <div class="layui-tab-content" style="padding-bottom: 5px;">
+                        <div class="layui-tab-item layui-show">
+                            <div class="rowLine">
+                                <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;display:none;">
+                                    <input type="text" name="textColor" value="" placeholder="Select color" class="layui-input" id="test-form-input">
+                                </div>
+                                <div class="layui-inline" style="left: -11px;float:left;margin-bottom:0px;margin-left:5px;">
+                                    <div id="underlineTextColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <div class="layui-fontStyle Bold" data="Bold">T</div>
+                                    <div class="layui-fontStyle Regualar" data="Regualar">T</div>
+                                    <div class="layui-fontStyle Italic" data="Italic">T</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine" style="margin-bottom:0px;">
+                                <div id="underlineTextStrokeColor-form" class="colorPreview" style="float: left;margin-right:10px;">
+                                    <span></span>
+                                </div>
+                                <input type="number" name="textStroke" value="" minlength="2" maxlength="2" placeholder="pt" autocomplete="off" title="stroke width" class="layui-input textStroke" style="float:left;margin-right:14px">
+                            </div>
+                            <div class="rowLine" style="margin-bottom:0px;display:none;">
+                                <div class="layui-input-inline layui-form-item" style="float:left;margin-bottom:0px;">
+                                    <input type="text" value="" name="strokeColor" placeholder="Select color" class="layui-input" id="textStrokeColor-form-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <div class="rowLine componentShadow" style="margin-bottom:0px;">
+                                <div id="underlineColor-form" class="colorPreview" style="float: left;">
+                                    <span></span>
+                                </div>
+                                <div class="underlineFilter">
+                                    <input type="number" name="underlineStrokeWidth" class="layui-input" placeholder="pt" value="0">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:99%">Text content<span  id="textBoxAttributes-dataFiled"></span></div>
+                </div>
+                <div class="rowLine">
+                    <input type="text" name="objText" value="" minlength="6" maxlength="100" title="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+
+
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:100%;">Size & position (pt)</div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objWidth" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">W</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objHeight" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">H</div>
+                    </div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objLeft" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">X</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objTop" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">Y</div>
+                    </div>
+                </div>
+            </div>
+            <!-- 划线文本配置结束 -->
+
+            <!-- 图片配置开始 -->
+            <div class="pictureConfig attribute-panel">
+                <div class="rowTitle" style="padding-top:0px">
+                    <div class="left" style="width:100%;">Size & position (pt)</div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objWidth" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">W</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objHeight" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">H</div>
+                    </div>
+                </div>
+                <div class="rowLine fontStyle">
+                    <div class="Left layui-form-item" style="position:relative;">
+                        <input type="number" name="objLeft" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">X</div>
+                    </div>
+                    <div class="Right" style="position:relative;">
+                        <input type="number" name="objTop" value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                        <div class="ztip">Y</div>
+                    </div>
+                </div>
+                <div class="layui-tab" style="margin-bottom:0px;padding-top:0px">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this" style="width:60px;min-width:auto;">Scale</li>
+                        <li style="width:60px;min-width:auto;">Shadow</li>
+                    </ul>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show">
+                            <div class="rowLine fontStyle">
+                                <div class="Left layui-form-item" style="position:relative;">
+                                    <input type="number" name="objScaleX"  value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                                    <div class="ztip">%</div>
+                                </div>
+                                <div class="Right" style="position:relative;">
+                                    <input type="number" name="objScaleY"  value="" minlength="4" maxlength="4" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                                    <div class="ztip">%</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-tab-item">
+                            <!-- 图片特效区开始 -->
+                            <div class="rowLine componentShadow" style="margin-bottom:0px;">
+                                <div id="shadow-picture" class="colorPreview" style="float: left;margin-right:10px;width:40px;">
+                                    <span></span>
+                                </div>
+                                <div class="angleBox">
+                                    <div class="roundShape">
+                                        <div class="pointer"></div>
+                                    </div>
+                                </div>
+                                <div class="angleNum">0</div>
+                                <div class="angleFilter" style="display:none;">
+                                    <input type="text" name="filterBlur" value="0">
+                                </div>
+                                <div class="angleFilter">
+                                    <span>Offset</span>
+                                    <input type="text" name="filterDistance" value="0">
+                                </div>
+                            </div>
+                            <!-- 图片特效区结束 -->
+                        </div>
+                    </div>
+                </div>
+                <div class="replacePictureElement">
+                    <button type="button" class="layui-btn layui-btn-fluid" id="elementPicture">Select Picture</button>
+                </div>
+            </div>
+            <!-- 图片配置结束 -->
+
+            <!-- LinkItem 商品图片组件设置开始 -->
+            <div class="LinItemConfig attribute-panel">
+                <div class="rowTitle linkItemClass" style="padding-top:14px">
+                    <div class="left" style="width:99%">Link Item Sort</div>
+                </div>
+                <div class="rowLine linkItemClass">
+                    <input type="number" name="lkSort" value="" minlength="6" maxlength="100" title="" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!-- LinkItem 商品图片组件设置结束 -->
+        </div>
+        <!-- 右则属性区结束 -->
+
+        <div class="loadingTip">
+            <i class="layui-icon layui-layer-ico16" ></i>
+        </div>
+
+    </div>
+    <!-- 设计区域结束 -->
+
+    <!-- 数据加载loading -->
+    <div class="pageLoading" id="pageLoading">Load system files</div>
+    
+    <!-- 图片弹出层 -->
+    <div class="pushWindow pictureWin">
+        <div class="closeWinIcon">
+            <i class="layui-icon layui-icon-close"></i>
+        </div>
+        <div class="winLeft">
+            <ul>
+                <li class="tabLoadPic act" data="3">Price tag</li>
+                <li class="tabLoadPic" data="2">Background</li>
+                <li class="tabLoadPic" data="4">Other</li>
+            </ul>
+            <div class="upNewImage">Upload Image</div>
+        </div>
+        <div class="winRight">
+            <div class="searchArea">
+                <div class="searchIcon">
+                    <i class="layui-icon layui-icon-search"></i>
+                </div>
+                <div class="searchInput">
+                    <input type="text" name="searchPicture" placeholder="Enter search background image">
+                </div>
+                <div class="clearIcon">
+                    <i class="layui-icon layui-icon-close"></i>
+                </div>
+            </div>
+            <div class="pictureList">
+                <div class="layui-row">
+                    <!-- 图片列表for start -->
+                    <!-- 图片列表for end -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 蒙板 -->
+    <div class="show-mask"></div>
+
+    <script src="../js/marketing/config/Sortable.min.js" ></script>
+    <script src="../js/marketing/config/localdb.class.js" async></script>
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/config/require.js"></script> 
+    <script src="../js/marketing/component/design.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

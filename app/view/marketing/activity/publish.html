@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Publish Marketing Activity</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        .layui-card, .layui-tab-card {
+            box-shadow: none !important;
+        }
+        .layui-tab-card-content {
+            border: 1px solid #e6e6e6;
+            border-top: 0px;
+        }
+        .card-scroll {
+            /*max-height: calc(100vh - 123px);*/
+            overflow-x: auto;
+        }
+        .card-scroll-full {
+            height: calc(100vh - 123px);
+            overflow-x: auto;
+        }
+        .layui-layedit.layui-layedit-disabled {
+            position: relative;
+        }
+        .layui-layedit.layui-layedit-disabled:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        #preview [carousel-item] .item {
+            text-align: center;
+        }
+        #preview [carousel-item] .item .item-image {
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+        #preview [carousel-item] .item .item-image:after {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #preview [carousel-item] .item .item-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        #profile .layui-input,
+        #profile .layui-textarea {
+            border-color: #F9F9F9 !important;
+        }
+        #profile .layui-textarea {
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm7">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-form" lay-filter="submitApplication" id="submitApplication">
+                            <div class="layui-form-item" id="channel">
+                                <label class="layui-form-label">Channel</label>
+                                <div class="layui-input-block">
+                                    <div class="layui-collapse">
+                                        <div class="layui-colla-item">
+                                            <div class="layui-colla-checkbox">
+                                                <input type="checkbox" name="channel_h5" title="H5" lay-filter="channel" lay-skin="primary">
+                                            </div>
+                                            <div class="layui-colla-content">
+                                                <input type="checkbox" name="channel_h5_email" title="<div class='layui-icon layui-icon-release'></div> Email">
+                                                <input type="checkbox" name="channel_h5_line" title="<div class='layui-icon layui-icon-release'></div> LINE">
+                                                <input type="checkbox" name="channel_h5_sms" title="<div class='layui-icon layui-icon-release'></div> SMS">
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <div class="layui-colla-checkbox">
+                                                <input type="checkbox" name="channel_app" title="APP" lay-filter="channel" lay-skin="primary">
+                                            </div>
+                                            <div class="layui-colla-content">
+                                                <div class="layui-form-item">
+                                                    <label class="layui-form-label" style="width: auto;">Title</label>
+                                                    <div class="layui-input-inline">
+                                                        <input type="text" name="channel_app_title" maxlength="100" placeholder="Title" autocomplete="off" class="layui-input">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <div class="layui-colla-checkbox">
+                                                <input type="checkbox" name="channel_pdf" title="PDF" lay-filter="channel" lay-skin="primary">
+                                            </div>
+                                            <div class="layui-colla-content">
+                                                <div class="layui-form-item">
+                                                    <label class="layui-form-label" style="width: auto;">Size</label>
+                                                    <div class="layui-input-inline">
+                                                        <select name="channel_pdf_size" lay-verify-disabled="required">
+                                                            <option value="OS">Original size</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <div class="layui-colla-checkbox">
+                                                <input type="checkbox" name="channel_pdfPrinting" title="PDF Printing" lay-filter="channel" lay-skin="primary">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">Remark</label>
+                                <div class="layui-input-block">
+                                    <textarea type="textarea" name="remark" id="remark" autocomplete="off" class="layui-input layui-hide"></textarea>
+                                    <textarea type="textarea" name="description" id="description" autocomplete="off" class="layui-input layui-hide"></textarea>
+                                </div>
+                            </div>
+                            <div class="layui-form-item layui-hide">
+                                <input type="text" name="mmCode" value="">
+                                <input type="text" name="previewUrl" value="">
+                                <button class="layui-btn" lay-submit lay-filter="LAY-approval-application-submit" id="LAY-approval-application-submit">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-sm5">
+                <div class="layui-card">
+                    <div class="layui-tab layui-tab-card">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this">Profile</li>
+                            <li>View</li>
+                            <li>Process</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <div class="layui-card-body card-scroll">
+                                    <div class="layui-form" lay-filter="profile" id="profile">
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">Title</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="title" value="" autocomplete="off" class="layui-input" readonly="readonly">
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">Store</label>
+                                            <div class="layui-input-block">
+                                                <textarea name="store" autocomplete="off" class="layui-textarea" readonly="readonly"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">Member Type</label>
+                                            <div class="layui-input-block">
+                                                <textarea name="memberType" autocomplete="off" class="layui-textarea" readonly="readonly"></textarea>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="layui-form-item">
+                                            <label class="layui-form-label">Segment</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="segment" value="" autocomplete="off" class="layui-input" readonly="readonly">
+                                            </div>
+                                        </div> -->
+                                        <div class="layui-form-item">
+                                            <label class="layui-form-label">Time</label>
+                                            <div class="layui-input-block">
+                                                <input type="text" name="time" value="" autocomplete="off" class="layui-input" readonly="readonly">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="layui-card-body card-scroll-full">
+                                    <div class="layui-carousel" id="preview">
+                                        <div carousel-item></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <div class="layui-card-body card-scroll">
+                                    <ul class="layui-timeline" id="approvalProcess"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="timelineTpl">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-icon-{{ d.icon == undefined ? 'circle' : d.icon }} layui-timeline-axis"></i>
+            <div class="layui-timeline-content">
+                <h3 class="layui-timeline-title">{{ d.title }}</h3>
+                <div class="content">{{ d.content }}</div>
+            </div>
+        </li>
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/layedit/ace/ace.js?t={$js_timestamp}"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/publish.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

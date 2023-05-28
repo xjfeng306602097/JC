@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Marketing Activity</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="marketing:activity:search">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">Search</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-row layui-form" lay-filter="activitySearch" id="activitySearch">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Status</label>
+                                            <div class="layui-input-inline">
+                                                <select name="status">
+                                                    <option value="">Select</option>
+                                                    <option value="0">0 New</option>
+                                                    <option value="1">1 Wait For Design</option>
+                                                    <option value="2">2 In Design</option>
+                                                    <option value="3">3 Wait For Review</option>
+                                                    <option value="4">4 Review Completed</option>
+                                                    <option value="5">5 Publish Approval</option>
+                                                    <option value="6">6 Publish Completed</option>
+                                                    <option value="10">10 Reject</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Activity Date</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" name="activityDate" id="activityDate" placeholder="yyyy-MM-dd - yyyy-MM-dd">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Type</label>
+                                            <div class="layui-input-inline">
+                                                <select name="type">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Name</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="title" maxlength="50" placeholder="MM Name" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">MM Code</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="mmCode" maxlength="50" placeholder="MM Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Store</label>
+                                            <div class="layui-input-inline" style="width: 240px;">
+                                                <div id="store"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingActivity-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingActivity-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15" permission="marketing:activity:list">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <script type="text/html" id="marketingActivityToolbar">
+                            <div class="layui-btn-container">
+                                <button type="button" class="layui-btn" lay-event="create" permission="marketing:activity:create">Create</button>
+                                <button type="button" class="layui-btn" lay-event="quickCreate" permission="marketing:activity:quickCreate">Quick Create</button>
+                                <button type="button" class="layui-btn layui-btn-normal" lay-event="edit" permission="marketing:activity:edit">Edit</button>
+                                <button type="button" class="layui-btn layui-btn-danger" lay-event="delete" permission="marketing:activity:delete">Delete</button>
+                                <button type="button" class="layui-btn layui-btn-warm" lay-event="publish" permission="[workflowPermission]MM-PUBLISH">Publish</button>
+                                <button type="button" class="layui-btn layui-btn-warm" lay-event="rollback" permission="marketing:activity:rollback">Rollback</button>
+                                <button type="button" class="layui-btn layui-btn-primary" lay-event="pushLog" permission="marketing:activity:push:log">Push Log</button>
+                            </div>
+                        </script>
+                        
+                        <div class="layui-row">
+                            <table id="content-marketingActivity-list" lay-filter="content-marketingActivity-list"></table>
+                            <script type="text/html" id="imgTpl">
+                                {{# if (d.previewUrl == null || d.previewUrl == ''){ }}
+                                <img src="/img/none.png" class="layui-table-thumb">
+                                {{# } else { }}
+                                <img src="{{ d.previewUrl }}" class="layui-table-thumb" lay-event="showPicture">
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingActivity-list-status">
+                                {{# if (d.status == '0'){ }}
+                                <span style="color: #AAA;"><i class="layui-icon layui-icon-addition"></i> New</span>
+                                {{# } else if (d.status == '1'){ }}
+                                <span style="color: #1E9FFF;"><i class="layui-icon layui-icon-senior"></i> Wait For Design</span>
+                                {{# } else if (d.status == '2'){ }}
+                                <span style="color: #1E9FFF;"><i class="layui-icon layui-icon-senior"></i> In Design</span>
+                                {{# } else if (d.status == '3'){ }}
+                                <span style="color: #5FB878;"><i class="layui-icon layui-icon-ok"></i> Wait For Review</span>
+                                {{# } else if (d.status == '4'){ }}
+                                <span style="color: #FFB800;"><i class="layui-icon layui-icon-ok"></i> Review Completed</span>
+                                {{# } else if (d.status == '5'){ }}
+                                <span style="color: #5FB878;"><i class="layui-icon layui-icon-release"></i> Publish Approval</span>
+                                {{# } else if (d.status == '6'){ }}
+                                <span style="color: #FFB800;"><i class="layui-icon layui-icon-release"></i> Publish Completed</span>
+                                {{# } else if (d.status == '10'){ }}
+                                <span style="color: #FF5722;"><i class="layui-icon layui-icon-subtraction"></i> Reject</span>
+                                {{# } else { }}
+                                <span style="color: #999;">Unknown</span>
+                                {{# } }}
+                                {{# if (d.templateInfo && d.templateInfo.lock){ }}
+                                <span style="color: #AAA; margin-left: 8px;"><i class="layui-icon layui-icon-user" style="font-size: 14px;"></i> {{ d.templateInfo.lockUser.nickname }}</span>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingActivity-list-product">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="product" permission="marketing:activity:product:view">Product</a>
+                                {{# if (d.status == '0' || d.status == '1' || d.status == '2'){ }}
+                                <a class="layui-btn layui-btn-xs" lay-event="importExcel" permission="marketing:activity:importExcel"><i class="layui-icon layui-icon-upload"></i> Import</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-disabled layui-btn-xs" permission="marketing:activity:importExcel"><i class="layui-icon layui-icon-upload"></i> Import</a>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingActivity-list-action">
+                                {{# if (d.status == '1' || d.status == '2'){ }}
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="design" permission="marketing:activity:design">Design</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-disabled layui-btn-xs" permission="marketing:activity:design">Design</a>
+                                {{# } }}
+                                {{# if (d.status == '2' || d.status == '3' || d.status == '4' || d.status == '5' || d.status == '6'){ }}
+                                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="preview" permission="marketing:activity:preview">Preview</a>
+                                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="exportPDF" permission="marketing:activity:export">Export</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-disabled layui-btn-xs" permission="marketing:activity:preview">Preview</a>
+                                <a class="layui-btn layui-btn-disabled layui-btn-xs" permission="marketing:activity:export">Export</a>
+                                {{# } }}
+                                {{# if (d.status == '6') { }}
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="publishDetail" permission="[workflowPermission]MM-PUBLISH">Publish Detail</a>
+                                {{# } else if (d.approvalInitiated == '1' || d.status == '3' || d.status == '4' || d.status == '5' || d.status == '6'){ }}
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="approvalDetail" permission="marketing:activity:approval:detail">Approval Detail</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-disabled layui-btn-xs" permission="marketing:activity:approval:detail">Approval Detail</a>
+                                {{# } }}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

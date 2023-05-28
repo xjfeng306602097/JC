@@ -1,0 +1,223 @@
+html {
+    background-color: transparent;
+}
+body {
+    height: 100vh;
+}
+/* 弹出层蒙板 */
+.show-mask {
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #000;
+    /*opacity: 0.3;*/
+    opacity: 0;
+    display: block;
+}
+.picture-window {
+    width: 80%;
+    height: 80%;
+    min-width: 900px;
+    min-height: 550px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+    overflow: hidden;
+}
+.picture-window .window-body {
+    float: right;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.picture-window .toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    display: block;
+    width: 100%;
+    padding: 12px 80px 12px 20px;
+    border: 1px solid #EEE;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    box-sizing: border-box;
+}
+.picture-window .toolbar .title {
+    float: left;
+    display: block;
+    font-size: 22px;
+    line-height: 40px;
+    color: #333;
+}
+.picture-window .toolbar .picture-search {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 360px;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    z-index: 20;
+}
+.picture-window .toolbar .picture-search .search-icon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 1;
+}
+.picture-window .toolbar .picture-search .search-icon>i {
+    color: #333;
+    font-size: 15px;
+}
+.picture-window .toolbar .picture-search .search-input {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+}
+.picture-window .toolbar .picture-search .search-input>input {
+    border: 0;
+    width: 100%;
+    text-indent: 50px;
+    font-size: 15px;
+    color: #333;
+    height: 38px;
+    line-height: 38px;
+}
+.picture-window .toolbar .picture-search .clear-icon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 1;
+    cursor: pointer;
+    display: none;
+}
+.picture-window .toolbar .picture-search .clear-icon>i {
+    color: #333;
+    font-size: 15px;
+}
+.picture-window .toolbar .upload-btn {
+    float: right;
+    width: 120px;
+    height: 40px;
+    line-height: 38px;
+    background-color: #ee1c1d;
+    border-radius: 6px;
+    color: #fff;
+    border: 1px solid #ee1c1d;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    user-select: none;
+}
+.picture-window .toolbar .upload-btn:hover {
+    background-color: #ee393a;
+}
+.picture-window .toolbar .upload-btn>i {
+    vertical-align: middle;
+    margin-right: 5px;
+    font-size: 18px;
+}
+.picture-window .toolbar .close {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    cursor: pointer;
+    color: #b4b8bf;
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 30;
+    text-align: center;
+}
+.picture-window .toolbar .close:hover {
+    color: #333;
+}
+.picture-window .toolbar .close>i {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+}
+.picture-window .picture-box {
+    width: 75%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-top: 64px;
+    /*padding-bottom: 20px;*/
+    box-sizing: border-box;
+    background-color: #fff;
+}
+.picture-window .picture-box {
+    width: 100%;
+}
+.picture-window .picture-box .picture-list {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    background-color: #f2f2f2;
+}
+.picture-window .picture-box .picture-list .picture-title {
+    width: 78%;
+    height: 40px;
+    max-height: 40px;
+    line-height: 18px;
+    overflow: hidden;
+    font-size: 13px;
+    color: #333;
+    text-align: center;
+    padding-left: 11%;
+    padding-right: 11%;
+    padding-top: 6px;
+}
+.picture-window .picture-box .picture-list .picture-image {
+    width: 100%;
+    height: 120px;
+    border-radius: 6px;
+    background-color: #FFF;
+    line-height: 120px;
+    text-align: center;
+    cursor: pointer;
+}
+.picture-window .picture-box .picture-list .picture-image:hover {
+    box-shadow: 0px 0px 6px rgb(36 36 36 / 20%);
+}
+.picture-window .picture-box .picture-list .picture-image>img {
+    width: auto;
+    height: auto;
+    max-height: 120px;
+    max-width: 100%;
+}
+.picture-window .picture-box .picture-list .picture-page {
+    display: block;
+    clear: both;
+    text-align: center;
+}
+.picture-window .picture-box .picture-list .picture-page span,
+.picture-window .picture-box .picture-list .picture-page .layui-laypage-refresh {
+    background-color: transparent;
+}

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Marketing Analysis - Advanced</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../style/marketing/analysis.css" media="all">
+    <style type="text/css">
+        .layui-card, .layui-tab-card {
+            box-shadow: none !important;
+        }
+        .tips {
+            padding: 300px 0;
+            text-align: center;
+            font-size: 16px;
+        }
+        #advancedMenu {
+            display: block;
+            padding: 0 15px;
+        }
+        .filter-menu {
+            display: block;
+        }
+        .menu-item {
+            display: block;
+        }
+        .menu-item .menu-title {
+            display: block;
+            height: 38px;
+            line-height: 38px;
+            margin: 0 -15px;
+            padding: 0 15px;
+            background-color: #F3F3F3;
+        }
+        .menu-item.menu-filter-item .menu-title {
+            background-color: #FFF;
+        }
+        .menu-item.menu-filter-item .menu-del-filter {
+            padding: 2px 0;
+            margin-top: 6px;
+            line-height: 20px;
+            color: #AAA;
+            cursor: pointer;
+        }
+        .menu-item.menu-filter-item .menu-del-filter i {
+        }
+        .menu-item .menu-title .menu-title-right {
+            float: right;
+            height: 38px;
+            line-height: 38px;
+        }
+        .menu-item .menu-title .menu-title-right .menu-item-btns {
+            display: block;
+            height: 100%;
+            padding: 4px 0;
+        }
+        .menu-item .menu-title .menu-title-right .menu-item-btns>* {
+            vertical-align: top;
+        }
+        .menu-item .menu-filter {
+            padding-bottom: 10px;
+        }
+        .menu-item .menu-group,
+        .menu-item .menu-select,
+        .menu-item .menu-multiple-select {
+            display: block;
+            padding: 10px 0;
+        }
+        .menu-item.menu-filter-item>.menu-group,
+        .menu-item.menu-filter-item>.menu-select,
+        .menu-item.menu-filter-item>.menu-multiple-select {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .menu-item .menu-group .menu-group-item {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #EEE;
+            border-radius: 4px;
+            margin-top: 10px;
+            box-sizing: border-box;
+            /*text-align: center;*/
+            color: #333;
+            cursor: pointer;
+        }
+        .menu-item .menu-group .menu-group-checked {
+            background-color: #5fb878;
+            border-color: #5fb878;
+            color: #FFF;
+        }
+        .menu-item .menu-group .menu-group-item:first-child {
+            margin-top: 0 !important;
+        }
+        .menu-item .menu-multiple-select xm-select>.xm-body {
+            min-width: 100%;
+        }
+        /** echarts图表 */
+        #advanced-chart {
+            width: 100%;
+            height: 400px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        #advanced-chart > div {
+            margin: 0 auto !important;
+        }
+    </style>
+</head>
+<body>
+    
+    <script type="text/html" id="body_all">
+        <div class="layui-fluid">
+            <div id="productAnalysisCompareResult">
+                <div class="tips">Please select a Makro Mail on the left</div>
+            </div>
+        </div>
+    </script>
+    
+    <script type="text/html" id="body_mm">
+        <div class="layui-frame product-frame">
+            <div class="layui-side layui-side-child">
+                <div class="layui-side-scroll">
+                    <div class="layui-menu analysis-menu filter-menu layui-form" id="advancedMenu">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-body">
+                <div class="layui-fluid">
+                    <div class="layui-card">
+                        <div class="layui-card-header">
+                            Data
+                            <div class="layui-card-header-right time-select">
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary" data-day="0">Yesterday</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary" data-day="-7">Last 7 days</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary" data-day="-30">Last 30 days</button>
+                                <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-primary" data-day="custom">Custom</button>
+                            </div>
+                        </div>
+                        <div class="layui-card-body">
+                            <div class="date-range">
+                                <span>Date:</span>
+                                <div class="layui-input-inline date-range-item">
+                                    <input type="text" name="startDate" placeholder="yyyy-MM-dd" autocomplete="false" class="layui-input">
+                                </div>
+                                <span>--</span>
+                                <div class="layui-input-inline date-range-item">
+                                    <input type="text" name="endDate" placeholder="yyyy-MM-dd" autocomplete="false" class="layui-input">
+                                </div>
+                            </div>
+                            <div id="advanced-chart"></div>
+                            <table id="advanced-tabel" lay-filter="advanced-tabel"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/html" id="menuTpl">
+        <div class="menu-item {{d.filter ? 'menu-filter-item' : ''}}" level="{{ d.level }}" key="{{ d.key }}">
+            {{# if(d.type == 'group' || d.type == 'select' || d.type == 'multiple-select' || d.type == 'filter'){ }}
+            <div class="menu-title">
+                {{ d.name }}
+                <div class="menu-title-right">
+                    {{# if(d.filter){ }}
+                    <div class="menu-del-filter">
+                        <i class="layui-icon layui-icon-close layui-font-16"></i>
+                    </div>
+                    {{# } else if(d.type == 'filter'){ }}
+                    <div class="menu-item-btns">
+                        <button type="button" class="layui-btn layui-btn-sm menu-add-filter">
+                            Add
+                            <i class="layui-icon layui-icon-addition layui-font-12"></i>
+                        </button>
+                    </div>
+                    {{# } }}
+                </div>
+            </div>
+            {{# } }}
+            {{# if(d.type == 'group'){ }}
+            <div class="menu-group" data-name="{{ d.field }}">
+                {{# layui.each(d.children, function(index, item){ }}
+                <div class="menu-group-item {{ item.checked && 'menu-group-checked' }}" key="{{ item.key }}" data-value="{{ item.value }}">{{ item.name }}</div>
+                {{# }) }}
+            </div>
+            {{# } else if(d.type == 'multiple-group'){ }}
+            {{# layui.each(d.children, function(index, item){ }}
+            {{# d.render(index) }}
+            {{# }) }}
+            {{# } else if(d.type == 'select'){ }}
+            <div class="menu-select" data-name="{{ d.field }}"></div>
+            {{# } else if(d.type == 'multiple-select'){ }}
+            <div class="menu-multiple-select" data-name="{{ d.field }}"></div>
+            {{# } else if(d.type == 'filter'){ }}
+            <div class="menu-filter"></div>
+            {{# } else { }}
+            {{# console.log(d) }}
+            {{# } }}
+        </div>
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../layuiadmin/echarts/echarts.common.min.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/analysis/advanced.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

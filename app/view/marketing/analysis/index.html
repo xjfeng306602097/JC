@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Marketing Analysis Detail</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../style/marketing/analysis.css" media="all">
+</head>
+<body class="layui-frame">
+    
+    <div class="layui-side layui-side-child">
+        <div class="layui-side-scroll">
+            <ul class="layui-menu analysis-menu" id="analysisMenu">
+                <li lay-options="{id: 0, mmCode: ''}" class="layui-menu-item-checked">
+                    <div class="layui-menu-body-title">Overview</div>
+                </li>
+                <li class="layui-menu-item-divider"></li>
+                <li class="layui-menu-item-group layui-menu-item-down" lay-options="{type: 'group', isAllowSpread: false}">
+                    <div class="layui-menu-body-title">Makro Mail</div>
+                    <div class="layui-row analysis-menu-search">
+                        <input type="text" placeholder="Search" autocomplete="off" class="layui-input" id="searchMM">
+                        <div class="search-empty">Not found!</div>
+                    </div>
+                    <ul id="mmMenu"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="analysisTab">
+            <ul class="layui-tab-title">
+                <li lay-id="panel" class="layui-this">Basic</li>
+                <li lay-id="behavior">Behavior</li>
+                <li lay-id="source">Source</li>
+                <li lay-id="advanced">Advanced</li>
+                <li lay-id="product">Product</li>
+                <li lay-id="visitor">Visitor</li>
+            </ul>
+            <div class="layui-tab-content layui-bg-gray">
+                <iframe src="" class="analysis-page"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/analysis/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

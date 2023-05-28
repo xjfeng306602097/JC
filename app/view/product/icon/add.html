@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add Icon</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-form" lay-filter="iconAdd">
+                    <div class="layui-row">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Name</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="name" maxlength="200" placeholder="Icon Name" lay-verify="required" lay-reqText="The brand name cannot be empty" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Image</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline">
+                                    <input type="text" name="path" maxlength="500" placeholder="Icon Image" lay-verify="required" lay-reqText="Please upload image file" autocomplete="off" class="layui-input" readonly>
+                                    <input type="hidden" name="picid">
+                                </div>
+                                <div class="layui-input-inline">
+                                    <button type="button" class="layui-btn" id="uploadProductIcon"><i class="layui-icon layui-icon-upload"></i> Upload</button>
+                                </div>
+                            </div>
+                            <div class="layui-input-block" style="min-height: 100px;margin-top: 10px;">
+                                <img src="" style="max-width: 190px;" id="iconImage">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Remarks</label>
+                            <div class="layui-input-block">
+                                <textarea type="textarea" name="remark" placeholder="Maximum 200 characters" style="height:120px;max-width:100%;line-height:20px;padding-top:8px;padding-bottom:8px;" maxlength="200" autocomplete="off" class="layui-input"></textarea>
+                            </div>
+                        </div>
+                        <div class="layui-form-item layui-hide">
+                            <button class="layui-btn" lay-submit lay-filter="LAY-productIcon-add-submit" id="LAY-productIcon-add-submit">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/product/icon/add.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

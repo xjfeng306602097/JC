@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Component</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="marketing:component:search">
+			<div class="layui-col-sm12">
+				<div class="layui-card">
+					<div class="layui-collapse">
+						<div class="layui-colla-item">
+		    				<h2 class="layui-colla-title">Search</h2>
+		    				<div class="layui-colla-content layui-show">
+			    				<div class="layui-row layui-form" lay-filter="componentSearch" id="componentSearch">
+                			        <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Type</label>
+                                            <div class="layui-input-inline">
+                                                <select name="type">
+                                                    <option value="">Select</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Status</label>
+                                            <div class="layui-input-inline">
+                	                            <select name="status">
+                	                                <option value="">Select</option>
+                	                                <option value="1">1 ON</option>
+                	                                <option value="0">0 OFF</option>
+                	                            </select>
+                	                        </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Create Date</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" name="createDate" id="createDate" placeholder="yyyy-MM-dd - yyyy-MM-dd">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Name</label>
+                                            <div class="layui-input-inline">
+                                              <input type="text" name="name" maxlength="50" placeholder="Component Name" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingComponent-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingComponent-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15" permission="marketing:component:list">
+			<div class="layui-col-sm12">
+				<div class="layui-card">
+					<div class="layui-card-body">
+                        <script type="text/html" id="marketingComponentToolbar">
+                            <div class="layui-btn-container">
+                                <button type="button" class="layui-btn" lay-event="create" permission="marketing:component:create">Create</button>
+    	                        <button type="button" class="layui-btn layui-btn-normal" lay-event="edit" permission="marketing:component:edit">Edit</button>
+    	                        <button type="button" class="layui-btn layui-btn-danger" lay-event="delete" permission="marketing:component:delete">Delete</button>
+	                        </div>
+                        </script>
+                        <div class="layui-row">
+                            <table id="content-marketingComponent-list" lay-filter="content-marketingComponent-list"></table>
+                            <script type="text/html" id="imgTpl">
+                                {{# if (d.previewUrl == null || d.previewUrl == ''){ }}
+                                <img src="/img/none.png" class="layui-table-thumb">
+                                {{# } else { }}
+                                <img src="{{ d.previewUrl }}" class="layui-table-thumb" lay-event="showPicture">
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingComponent-list-status">
+                                {{# if (layui.common.permission.verify('marketing:component:switchStatus')) { }}
+                                <input type="checkbox" name="status" {{ d.status == 1 ? 'checked' : '' }} value="{{d.id}}" lay-skin="switch" lay-filter="switchStatus" lay-text="ON|OFF">
+                                {{# } else { }}
+                                <input type="checkbox" name="status" {{ d.status == 1 ? 'checked' : '' }} value="{{d.id}}" lay-skin="switch" lay-text="ON|OFF" disabled>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingComponent-list-action">
+                                <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="design" permission="marketing:component:design">Design</a>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<script src="../layuiadmin/layui/layui.js"></script>
+	<script src="../js/base.js?t={$js_timestamp}"></script>
+	<script src="../js/marketing/component/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Department</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="sys:department:search">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">Search</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-row layui-form" lay-filter="departmentSearch" id="departmentSearch">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Name</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="name" placeholder="Name" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-department-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-department-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15" permission="sys:department:list">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <div class="layui-row">
+                            <div style="padding-bottom: 10px;" id="department-button">
+                                <button class="layui-btn layuiadmin-btn-order" id="department-add-button" permission="sys:department:add">Add</button>
+                            </div>
+                            <table class="layui-table" id="content-department-list" lay-filter="content-department-list"></table>
+                            <script type="text/html" id="content-department-list-action">
+                                <div class="layui-btn-container">
+                                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-filter="add" permission="sys:department:add">Add</a>
+                                    <a class="layui-btn layui-btn-normal layui-btn-xs" lay-filter="edit" permission="sys:department:edit">Edit</a>
+                                    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-filter="del" permission="sys:department:delete">Del</a>
+                                    <a class="layui-btn layui-btn layui-btn-xs" lay-filter="user" permission="sys:department:user">User</a>
+                                </div>
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/department/index.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

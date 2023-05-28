@@ -1,0 +1,27 @@
+{
+    "code": "0000",
+    "msg": "请求成功",
+    "data": {
+        "list": [{
+            "name": "会员类型A",
+            "total": 109999,
+            "value": 32
+        }, {
+            "name": "会员类型B",
+            "total": 100,
+            "value": 32
+        }, {
+            "name": "会员类型C",
+            "total": 100,
+            "value": 32
+        }, {
+            "name": "会员类型D",
+            "total": 100,
+            "value": 32
+        }, {
+            "name": "会员类型E",
+            "total": 100,
+            "value": 32
+        }]
+    }
+}

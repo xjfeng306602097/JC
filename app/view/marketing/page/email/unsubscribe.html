@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>unsubscribe</title>
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="/html/css/subscribe-1.0.0.css" rel="stylesheet">
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="main-container">
+            <h1>You are going to unsubscribe</h1>
+            <p class="thai">คุณจะยกเลิกการสมัครสมาชิก</p>
+            <br>
+            <p>We value your opinion and would appreciate your feedback regarding your decision to unsubscribe. If you have a moment, please let us know why you unsubscribed.</p>
+            <p class="thai">หากเป็นไปได้ เราอยากทราบถึงสาเหตุในการยกเลิกครั้งนี้ เพราะความเห็นของคุณมีคุณค่าอย่างมาก และยังเป็นประโยชน์ต่อการปรับปรุงในอนาคต</p>
+            <div class="options">
+                <div class="item">
+                    <input type="radio" autocomplete="off" name="unsubReason" class="unsubReason" id="unsubReason_1" value="I get too many emails from Siam Makro Public Company Limited" checked>
+                    <label class="item-text" for="unsubReason_1">
+                        <p>I get too many emails from Siam Makro Public Company Limited</p>
+                        <p class="thai">ฉันได้รับอีเมลมากเกินไปจาก Siam Makro Public Company Limited</p>
+                    </label>
+                </div>
+                <div class="item">
+                    <input type="radio" autocomplete="off" name="unsubReason" class="unsubReason" id="unsubReason_2" value="I no longer want to receive these emails">
+                    <label class="item-text" for="unsubReason_2">
+                        <p>I no longer want to receive these emails</p>
+                        <p class="thai">ฉันไม่ต้องการรับอีเมลเหล่านี้แล้ว</p>
+                    </label>
+                </div>
+                <div class="item">
+                    <input type="radio" autocomplete="off" name="unsubReason" class="unsubReason" id="unsubReason_3" value="I never signed up for this mailing list">
+                    <label class="item-text" for="unsubReason_3">
+                        <p>I never signed up for this mailing list</p>
+                        <p class="thai">ฉันไม่เคยสมัครรับข้อมูลเหล่านี้มาก่อน</p>
+                    </label>
+                </div>
+                <div class="item">
+                    <input type="radio" autocomplete="off" name="unsubReason" class="unsubReason" id="unsubReason_4" value="The emails are spam and should be reported">
+                    <label class="item-text" for="unsubReason_4">
+                        <p>The emails are spam and should be reported</p>
+                        <p class="thai">อีเมลนี้เป็นอีเมลขยะ และฉันต้องการรายงานให้ทราบ</p>
+                    </label>
+                </div>
+                <div class="item">
+                    <input type="radio" autocomplete="off" name="unsubReason" class="unsubReason" id="unsubReason_5" value="Other (fill in reason below)">
+                    <label class="item-text" for="unsubReason_5">
+                        <p>Other (fill in reason below)</p>
+                        <p class="thai">อื่นๆ (โปรดระบุ)</p>
+                    </label>
+                    <div class="item-input">
+                        <textarea type="textarea" name="unsubRemark" class="unsubRemark"></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="button" class="btn" onclick="unsubscribe();">Submit the reason and unsubscribe</button>
+            <p style="margin-top: 5px;"><a class="btn-link" href="javascript:;" onclick="unsubscribe();">ส่งความคิดเห็น</a></p>
+            <br>
+            <p>We’re sorry to see you go. If you unsubscribe by accident, please click to button below to subscribe again.</p>
+            <p class="thai">เราเสียใจที่คุณได้ยกเลิกรับอีเมลจากเรา ถ้าคุณไม่ได้เจตนายกเลิก ให้คลิกที่ปุ่มด้านล่างนี้ เพื่อสมัครรับอีเมลต่ออีกครั้ง</p>
+            <br>
+            <button type="button" class="btn" onclick="subscribe();">Subscribe me back to list again</button>
+            <p style="margin-top: 5px;"><a class="btn-link" href="javascript:;" onclick="subscribe();">ขอสมัครรับอีเมลต่อไป</a></p>
+        </div>
+        <div class="footer">
+            <p>© {php}echo date('Y');{/php} Siam Makro. All right reserved.</p>
+            <p>3498 2nd FL., Lardprao Road, Klongchan, Bangkapi, Bangkok 10240</p>
+        </div>
+    </div>
+    {// 本地文件被更新到文件服务器时会把对应的文件替换，但必须在更新时把对应的文件一并上传 }
+    <script type="text/javascript" src="/html/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/html/js/common-1.0.1.js"></script>
+    <script type="text/javascript">
+        var API_URL = $('meta[name="gateway"]').attr("content");
+
+        // variable input
+        var current_address = Common.url.searchParams.get('address') || '',
+            current_d = Common.url.searchParams.get('d') || '';
+
+        function unsubscribe() {
+            var reason = $('input[name="unsubReason"]:checked').val();
+            var remark = $('textarea[name="unsubRemark"]').val();
+
+            var data = {
+                address: current_address,
+                d: current_d,
+                reason: reason,
+                remark: remark,
+            };
+            $.ajax({
+                url: API_URL + '/makro-message/api/v1/mail/unsub',
+                type: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify(data),
+                success: function(result) {
+                    if (result.code == '0000') {
+                        window.location.href = './unsubscribe-ok.html';
+                    } else {
+                        alert(result.msg);
+                    }
+                },
+                error: function(xhr, error) {
+                    alert('Error');
+                    console.log(xhr);
+                }
+            });
+        }
+        function subscribe() {
+            var data = {
+                address: current_address,
+                d: current_d,
+            };
+            $.ajax({
+                url: API_URL + '/makro-message/api/v1/mail/sub',
+                type: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify(data),
+                success: function(result) {
+                    if (result.code == '0000') {
+                        var url = result.msg;
+                        window.location.href = './subscribe-ok.html';
+                    } else {
+                        alert(result.msg);
+                    }
+                },
+                error: function(xhr, error) {
+                    alert('Error');
+                    console.log(xhr);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

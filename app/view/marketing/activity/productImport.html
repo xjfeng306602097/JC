@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Import Product</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+    .layui-upload-drag-full {
+        display: flex;
+        height: 404px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .layui-upload-drag-full .layui-upload-box {
+        display: block;
+    }
+
+    .upload-file {
+        display: block;
+        width: 100%;
+        min-height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .upload-file .upload-box {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .upload-file .upload-box .upload-progress {
+        display: block;
+        width: 100%;
+    }
+
+    .upload-file .upload-box .upload-progress h2 {
+        display: block;
+        font-size: 20px;
+        line-height: 1.5;
+        color: #333;
+        text-align: center;
+    }
+
+    .upload-file .upload-box .upload-progress p {
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 40px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: #666;
+        text-align: center;
+    }
+
+    .upload-file .upload-box .upload-progress .layui-progress {
+        width: 100%;
+    }
+
+    .select-sheet ul {
+        display: block;
+        width: 100%;
+        min-height: 330px;
+        margin-bottom: 20px;
+    }
+
+    .select-sheet ul li {
+        display: block;
+        border: 1px solid #F6F6F6;
+        border-radius: 6px;
+        margin-bottom: 10px;
+    }
+
+    .select-sheet ul li.selected {
+        border-color: #5FB878;
+    }
+
+    .select-sheet ul li a {
+        display: block;
+        padding: 8px 15px;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #666;
+    }
+
+    .select-sheet ul li.selected a {
+        color: #5FB878;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                Upload
+                <div class="layui-card-header-toolbar">
+                    <a class="layui-btn layui-btn-sm" href="/template/MM-Product.xlsx">Download Excel Template</a>
+                </div>
+            </div>
+            <div class="layui-card-body">
+                <div class="layui-form" id="importProductUpload">
+                    <div class="layui-upload-drag layui-upload-drag-full" id="upload-0">
+                        <div class="layui-upload-box">
+                            <i class="layui-icon">&#xe681;</i>
+                            <p>Click to select/drag and drop the Excel file here</p>
+                        </div>
+                    </div>
+                    <div class="upload-btn" id="impDataBtn-0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="uploadHtml">
+        <div class="upload-file select-sheet" style="height: 100%;">
+            <div class="upload-box">
+                <div class="upload-progress">
+                    <h2>Uploading...</h2>
+                    <p>please do not close the pop-up window!</p>
+                    <div class="layui-progress" lay-filter="upload-progress" lay-showPercent="true">
+                        <div class="layui-progress-bar" lay-percent="0%">
+                            <span class="layui-progress-text">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/productImport.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>productDetails</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+    html{background-color:#fff;}
+    body{overflow: hidden;}
+    #think_page_trace_open{display: none;}
+    .layui-table-view {
+        border: 0px;
+    }
+
+    .layui-table-box .layui-table-header thead {
+        display: none;
+    }
+
+    .layui-table,
+    .layui-table-view {
+        margin: 0px;
+    }
+
+    .layui-table[lay-even] tr:nth-child(even) {
+        background-color: #fff;
+    }
+
+    .layui-btn-xs.showed {
+        color: #5e5e5e;
+    }
+
+    .layui-btn-xs.hided {
+        color: #eee;
+    }
+
+    .laytable-cell-1-0-0 {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .iconBtn {
+        cursor: pointer;
+    }
+
+    .iconBtn:hover,
+    .iconBtn.act {
+        color: #d6010b;
+    }
+    
+    
+    
+    .detailsBox {
+        width:92%;
+        height:400px;
+        padding:4%;
+        overflow: scroll;
+    }
+    
+    .detailsBox dl{
+        width:100%;
+        height: auto;
+        padding:0px;
+        color: #000;
+    }
+    
+    .detailsBox dl dt {
+        width:100%;
+        height: 30px;
+        font-size:16px;
+        font-weight: bold;
+        line-height: 30px;
+        border-bottom: 1px solid #999;
+        display: table;
+        padding-top:14px;
+    }
+    
+    .detailsBox dl dd {
+        width:94%;
+        height: auto;
+        padding-left:3%;
+        padding-right: 3%;
+        display: table;
+        padding-top:14px;
+    }
+
+    .detailsBox dl dd .dataFiled-Title {
+        width:38%;
+        height: 20px;
+        line-height: 20px;
+        font-size:12px;
+        float:left;
+        text-align: left;
+    }
+    
+    .detailsBox dl dd .dataFiled-content {
+        width:60%;
+        height: auto;
+        line-height: 20px;
+        font-size:12px;
+        float:right;
+        text-align: right;
+        display: table;
+        overflow: visible;
+        word-break:break-all; 
+        word-wrap:break-word;
+    }
+    
+    </style>
+</head>
+<body onselectstart="return false;" unselectable="on">
+
+    <div class="detailsBox"></div>
+    
+    <script type="text/html" id="content-product-details-operate">
+        {{# if (d.visible==true) { }}
+        <a class="layui-btn-xs showed" lay-event="visible" data="1"><i class="layui-icon layui-icon-circle-dot iconBtn act"></i></a>
+        {{# }else { }}
+        <a class="layui-btn-xs hided" lay-event="visible" data="0"><i class="layui-icon layui-icon-circle iconBtn"></i></a>
+        {{# } }}
+    </script>
+    <script type="text/html" id="content-product-name-operate">
+        <a class="layui-btn-xs" lay-event="name">{{d.name}}</a>
+    </script>
+    <script type="text/html" id="content-product-panel-operate">
+        {{# if (d.lock==true) { }}
+        <a class="layui-btn-xs" lay-event="lock" data="1"><i class="layui-icon layui-icon-password iconBtn act" style="font-size:15px!important;"></i></a>
+        {{# }else { }}
+        <a class="layui-btn-xs" lay-event="lock" data="0"><i class="layui-icon layui-icon-password iconBtn" style="font-size:15px!important;"></i></a>
+        {{# } }}
+        {{# if (d.dType!="BackgroundImage") { }}
+        <a class="layui-btn-xs" lay-event="delete" data="0"><i class="layui-icon layui-icon-delete iconBtn" style="font-size:18px!important;"></i></a>
+        {{# } }}
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/productDetails.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

@@ -1,0 +1,217 @@
+{
+    "messageUtils": null,
+    "code": "0000",
+    "msg": "Success",
+    "data": [{
+        "name": "Page",
+        "type": "multiple-group",
+        "value": "page",
+        "checked": true,
+        "children": [{
+            "name": "Page",
+            "field": "pageNos",
+            "type": "multiple-select",
+            "children": [{
+                "name": "Page 1",
+                "value": "1"
+            }, {
+                "name": "Page 2",
+                "value": "2"
+            }, {
+                "name": "Page 3",
+                "value": "3"
+            }, {
+                "name": "Page 4",
+                "value": "4"
+            }, {
+                "name": "Page 5",
+                "value": "5"
+            }]
+        }, {
+            "name": "Data indicators",
+            "field": "dataType",
+            "type": "multiple-select",
+            "children": [{
+                "name": "Click",
+                "value": "Click",
+                "checked": true
+            }, {
+                "name": "Goods Click",
+                "value": "Goods Click"
+            }, {
+                "name": "Page Stay Time",
+                "value": "Page Stay Time"
+            }, {
+                "name": "Bounce Rate",
+                "value": "Bounce Rate"
+            }]
+        }]
+    }, {
+        "name": "Member",
+        "type": "multiple-group",
+        "value": "member",
+        "children": [{
+            "name": "Step",
+            "field": "step",
+            "type": "multiple-select",
+            "children": [{
+                "name": "Send Total",
+                "value": "Send Total"
+            }, {
+                "name": "Send Success",
+                "value": "Send Success"
+            }, {
+                "name": "Access to MM",
+                "value": "Access to MM"
+            }, {
+                "name": "Access to Page",
+                "value": "Access to Page"
+            }, {
+                "name": "Access to Item",
+                "value": "Access to Item"
+            }]
+        }, {
+            "name": "Filter",
+            "type": "filter",
+            "children": [{
+                "name": "Member Type",
+                "field": "memberTypes",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "FR",
+                    "value": "FR"
+                }, {
+                    "name": "NFR",
+                    "value": "NFR"
+                }, {
+                    "name": "HO",
+                    "value": "HO"
+                }, {
+                    "name": "SV",
+                    "value": "SV"
+                }, {
+                    "name": "DT",
+                    "value": "DT"
+                }, {
+                    "name": "OT",
+                    "value": "OT"
+                }]
+            }, {
+                "name": "Channel",
+                "field": "channels",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "Email",
+                    "value": "email"
+                }, {
+                    "name": "SMS",
+                    "value": "sms"
+                }, {
+                    "name": "LINE",
+                    "value": "line"
+                }, {
+                    "name": "Facebook",
+                    "value": "facebook"
+                }, {
+                    "name": "APP",
+                    "value": "app"
+                }]
+            }, {
+                "name": "Mobile",
+                "field": "mobile",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "Mobile terminal",
+                    "value": "1"
+                }, {
+                    "name": "Non-mobile terminal",
+                    "value": "0"
+                }]
+            }]
+        }]
+    }, {
+        "name": "Session",
+        "type": "multiple-group",
+        "value": "session",
+        "children": [{
+            "name": "Step",
+            "field": "step",
+            "type": "multiple-select",
+            "children": [{
+                "name": "Send Total",
+                "value": "Send Total"
+            }, {
+                "name": "Send Success",
+                "value": "Send Success"
+            }, {
+                "name": "Access to MM",
+                "value": "Access to MM"
+            }, {
+                "name": "Access to Page",
+                "value": "Access to Page"
+            }, {
+                "name": "Access to Item",
+                "value": "Access to Item"
+            }]
+        }, {
+            "name": "Filter",
+            "type": "filter",
+            "children": [{
+                "name": "Member Type",
+                "field": "memberTypes",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "FR",
+                    "value": "FR"
+                }, {
+                    "name": "NFR",
+                    "value": "NFR"
+                }, {
+                    "name": "HO",
+                    "value": "HO"
+                }, {
+                    "name": "SV",
+                    "value": "SV"
+                }, {
+                    "name": "DT",
+                    "value": "DT"
+                }, {
+                    "name": "OT",
+                    "value": "OT"
+                }]
+            }, {
+                "name": "Channel",
+                "field": "channels",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "Email",
+                    "value": "email"
+                }, {
+                    "name": "SMS",
+                    "value": "sms"
+                }, {
+                    "name": "LINE",
+                    "value": "line"
+                }, {
+                    "name": "Facebook",
+                    "value": "facebook"
+                }, {
+                    "name": "APP",
+                    "value": "app"
+                }]
+            }, {
+                "name": "Mobile",
+                "field": "mobile",
+                "type": "multiple-select",
+                "children": [{
+                    "name": "Mobile terminal",
+                    "value": "1"
+                }, {
+                    "name": "Non-mobile terminal",
+                    "value": "0"
+                }]
+            }]
+        }]
+    }],
+    "success": true
+}

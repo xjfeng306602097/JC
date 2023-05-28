@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Product Picture Batch Upload</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+    .layui-upload-drag-full {
+        display: flex;
+        height: 120px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .layui-upload-drag-full .layui-upload-box {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <div class="layui-form" id="batchUpload" lay-filter="batchUpload">
+                    <div class="layui-upload-drag layui-upload-drag-full" id="upload-0">
+                        <div class="layui-upload-box">
+                            <i class="layui-icon layui-icon-addition"></i>
+                            <p>Click here to select/drag and drop the image you want to upload</p>
+                        </div>
+                    </div>
+                        <input type="hidden" name="number" value="0">
+                    <div class="layui-form-item layui-hide">
+                        <input type="hidden" name="list">
+                        <button class="layui-btn" lay-submit lay-filter="LAY-picture-batchUpload-submit" id="LAY-picture-batchUpload-submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <script type="text/html" id="batchUploadListToolbar">
+                    {{# if(uploadNum > 0) { }}
+                    <div class="layui-btn-container">
+                        <button type="button" class="layui-btn layui-btn-danger layui-btn-sm" lay-event="remove">Remove</button>
+                    </div>
+                    {{# } }}
+                </script>
+                <div class="layui-row">
+                    <!-- table 开始 -->
+                    <table class="layui-table" id="content-picture-batchUpload-list" lay-filter="content-picture-batchUpload-list"></table>
+                    <!-- table 结束 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/product/picture/batch.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

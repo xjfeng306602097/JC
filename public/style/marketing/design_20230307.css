@@ -1,0 +1,2821 @@
+/* 弹出层蒙板 */
+.show-mask {
+    position: fixed;
+    z-index: 900;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-color: #000;
+    opacity: 0.6;
+    display: none;
+}
+
+/* 加载数据 loading  */
+.pageLoading {
+    width: 240px;
+    height: auto; 
+    padding: 20px;
+    background-color: #333;
+    position: absolute;
+    z-index: 991;
+    display: block;
+    left: 50%;
+    margin-left:-130px;
+    top: 50%;
+    margin-top: -100px;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+}
+/*
+.pageLoading {
+    width: auto;
+    height: auto; 
+    padding: 20px;
+    background-color: #333;
+    position: fixed;
+    z-index: 991;
+    display: none;
+    border-radius: 5px;
+}*/
+
+.pageLoading>i {
+    font-size: 30px;
+    color: #fff;
+}
+
+/* 弹出层 */
+.pushWindow {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    margin: 0px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+    display: none;
+    overflow: hidden;
+}
+
+.pushWindow .winLeft {
+    width: 25%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background-color: #f6f7f9;
+}
+
+.pushWindow .winLeft ul {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    display: table;
+}
+
+.pushWindow .winLeft ul>li {
+    width: 86%;
+    margin-left: 7%;
+    margin-right: 7%;
+    height: 35px;
+    line-height: 35px;
+    margin-bottom: 10px;
+    color: #7f8792;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.pushWindow .winLeft ul>li.act {
+    background-color: #fff;
+    border-radius: 3px;
+    color: #ee1c1d;
+    border: 1px solid #ee1c1d;
+}
+
+.pushWindow .winLeft ul>li:hover {
+    background-color: #fff;
+    border-radius: 3px;
+    color: #ee1c1d;
+}
+
+#tabContent {
+    /*overflow: scroll;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+div#tabContent::-webkit-scrollbar {
+    display: none;
+}
+
+#duplicateList li {
+    border: 0px;
+    background-color: transparent;
+}
+
+#duplicateList li.cunter {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #ee1c1d;
+}
+
+.pushWindow .winLeft .upNewImage {
+    width: 86%;
+    margin-left: 7%;
+    margin-right: 7%;
+    height: 35px;
+    line-height: 35px;
+    background-color: #ee1c1d;
+    border-radius: 3px;
+    color: #fff;
+    border: 1px solid #ee1c1d;
+    cursor: pointer;
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.pushWindow .winRight #pushConfirmBtn {
+    width: 140px;
+    height: 35px;
+    line-height: 35px;
+    background-color: #ee1c1d;
+    border-radius: 3px;
+    color: #fff;
+    border: 1px solid #ee1c1d;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.pushWindow .winLeft .upNewImage:hover {
+    background-color: #ee393a;
+}
+
+.pushWindow .winRight {
+    width: 75%;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: #fff;
+}
+
+
+.pushWindow .winRight .searchArea {
+    width: 300px;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    z-index: 20;
+}
+
+.pushWindow .winRight .searchArea .searchIcon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 1;
+}
+
+.pushWindow .winRight .searchArea .searchIcon>i {
+    color: #333;
+    font-size: 15px;
+}
+
+.pushWindow .winRight .searchArea .searchInput {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+}
+
+.pushWindow .winRight .searchArea .searchInput>input {
+    border: 0px;
+    width: 100%;
+    text-indent: 50px;
+    font-size: 15px;
+    color: #333;
+    height: 38px;
+    line-height: 38px;
+}
+
+.pushWindow .winRight .searchArea .clearIcon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 1;
+    cursor: pointer;
+    display: none;
+}
+
+.pushWindow .winRight .searchArea .clearIcon>i {
+    color: #333;
+    font-size: 15px;
+}
+
+
+.pushWindow .winRight .pictureList {
+    width: 95%;
+    height: 80%;
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    z-index: 10;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-right: 5%;
+}
+
+.pushWindow .winRight .duplicateVeiw {
+    width: 95%;
+    height: 80%;
+    z-index: 10;
+    padding-right: 5%;
+    overflow: scroll;
+    margin-top: 40px;
+}
+
+
+.pushWindow .winRight .pictureList .pictureTitle {
+    width: 78%;
+    height: 40px;
+    max-height: 40px;
+    line-height: 18px;
+    overflow: hidden;
+    font-size: 13px;
+    color: #333;
+    text-align: center;
+    padding-left: 11%;
+    padding-right: 11%;
+    padding-top: 6px;
+}
+
+.pushWindow .winRight .pictureList .pictureMap {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    /*background-color:#f9f9f9;*/
+    text-align: center;
+    height: 140px;
+}
+
+.pushWindow .winRight .pictureList .pictureMap>img {
+    width: auto;
+    height: auto;
+    max-height: 140px;
+    cursor: pointer;
+    max-width: 140px;
+}
+
+.pushWindow .winRight .pictureList .pictureMap>img:hover {
+    box-shadow: 0 2px 8px rgb(36 36 36 / 40%);
+}
+
+.pushWindow .closeWinIcon {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    cursor: pointer;
+    color: #b4b8bf;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 30;
+}
+
+.pushWindow .closeWinIcon:hover {
+    color: #333;
+}
+
+.pushWindow .closeWinIcon>i {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.layui-fluid {
+    padding: 0px;
+}
+
+.layui-card {
+    padding: 0px;
+}
+
+.layui-card-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.createTemplatePageTop {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 9999;
+}
+
+.createTemplatePageTop .line {
+    width: 1px;
+    height: 25px;
+    border-left: 1px solid #eff2f7;
+    margin-left: 14px;
+    margin-right: 16px;
+    float: left;
+}
+
+.createTemplatePageTop .logo {
+    width: auto;
+    height: auto;
+    float: left;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.createTemplatePageTop .logo>img {
+    width: auto;
+    height: 30px;
+}
+
+.createTemplatePageTop .appTitle {
+    display: block;
+    width: 130px;
+    height: 42px;
+    box-sizing: border-box;
+    padding-left: 14px;
+    float: left;
+    line-height: 42px;
+    font-size: 20px;
+    color: #333;
+}
+
+.createTemplatePageTop .designTitle {
+    display: block;
+    margin-left: 130px;
+    height: 42px;
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 14px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.createTemplatePageTop .designTitle:after {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 0;
+    height: 100%;
+}
+
+.createTemplatePageTop .designTitle .mmName {
+    display: inline-flex;
+    vertical-align: middle;
+    max-height: 32px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #333;
+    overflow: hidden;
+}
+
+
+.fileBtnBox {
+    width: 100%;
+    height: auto;
+    padding-top: 10px;
+}
+
+.fileBtnBox .dispelBtn,
+.fileBtnBox .redoBtn {
+    width: auto;
+    height: 22px;
+
+    opacity: 0.1;
+    display: table;
+    float: left;
+    margin-right: 10px;
+}
+
+.fileBtnBox .dispelBtn {
+    width: 22px;
+    height: 22px;
+    background-size: 22px 22px;
+    opacity: 0.6;
+    cursor: pointer;
+    background-image: url('/img/undoIcon.png');
+}
+
+.fileBtnBox .redoBtn {
+    width: 22px;
+    height: 22px;
+    opacity: 0.6;
+    cursor: pointer;
+    background-size: 22px 22px;
+    background-image: url('/img/redoIcon.png');
+}
+
+.fileBtnBox .dispelBtn:hover,
+.fileBtnBox .redoBtn:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.fileBtnBox .dispelBtn.noneClick,
+.fileBtnBox .redoBtn.noneClick {
+    cursor: not-allowed;
+    opacity: 0.1;
+}
+
+
+/* 选择工具按钮  */
+.fileBtnBox .mouseComponentBtn,
+.fileBtnBox .mouseGroupBtn {
+    width: auto;
+    height: 22px;
+    opacity: 0.1;
+    display: table;
+    float: left;
+    margin-right: 10px;
+}
+
+.fileBtnBox .mouseComponentBtn {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    cursor: pointer;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/mouseComponent.png');
+}
+.fileBtnBox .mouseGroupBtn {
+    margin-top: 4px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    cursor: pointer;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('/img/mouseGroup.png');
+    margin-right: 0px;
+}
+.fileBtnBox .mouseGroupBtn.noneClick,.fileBtnBox .mouseComponentBtn.noneClick{
+    opacity: 0.2;
+}
+
+.fileBtnBox .mouseGroupBtn:hover,.fileBtnBox .mouseComponentBtn:hover{
+    opacity: 1;
+}
+.fileBtnBox .mouseGroupBtn.selected,.fileBtnBox .mouseComponentBtn.selected{
+    padding: 1px;
+    border-style: dashed;
+    border: 1px dashed #333;
+    opacity: 0.8;
+    background-color: #e2e2e2;
+    border-radius: 3px;
+    background-size: 12px 12px;
+}
+
+
+
+.createTemplatePageTop .fileBtnBox .pageButton.DesignLine.act>i {
+    color: #d93732;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton,
+.createTemplatePageTop .fileBtnBox .pageEvent {
+    width: auto;
+    float: left;
+    margin-right: 14px;
+    margin-left: 4px;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton>i {
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #999;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton.disPage.act>i {
+    color: #d93732;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton>i:hover {
+    font-weight: 600;
+    color: #333;
+}
+
+
+
+
+.fileBtnBox .pageButton.noneClick>i {
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.fileBtnBox .pageButton.noneClick>i:hover {
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent.noneClick>i {
+    color: #ddd;
+    cursor: not-allowed;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton.prePage>i {
+    font-size: 18px;
+}
+
+.createTemplatePageTop .fileBtnBox .pageButton.nextPage>i {
+    font-size: 18px;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent.noneClick {
+    color: #ccc;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent.deletePage>i {
+    font-size: 24px;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent.pageLevel>i {
+    font-size: 18px;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent>i {
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #666;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent>i:hover {
+    color: #333;
+}
+
+.createTemplatePageTop .fileBtnBox .pageEvent.noneClick>i:hover {
+    color: #ccc;
+}
+
+.createTemplatePageTop .pageButton.forbidClick>i {
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.createTemplatePageTop .fileBtnBox .activationPage {
+    font-size: 18px;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    margin-right: 14px;
+    font-weight: 300;
+}
+
+.pageTopBtn {
+    font-size: 0;
+    text-align: right;
+}
+
+.pageTopBtn .mmBtn-group,
+.pageTopBtn .mmBtn {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.pageTopBtn .mmBtn {
+    margin-top: 4px;
+    border-radius: 5px;
+    margin-left: 0;
+    margin-right: 20px;
+    min-width: 90px;
+}
+
+.pageTopBtn .mmBtn-group {
+    position: relative;
+    text-align: left;
+}
+
+.pageTopBtn .mmBtn-group .mmBtn {
+    margin-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.pageTopBtn .mmBtn-group .mmMore {
+    padding: 0 9px;
+    margin-top: 4px;
+    margin-left: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-color: #009688;
+    color: #009688;
+}
+
+.pageTopBtn .mmBtn-group .mmMore.mmMore-warm {
+    border-color: #FFB7FF;
+    color: #FFB7FF;
+}
+
+.pageTopBtn .mmBtn-group .mmBtn.noneClick+.mmMore {
+    border-color: #CCC;
+    color: #CCC;
+}
+
+.pageTopBtn .mmBtn-group .layui-nav-child {
+    position: absolute;
+    top: 45px;
+    left: unset;
+    right: 0;
+    width: 160px;
+    font-size: 14px;
+}
+
+.pageTopBtn .mmBtn-group .layui-nav-child dd {
+    padding: 0 10px;
+    text-align: center;
+}
+
+#saveComponent.noneClick,
+#saveTemplate.noneClick,
+#lockBtn.noneClick {
+    background-color: #ccc;
+}
+
+.pageTopBtn .staffInfo {
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    color: #333;
+    width: auto;
+    margin-left: 14px;
+    display: block;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    float: left;
+    font-weight: 300;
+}
+
+.body-content {
+    width: 100%;
+    height: auto;
+    margin-top: 100px;
+    display: table;
+}
+
+.design-edit-content {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    background-color: #eff2f7;
+}
+
+.design-edit-content .edit-tool-panel {
+    width: 204px;
+    /* 84px; */
+    height: 100%;
+    top: 53px;
+    left: 0px;
+    background-color: #fff;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 4px 0 5px -3px #d5d5d5;
+}
+
+.design-edit-content .edit-tool-panel>ul {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+}
+
+.design-edit-content .edit-tool-panel>ul>li {
+    width: 81px;
+    height: 51px;
+    border-left: 3px solid #fff;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.design-edit-content .edit-tool-panel>ul>li:hover {
+    border-left: 3px solid #d93732;
+}
+
+.design-edit-content .edit-tool-panel>ul>li.act {
+    border-left: 3px solid #d93732;
+    color: #d93732;
+}
+
+.design-edit-content .edit-tool-panel>ul>li.noneClick {
+    border-left: 3px solid #fff;
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.design-edit-content .edit-tool-panel>ul>li.noneClick:hover {
+    border-left: 3px solid #fff;
+    color: #eee;
+    cursor: not-allowed;
+}
+
+
+
+.design-edit-content .edit-tool-panel>ul>li .design_tool_icon {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    padding-top: 6px;
+}
+
+.design-edit-content .edit-tool-panel>ul>li .design_tool_icon>i {
+    font-weight: 500;
+    font-size: 25px;
+}
+
+.design-edit-content .edit-tool-panel>ul>li>span {
+    width: 100%;
+    height: 18px;
+    line-height: 18px;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* 作业区域开始 */
+.design-edit-content .workArea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+    overflow: scroll;
+    border:1px solid #666;
+}
+
+.design-edit-content .loadingTip {
+    width:100%;
+    height:100%;
+    text-align: center;
+    font-size:18px;
+    color:#333;
+    left: 0px;
+    top:0px;
+    position:absolute;
+    z-index: 999999;
+    background-color: #383d49;
+    opacity: 0.3;
+}
+
+.design-edit-content .loadingTip > i{
+    position: absolute;
+    top:50%;
+    margin-top:-16px;
+    left:50%;
+    margin-left:-16px;
+}
+
+.design-edit-content .pageList {
+    width: 100%;
+    /*height: 71px;*/
+    max-height: 200px;
+    min-height: 71px;
+    display: table;
+    position: fixed;
+    z-index: 12;
+    left: 0px;
+    top: 55px;
+    display: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.design-edit-content .pageList.moveDown {
+    -webkit-animation-name: "fadeInDown";
+    /*动画名称，需要跟@keyframes定义的名称一致*/
+    -webkit-animation-duration: 0.5s;
+    /*动画持续的时间长*/
+    -webkit-animation-iteration-count: 1;
+    /*动画循环播放的次数为1 infinite为无限次*/
+    animation-fill-mode: forwards;
+    display: table;
+}
+
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        top: 0px;
+    }
+
+    100% {
+        opacity: 1;
+        top: 50;
+    }
+}
+
+
+.design-edit-content .pageList .listBg {
+    width: 100%;
+    /*height:71px;*/
+    height: 100%;
+    z-index: 1;
+    background-color: #000;
+    opacity: 0.5;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+}
+
+.design-edit-content .pageList .listDl {
+    width: 60%;
+    height: 51px;
+    padding-top: 18px;
+    padding-bottom: 8px;
+    position: absolute;
+    left: 20%;
+    top: 0px;
+    z-index: 2;
+    text-align: center;
+    display: block;
+}
+
+.design-edit-content .pageList .listDl .pageDt {
+    width: 50px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-size: 18px;
+    color: #fff;
+    display: inline-block;
+    margin-left: 7px;
+    margin-right: 7px;
+    border: 1px solid #9d9e9e;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #9e9fa0;
+    margin-bottom: 20px;
+}
+
+.design-edit-content .pageList .listDl .pageDt.act {
+    color: #fff;
+    border: 1px solid #d93732;
+    background-color: #d93732;
+}
+
+.design-edit-content .pushLeftMenu {
+    width: auto;
+    height: auto;
+    max-width: 320px;
+    background-color: #fff;
+    float: left;
+    min-width: 320px;
+    position: absolute;
+    left: -340px;
+    top: 57px;
+    z-index: 9;
+}
+
+.design-edit-content .pushLeftMenu.openLeftMenu {
+    -webkit-animation-name: "fadeInLeft";
+    /*动画名称，需要跟@keyframes定义的名称一致*/
+    -webkit-animation-duration: 0.5s;
+    /*动画持续的时间长*/
+    -webkit-animation-iteration-count: 1;
+    /*动画循环播放的次数为1 infinite为无限次*/
+    animation-fill-mode: forwards;
+}
+
+.design-edit-content .pushLeftMenu.closeLeftMenu {
+    -webkit-animation-name: "fadeInRight";
+    /*动画名称，需要跟@keyframes定义的名称一致*/
+    -webkit-animation-duration: 0.5s;
+    /*动画持续的时间长*/
+    -webkit-animation-iteration-count: 1;
+    /*动画循环播放的次数为1 infinite为无限次*/
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        left: -359px;
+    }
+
+    100% {
+        opacity: 1;
+        left: 82px;
+    }
+}
+
+
+@-webkit-keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        left: -359px;
+    }
+
+    100% {
+        opacity: 1;
+        left: 82px;
+    }
+}
+
+@-webkit-keyframes fadeInRight {
+    0% {
+        opacity: 1;
+        left: 0px;
+    }
+
+    100% {
+        opacity: 1;
+        left: -359px;
+    }
+}
+
+.design-edit-content .pushLeftMenu .panel_content {
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+.design-edit-content .pushLeftMenu .panel_content .leftMenuContent {
+    width: 280px;
+    height: auto;
+    padding: 20px;
+}
+
+
+.panel_content .leftMenuContent .newPicture,
+.panel_content .leftMenuContent .newText,
+.panel_content .leftMenuContent .newRect {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #d93732;
+    color: #fff;
+    font-size: 15px;
+    line-height: 40px;
+    border-radius: 3px;
+    margin-top: 14px;
+}
+
+.panel_content .leftMenuContent .newPicture:hover,
+.panel_content .leftMenuContent .newText:hover,
+.panel_content .leftMenuContent .newRect:hover {
+    background-color: #df4f4a;
+    color: #fff;
+}
+
+#productElement {
+    padding-top: 14px;
+}
+
+#productElement .layui-colla-item {
+    width: 100%;
+    display: table;
+    border: 0px;
+}
+
+#productElement .layui-colla-item .layui-colla-content {
+    padding: 0px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    max-height: 200px;
+    /*overflow: scroll;*/
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#productElement .layui-colla-item .layui-colla-content::-webkit-scrollbar {
+    display: none;
+}
+
+#productElement .layui-collapse {
+    border-width: 0px;
+}
+
+#productElement .layui-colla-title {
+    background-color: #fff;
+}
+
+.elementOption {
+    width: 80%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #f7f5f7;
+    height: auto;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 10px;
+    display: table;
+}
+
+.elementOption.act {
+    color: #fff;
+    background-color: #d93732;
+}
+
+#productElement .elementOption:hover {
+    color: #fff;
+    background-color: #d93732;
+}
+
+
+.elementOption .componetTitle {
+    width: 100%;
+    height: 30px;
+    text-align: center;
+    font-size: 10px;
+    vertical-align: middle;
+    line-height: 14px;
+    display: table-cell;
+    word-break: break-all;
+    /*强制转行*/
+}
+
+#textBoxAttributes-dataFiled {
+    width: 60%;
+    text-align: right;
+    float: right;
+    color: #cc2028;
+    overflow: hidden;
+}
+
+#component .elementOption {
+    background-color: transparent;
+}
+
+#component .elementOption .componetTitle {
+    width: 100%;
+    max-height: 40px;
+    /*height: auto;*/
+    text-align: center;
+    font-size: 10px;
+    vertical-align: middle;
+    line-height: 15px;
+    display: table;
+    margin-top: 8px;
+}
+
+.elementOption .componetPic {
+    width: 100%;
+    height: 50px;
+    display: table;
+}
+
+.elementOption .componetPic>img {
+    width: 80px;
+    height: 80px;
+    margin: 0px auto;
+    border: 1px solid #e6e6e6;
+}
+
+
+#shapeElement {
+    width: 100%;
+    height: auto;
+    display: table;
+    padding-top: 2px;
+}
+
+#shapeElement object {
+    width: 80%;
+    height: 30px;
+    display: table;
+    margin: 0px auto;
+    cursor: pointer;
+}
+
+#shapeElement object svg {
+    cursor: pointer;
+}
+
+#shapeElement .elementOption {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #fff;
+    border: 1px dashed #e6e6e6;
+    height: auto;
+    cursor: pointer;
+    color: #333;
+    margin-bottom: 10px;
+    display: table;
+    position: relative;
+    text-align: center;
+    line-height: 80px;
+}
+
+#shapeElement .elementOption.act {
+    border-color: #d93732
+}
+
+#shapeElement .elementOption:hover {
+    border-color: #d93732
+}
+
+#shapeElement .elementOption .maskClick:hover {
+    color: #fff;
+    background-color: #d93732;
+    opacity: 0.5;
+}
+
+#shapeElement .elementOption .maskClick {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    cursor: pointer;
+    z-index: 99;
+    position: absolute;
+}
+
+.baseElement {
+    width: 100%;
+    height: auto;
+    display: table;
+}
+
+.baseElement .elementOption:hover {
+    color: #fff;
+    background-color: #d93732;
+}
+
+.edit-tool-panel .menuContent_Title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-bottom: 4px;
+    color: #333;
+    font-size: 14px;
+    text-align: left;
+    text-indent: 6px;
+    margin-top: 11px;
+}
+
+.panel_content .leftMenuContent .newComponent {
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #d93732;
+    color: #fff;
+    font-size: 15px;
+    line-height: 40px;
+    border-radius: 3px;
+    margin-top: 14px;
+}
+
+.panel_content .leftMenuContent .newComponent:hover {
+    background-color: #df4f4a;
+    color: #fff;
+}
+
+.panel_content .menuContent_Title {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-top: 15px;
+    padding-bottom: 4px;
+    color: #333;
+    font-size: 15px;
+    text-align: left;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox {
+    width: 100%;
+    height: auto;
+}
+
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea {
+    width: 100%;
+    height: 38px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    position: relative;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .searchIcon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 1;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .searchIcon>i {
+    color: #333;
+    font-size: 15px;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .searchInput {
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .searchInput>input {
+    border: 0px;
+    width: 100%;
+    text-indent: 50px;
+    font-size: 15px;
+    color: #333;
+    height: 38px;
+    line-height: 38px;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .clearIcon {
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 1;
+    cursor: pointer;
+    display: none;
+}
+
+.panel_content .leftMenuContent .menuContent_searchBox .searchArea .clearIcon>i {
+    color: #333;
+    font-size: 15px;
+}
+
+.panel_content .leftMenuContent .reload {
+    width: 100%;
+    height: 24px;
+    text-align: right;
+    display: table;
+    line-height: 24px;
+    margin-top: 14px;
+}
+
+.panel_content .leftMenuContent .reload>i {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px;
+}
+
+.panel_content .leftMenuContent .reload>i:hover {
+    color: #999;
+}
+
+.panel_content .leftMenuContent .menuContent_Box {
+    width: 280px;
+    height: auto;
+    position: absolute;
+    left: 20px;
+    top: 80px;
+    z-index: 10;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.panel_content .leftMenuContent .menuContent_Box .componetPic {
+    width: 75%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+    overflow: hidden;
+    display: list-item;
+    margin-bottom: 10px;
+    max-height: 60px;
+    height: auto;
+    line-height: 20px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.panel_content .leftMenuContent .menuContent_Box .componetPic:hover {
+    background-color: #f9f9f9;
+}
+
+.panel_content .leftMenuContent .menuContent_Box .componetTitle {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    font-size: 12px;
+    height: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+    max-height: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.panel_content .leftMenuContent .menuShape_Box {
+    width: 280px;
+    height: 300px;
+    position: relative;
+    z-index: 10;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.panel_content .leftMenuContent .menuShape_Box .componetPic {
+    width: 75%;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: center;
+    overflow: hidden;
+    display: list-item;
+    margin-bottom: 10px;
+    height: auto;
+    line-height: 20px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.panel_content .leftMenuContent .menuShape_Box .componetPic:hover {
+    background-color: #f9f9f9;
+}
+
+.panel_content .leftMenuContent .menuShape_Box .componetImg {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+    font-size: 14px;
+    height: auto;
+    overflow: hidden;
+    word-wrap: break-word;
+}
+
+.panel_content .leftMenuContent .menuShape_Box .componetImg>img {
+    height: auto;
+    width: 100%;
+    margin: 0px auto;
+}
+
+.design-edit-content .pushLeftMenu .panel_close {
+    width: 20px;
+    height: 64px;
+    cursor: pointer;
+    /*background-image: url("./images/closeLeftMenuIcon.png");*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    margin-top: -30%;
+}
+
+
+.workArea .drawPanel {
+    width: 100%;
+    height: 100%;/*auto*/;
+    display: table;
+    position: absolute;
+}
+
+.design-edit-content .editor-tool-bar {
+    width: auto;
+    height: 40px;
+    position: absolute;
+    bottom: 30px;
+    right: 300px;
+    z-index: 99;
+}
+
+.design-edit-content .editor-tool-bar .helpIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 40px;
+    font-size: 23px;
+    color: #333;
+    float: right;
+    margin-left: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.design-edit-content .editor-tool-bar .helpIcon.noneClick {
+    background-color: #ccc;
+}
+
+.design-edit-content .editor-tool-bar .pushMenu {
+    width: 60px;
+    height: auto;
+    position: absolute;
+    z-index: 99;
+    right: -10px;
+    opacity: 0.9;
+    bottom: 45px;
+    background-color: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: none;
+}
+
+.design-edit-content .editor-tool-bar .pushMenu .row {
+    width: 90%;
+    height: 20px;
+    line-height: 20px;
+    margin: 0px auto;
+    text-align: center;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    display: table;
+    cursor: pointer;
+    color: #333;
+}
+
+.design-edit-content .editor-tool-bar .pushMenu .row i:hover {
+    color: #ff5721;
+}
+
+.design-edit-content .editor-tool-bar .pushMenu .row>i {
+    color: #333;
+}
+
+.design-edit-content .editor-tool-bar .sizeScale {
+    width: auto;
+    height: 36px;
+    border-radius: 5px;
+    border: 1px solid #dadce0;
+    float: right;
+    background-color: #eff2f7;
+}
+
+#scaleNumber {
+    width: auto;
+    height: 38px;
+    line-height: 38px;
+    padding-right: 14px;
+    color: #333;
+    font-size: 15px;
+    float: left;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#decreaseScale>i {
+    font-weight: 580;
+}
+
+#amplifyScale>i {
+    font-weight: 580;
+}
+
+#decreaseScale {
+    width: auto;
+    height: 38px;
+    line-height: 32px;
+    padding-left: 14px;
+    padding-right: 2px;
+    color: #333;
+    font-size: 24px;
+    float: left;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: 'layui-icon';
+}
+
+#decreaseScale:hover,
+#amplifyScale:hover {
+    color: #666;
+}
+
+#amplifyScale {
+    width: auto;
+    height: 38px;
+    line-height: 32px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #333;
+    font-size: 24px;
+    float: left;
+    cursor: pointer;
+    margin-right: 10px;
+    font-family: 'layui-icon';
+}
+
+.sizeScale .scaleTool {
+    width: auto;
+    height: 38px;
+    line-height: 32px;
+    padding-left: 4px;
+    padding-right: 4px;
+    color: #333;
+    font-size: 24px;
+    float: left;
+    margin-right: 10px;
+    display: none;
+}
+
+.sizeScale .scaleTool span {
+    width: auto;
+    height: 38px;
+    line-height: 38px;
+    padding-right: 4px;
+    color: #333;
+    font-size: 15px;
+    float: left;
+    font-weight: 400;
+}
+
+.sizeScale .scaleTool span #inputScale{
+    width: 50px;
+    /*background-color: transparent;*/
+    background-color: #fff;
+    border: 1px solid #eee;
+    font-size: 15px;
+    text-align: center;
+    height: 24px;
+    line-height: 22px;
+    margin-top: 7px;
+}
+
+
+/*#draw-wrapper {*/
+/*    width:auto;*/
+/*    padding:0px;*/
+/*    display:table;*/
+/*    margin:0px auto;*/
+/*    margin-top:20px;*/
+/*    margin-bottom:20px;*/
+/*    background-color:#fff;  */
+/*    box-shadow: 0 2px 8px rgb(160 160 180 / 40%);*/
+/*}*/
+
+#draw-wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: auto;
+    left: 0px;
+    top: 0px;
+}
+
+#draw-wrapper #showAttributesTip {
+    font-size:10px;
+    color:#fff;
+    width: auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    height:18px;
+    background:#0a0a0a;
+    position:absolute;
+    z-index:99999;
+    border-radius: 6px;
+}
+
+
+#draw-wrapper.componentDesign .canvas-container {
+    margin: 0px auto;
+}
+
+#paperArea {
+    background-color: #eff2f7;
+}
+
+/* 作业区域结束 */
+
+/********* 右则属性区开始 **********/
+
+.productPictureList {
+    display: none;
+}
+
+.productPictureList .rowLine.listBox {
+    height: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+    /*border: 1px solid #eee;*/
+}
+
+.productPictureList .rowLine.listBox .replacePicture {
+    width: 76px;
+    height: 76px;
+    float: left;
+    margin: 2px;
+    padding: 2px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.productPictureList .rowLine.listBox .replacePicture:hover {
+    border: 1px solid #ccc;
+}
+
+.productPictureList .rowLine.listBox .replacePicture>img {
+    width: auto;
+    max-width: 66px;
+    height: 66px;
+    cursor: pointer;
+    margin: 0px auto;
+    margin-top: 5px;
+}
+
+.underlineFilter {
+    width: 80px;
+    height: 28px;
+    margin: 0px;
+    border-radius: 3px;
+    position: relative;
+    float: left;
+    /*background-color: #eff2f7;*/
+    text-align: center;
+    margin-left: 8px;
+}
+
+.underlineFilter>span {
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    float: left;
+    font-size: 13px;
+}
+
+.underlineFilter>input {
+    width: 80px;
+    text-align: left;
+    /*line-height: 28px;*/
+    color: #333;
+    font-size: 12px;
+    /*margin: 0px auto;*/
+    /*height: 26px;*/
+    /*background-color: #eff2f7;*/
+    /*float: left;*/
+}
+
+
+.angleBox {
+    width: 28px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.angleBox .roundShape {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ff5722;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    -moz-transform: rotate(0deg);
+    /* Firefox */
+    -webkit-transform: rotate(0deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(0deg);
+    /* Opera */
+}
+
+.angleBox .roundShape .pointer {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 3px;
+    position: absolute;
+    left: 21px;
+    top: 12px;
+}
+
+.angleNum {
+    width: 28px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    text-align: center;
+    line-height: 28px;
+    color: #333;
+    font-size: 10px;
+}
+
+.angleFilter {
+    width: 90px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    text-align: center;
+    margin-left: 8px;
+}
+
+.angleFilter>span {
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    float: left;
+    font-size: 13px;
+}
+
+.angleFilter>input {
+    width: 40px;
+    border: 0px;
+    text-align: center;
+    line-height: 28px;
+    color: #333;
+    font-size: 10px;
+    margin: 0px auto;
+    height: 26px;
+    background-color: #eff2f7;
+    float: left;
+}
+
+
+
+/*#############多选组件批量设置阴影选角器 Start #############*/
+
+
+.moreAngleBox {
+    width: 28px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.moreAngleBox .moreRoundShape {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #ff5722;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+
+    transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    /* IE 9 */
+    -moz-transform: rotate(0deg);
+    /* Firefox */
+    -webkit-transform: rotate(0deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(0deg);
+    /* Opera */
+}
+
+.moreAngleBox .moreRoundShape .pointer {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 3px;
+    position: absolute;
+    left: 21px;
+    top: 12px;
+}
+
+.moreAngleNum {
+    width: 28px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    cursor: pointer;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    text-align: center;
+    line-height: 28px;
+    color: #333;
+    font-size: 10px;
+}
+
+.moreAngleFilter {
+    width: 90px;
+    height: 28px;
+    margin: 0px;
+    padding: 4px;
+    border-radius: 3px;
+    position: relative;
+    float: left;
+    background-color: #eff2f7;
+    text-align: center;
+    margin-left: 8px;
+}
+
+.moreAngleFilter>span {
+    width: 50px;
+    height: 28px;
+    line-height: 28px;
+    display: block;
+    float: left;
+    font-size: 13px;
+}
+
+.moreAngleFilter>input {
+    width: 40px;
+    border: 0px;
+    text-align: center;
+    line-height: 28px;
+    color: #333;
+    font-size: 10px;
+    margin: 0px auto;
+    height: 26px;
+    background-color: #eff2f7;
+    float: left;
+}
+
+
+
+
+/*###############多选组件批量设置阴影选角器 END ##############*/
+
+
+
+
+.edit-attribute-panel .attribute-panel .templateSizeBox,
+.edit-attribute-panel .attribute-panel .pictureSizeBox {
+    width: 100%;
+    height: auto;
+    display: table;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth,
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeWidth {
+    width: 48%;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    background-color: #f6f7f9;
+    color: #33383e;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: left;
+    text-indent: 10px;
+    position: relative;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight,
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeHeight {
+    width: 48%;
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    background-color: #f6f7f9;
+    color: #33383e;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: left;
+    text-indent: 10px;
+    position: relative;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth>span.number,
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight>span.number {
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth>span.unit,
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight>span.unit {
+    width: auto;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    color: #7f8792;
+    font-size: 14px;
+}
+
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeWidth>span.number,
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeHeight>span.number {
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+}
+
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeWidth>span.unit,
+.edit-attribute-panel .attribute-panel .pictureSizeBox .sizeHeight>span.unit {
+    width: auto;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    color: #7f8792;
+    font-size: 14px;
+}
+
+
+
+.edit-attribute-panel {
+    width: 276px;
+    height: 100%;
+    position: absolute;
+    right: 0px;
+    top: 53px;
+    z-index: 10;
+    background-color: #fff;
+    border-left: 1px solid #eeeddd;
+    box-shadow: -4px 0 5px -3px #d5d5d5;
+    /*overflow-y: scroll;*/
+    /*overflow-x: visible;*/
+}
+
+.edit-attribute-panel .panelTitle {
+    width: 88%;
+    height: 20px;
+    line-height: 20px;
+    font-size: 15px;
+    color: #333;
+    text-align: left;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    margin-top: 8px;
+    padding-left: 6%;
+    padding-right: 6%;
+    border-bottom: 1px solid #eee;
+}
+
+.edit-attribute-panel .rowLine {
+    width: 100%;
+    height: auto;
+    color: #9da3ac;
+    display: table;
+}
+
+.edit-attribute-panel .rowLine .Left,
+.edit-attribute-panel .rowLine .Right {
+    width: 50%;
+    height: auto;
+    float: left;
+}
+
+.edit-attribute-panel .rowLine .Left .ztip,
+.edit-attribute-panel .rowLine .Right .ztip {
+    position: absolute;
+    width: auto;
+    height: 38px;
+    line-height: 38px;
+    padding-right: 5px;
+    right: 0px;
+    top: 0px;
+    z-index: 10;
+    color: #ddd;
+}
+
+.edit-attribute-panel .rowLine .Left>button,
+.edit-attribute-panel .rowLine .Right>button {
+    width: 90%;
+    margin-top: 10px;
+    margin-right: 0px;
+    display: table;
+}
+
+.edit-attribute-panel .rowLine .Left>button:hover,
+.edit-attribute-panel .rowLine .Right>button:hover {
+    border: 1px solid #e61f24;
+    color: #e61f24;
+}
+
+.edit-attribute-panel .rowLine .Left {
+    float: left;
+}
+
+.edit-attribute-panel .rowLine .Right {
+    float: right;
+    text-align: right;
+}
+
+.edit-attribute-panel .rowLine .Right>button {
+    float: right;
+}
+
+.edit-attribute-panel .rowTitle {
+    width: 100%;
+    height: auto;
+    color: #9da3ac;
+    padding-top: 5px;
+    display: table;
+}
+
+.edit-attribute-panel .rowTitle .left {
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    text-align: left;
+    float: left;
+}
+
+.edit-attribute-panel .rowTitle .right {
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    text-align: right;
+    float: right;
+}
+
+.LinItemConfig {
+    display: none;
+}
+
+.LinItemConfig .lineItemPicture {
+    width: 100%;
+    height: auto;
+}
+
+.LinItemConfig .lineItemPicture > img{
+    width: 60px;
+    height: 60px;
+    border: 2px solid #fff;
+    margin-right: 6px;
+    display: inline-block;
+    margin-top: 5px;
+    cursor: pointer;
+}
+.LinItemConfig .lineItemPicture > img:hover{
+    border: 2px solid #d93732;
+}
+
+.LinItemConfig .lineItemPicture > img.act{
+    width: 60px;
+    height: 60px;
+    border: 2px solid #d93732;
+}
+
+
+/* 页面画布设置 */
+.pageConfig {
+    display: table;
+}
+
+.productConfig,
+.textConfig,
+.pictureConfig,
+.composingConfig,
+.rectConfig,.underlineTextConfig {
+    display: none;
+}
+
+.edit-attribute-panel .attribute-panel {
+    width: 88%;
+    height: auto;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox {
+    width: 100%;
+    height: auto;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth {
+    width: 48%;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    background-color: #f6f7f9;
+    color: #33383e;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: left;
+    text-indent: 10px;
+    position: relative;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight {
+    width: 48%;
+    height: 40px;
+    float: right;
+    line-height: 40px;
+    background-color: #f6f7f9;
+    color: #33383e;
+    cursor: pointer;
+    border-radius: 3px;
+    text-align: left;
+    text-indent: 10px;
+    position: relative;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth>span.number,
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight>span.number {
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+}
+
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeWidth>span.unit,
+.edit-attribute-panel .attribute-panel .templateSizeBox .sizeHeight>span.unit {
+    width: auto;
+    height: 40px;
+    position: absolute;
+    right: 10px;
+    top: 0px;
+    color: #7f8792;
+    font-size: 14px;
+}
+
+.edit-attribute-panel .attribute-panel .preViewPageBackground {
+    width: 100%;
+    height: 100px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    text-align: center;
+    background-color: #f6f7f9;
+}
+
+.edit-attribute-panel .attribute-panel .preViewPageBackground>img {
+    height: 100px;
+    width: auto;
+    margin: 0px auto;
+}
+
+.edit-attribute-panel .attribute-panel .replaceBackground {
+    width: 100%;
+    height: 100px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+#zoomToPaper {
+    margin-left: 0px;
+    margin-top: 14px;
+}
+
+#LockBackgroundImage {
+    margin-left: 0px;
+    margin-top: 14px;
+    width: 100%;
+}
+
+/*.edit-attribute-panel .attribute-panel .replaceBackground >button{*/
+/*    background-color:#f6f7f9;*/
+/*    color:#33383e;*/
+/*}*/
+/*.edit-attribute-panel .attribute-panel .replaceBackground >button:hover{*/
+/*    background-color:#e8eaec;*/
+/*}*/
+
+.edit-attribute-panel .attribute-panel .fontStyle .Right input,
+.edit-attribute-panel .productPictureList .fontStyle .Right input {
+    width: 90%;
+    margin-left: 10%;
+    float: right;
+}
+
+.edit-attribute-panel .attribute-panel .fontStyle .Right .layui-form-select .layui-edge {
+    top: 2px;
+    margin-top: 16px;
+}
+
+
+/*.edit-attribute-panel .attribute-panel .replaceBackground >button{*/
+/*    background-color:#f6f7f9;*/
+/*    color:#33383e;*/
+/*}*/
+/*.edit-attribute-panel .attribute-panel .replaceBackground >button:hover{*/
+/*    background-color:#e8eaec;*/
+/*}*/
+
+.attribute-btn {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: auto;
+    padding-top: 20px;
+    display: none;
+}
+
+.attribute-btn .pageButton {
+    width: auto;
+    height: 38px;
+    line-height: 38px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float: left;
+    cursor: pointer;
+}
+
+.pageEvent.productDetails {
+    cursor: pointer;
+}
+
+.attribute-btn .pageButton>i {
+    font-size: 20px;
+}
+
+.attribute-btn .pageButton.noneClick>i {
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.attribute-btn .pageButton.noneClick>i:hover {
+    color: #eee;
+    cursor: not-allowed;
+}
+
+.attribute-btn .pageButton>i:hover {
+    color: #000;
+}
+
+.attribute-btn .pageButton.copyStyleBtn>i {
+    font-size: 18px;
+}
+
+.attribute-btn .pageButton.copyStyleBtn.selected>i {
+    color: #d93732;
+}
+
+.composing-btn,
+.textAlign-btn {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #f6f7f9;
+    border-radius: 3px;
+    display: table;
+    margin-top: 25px;
+    position: relative;
+}
+
+.textAlign-btn {
+    margin-top: 0px;
+}
+
+.composing-btn .sliderTextBox,
+.textAlign-btn .sliderTextBox {
+    width: 80%;
+    height: auto;
+    background-color: #fff;
+    left: 0px;
+    top: 55px;
+    z-index: 10;
+    display: none;
+    position: absolute;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 4px !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .16), 0 1px 8px rgba(0, 0, 0, .06), 0 4px 12px rgba(0, 0, 0, .08) !important;
+}
+
+#textLineSpace,
+#textFontSpace,
+#textFontAglin {
+    display: none;
+}
+
+.composing-btn .sliderPictureBox {
+    width: 80%;
+    height: auto;
+    background-color: #fff;
+    left: 0px;
+    top: 55px;
+    z-index: 10;
+    display: none;
+    position: absolute;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-radius: 4px !important;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .16), 0 1px 8px rgba(0, 0, 0, .06), 0 4px 12px rgba(0, 0, 0, .08) !important;
+}
+
+
+.elementLever {
+    padding-top: 0px;
+}
+
+.elementLever .levelSpan{
+    width: 100%;
+    height: auto;
+    display: table;
+}
+
+.elementLever .levelSpan .levelBtn {
+    width: 24px;
+    height: 24px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    color: #333;
+    margin-right: 10px;
+}
+
+.elementLever .levelSpan .levelBtn.noneClick{
+    color: #ccc;
+    cursor: default;
+}
+
+#layerToForward {
+    margin-left: 10px;
+    margin-right: 16px;
+}
+
+#layerToBackward{
+    margin-right: 16px;
+}
+#layerToBackward > svg{
+    margin-top: -2px;
+}
+
+#layerToTop {
+    margin-right: 16px;
+}
+#layerToTop >svg {
+    margin-top: 2px;
+}
+
+#layerToBottom >svg {
+    margin-top: -1px;
+}
+
+
+.composing-btn .vLine,
+.textAlign-btn .vLine {
+    position: absolute;
+    width: 1px;
+    height: 20px;
+    border-left: 1px solid #ccc;
+    left: 50%;
+    top: 14px;
+    z-index: 10;
+}
+
+.composing-btn .styleButton,
+.textAlign-btn .styleButton {
+    width: auto;
+    height: 24px;
+    line-height: 24px;
+    padding: 3px;
+    float: left;
+    cursor: pointer;
+    margin-right: 2px;
+    opacity: 1;
+}
+
+.composing-btn .styleButton,
+.textAlign-btn .styleButton:hover {
+    opacity: 0.7;
+}
+
+.composing-btn .styleButton.r,
+.textAlign-btn .styleButton.r {
+    float: right;
+}
+
+.composing-btn .styleButton:hover {
+    opacity: 0.7;
+}
+
+.composing-btn .styleButton > img,
+.textAlign-btn .styleButton > img {
+    width: 24px;
+    height: 24px;
+}
+
+.composing-btn .styleButton.r.noneClick, .textAlign-btn .styleButton.r.noneClick{
+   cursor: not-allowed; 
+}
+.composing-btn .styleButton.r.noneClick >img , .textAlign-btn .styleButton.r.noneClick >img {
+   opacity: 0.2;
+}
+
+
+.edit-attribute-panel .attribute-panel .replacePictureElement {
+    width: 100%;
+    height: 100px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+.edit-attribute-panel .attribute-panel .deletePage>button {
+    background-color: #f6f7f9;
+    color: #33383e;
+}
+
+.edit-attribute-panel .attribute-panel .deletePage>button:hover {
+    background-color: #e8eaec;
+}
+
+#test-form .layui-colorpicker {
+    width: 60px;
+}
+
+#test-form .layui-colorpicker i {
+    display: none;
+}
+
+.layui-input.textStroke,
+.layui-textarea.textStroke {
+    width: 80px;
+    float: left;
+}
+
+.layui-input.rectStroke,
+.layui-textarea.rectStroke {
+    width: 80px;
+    float: left;
+    margin-right: 14px;
+}
+
+#textStrokeColor-form-input,
+#rectColor-form-input {
+    display: none;
+}
+
+#textStrokeColor-form .layui-colorpicker,
+#rectColor-form .layui-colorpicker {
+    width: 60px;
+}
+
+#textStrokeColor-form .layui-colorpicker i,
+#rectColor-form .layui-colorpicker i {
+    display: none;
+}
+
+.layui-fontStyle {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    color: #333;
+    text-align: center;
+    font-family: monospace;
+    font-size: 20px;
+    border: 1px solid rgb(230, 230, 230);
+    padding: 5px;
+    border-radius: 2px;
+    line-height: 24px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    margin-right: 6px;
+}
+
+.layui-fontStyle:hover {
+    color: #999;
+}
+
+.layui-fontStyle.act {
+    background-color: #f0f0f0;
+}
+
+.layui-fontStyle.noneClick {
+    color: #eee;
+}
+
+.layui-fontStyle.Bold {
+    font-weight: 550;
+}
+
+.layui-fontStyle.Regualar {
+    font-weight: normal;
+}
+
+.layui-fontStyle.Italic {
+    font-style: italic;
+}
+
+
+/********** 右则属性区结束 **********/
+
+
+/********** 其他 **********/
+
+/*水平辅助线*/
+#hLine {
+    box-sizing: content-box;
+    position: absolute;
+    opacity: 0.8;
+    z-index: 100;
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height: 1px;
+    padding: 0px;
+    cursor: row-resize;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: #dde5f3;
+    display: none;
+}
+
+.workArea .horizontalLine {
+    border-top: 1px solid #0ecbd7;
+    box-sizing: content-box;
+    position: absolute;
+    opacity: 0.8;
+    z-index: 100;
+    left: 0px;
+    width: 100%;
+    top: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height: 1px;
+    cursor: row-resize;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: none;
+}
+
+/*垂直辅助线*/
+#vLine {
+    box-sizing: content-box;
+    position: absolute;
+    opacity: 0.8;
+    z-index: 100;
+    width: 10px;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding: 0px;
+    cursor: col-resize;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: #dde5f3;
+    display: none;
+}
+
+.workArea .verticalLine {
+    border-left: 1px solid #0ecbd7;
+    box-sizing: content-box;
+    position: absolute;
+    opacity: 0.8;
+    z-index: 100;
+    left: 10px;
+    width: 1px;
+    top: 0px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height: 100%;
+    padding: 0px;
+    cursor: col-resize;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    display: none;
+}
+
+/*  CMYK颜色  */
+.colorPreview {
+    width: 60px;
+    height: 26px;
+    margin: 0px;
+    padding: 4px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+}
+
+.colorPreview>span.disColor {
+    width: 100%;
+    height: 26px;
+    display: table;
+    text-align: center;
+    line-height: 26px;
+}
+
+.colorPreview>.colorLayer {
+    width: 350px;
+    height: 300px;
+    position: fixed;
+    z-index: 100;
+    right: 14px;
+    top: 50px;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #d2d2d2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 12%);
+    border-radius: 3px;
+    cursor: default;
+    padding: 14px;
+}
+
+
+
+  /* 右键菜单 */
+  .menu-x {
+    visibility: hidden; /* 隐藏菜单 */
+    z-index: -100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 12px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+  }
+
+  /* 菜单每个选项 */
+  .menu-li {
+    box-sizing: border-box;
+    padding: 8px 18px;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+
+  /* 鼠标经过的选项，更改背景色 */
+  .menu-li:hover {
+    background-color: antiquewhite;
+  }
+
+  /* 第一个选项，顶部两角是圆角 */
+  .menu-li:first-child {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+  }
+
+  /* 最后一个选项，底部两角是圆角，底部不需要边框 */
+  .menu-li:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+ 
+
+
+
+
+/*三角提示标签*/
+:root {
+  /*背景颜色*/
+  --cssTriangle-background: #4fb16f;
+}
+ 
+/*核心：整体样式(清除浮动)*/
+.cssTriangle {
+  zoom: 1;
+}
+/*核心：整体样式(清除浮动)*/
+.cssTriangle:after {
+  content:"";
+  display:block;
+  clear:both;
+  visibility:hidden;
+  height:0
+}
+/*核心：背景样式*/
+.cssTriangle span {
+  font-size: 12px;
+  padding: 0 10px;  
+  line-height: 14px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background: var(--cssTriangle-background);
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  position: relative;
+  margin: 10px;
+  text-align: left;
+}
+/*核心：三角形样式*/
+.cssTriangle span:after {
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent var(--cssTriangle-background) transparent transparent;
+  border-width: 12px;
+  position: absolute;
+  top: 50%;
+  right: unset;
+  bottom: unset;
+  left: -20px;
+  margin-top: -12px;
+}
+ 
+/*三角形位置：左侧*/
+.cssTriangle.left span {
+  float: left;
+  margin-top: -4px;
+}
+.cssTriangle.left:after {
+  content: "";
+  clear: both;
+}
+.cssTriangle.left span:after {
+  border-color: transparent transparent transparent var(--cssTriangle-background);
+  top: 50%;
+  right: -20px;
+  bottom: unset;
+  left: unset;
+  margin-left: -12px;
+}
+/*三角形位置：右侧*/
+.cssTriangle.right span:after {
+  border-color: transparent var(--cssTriangle-background) transparent transparent;
+  top: 50%;
+  right: unset;
+  bottom: unset;
+  left: -20px;
+  margin-top: -12px;
+}
+
+/*三角形位置：下侧*/
+.cssTriangle.bottom span:after {
+  border-color: var(--cssTriangle-background) transparent transparent transparent;
+  left: 50%;
+  right: unset;
+  bottom: unset;
+  top: 100%;
+  margin-left: -12px;
+  margin-top: -4px;
+}
+ 
+/*预定义：背景颜色*/
+.cssTriangle.green span {
+  --cssTriangle-background: #4fb16f;
+}
+.cssTriangle.orange span {
+  --cssTriangle-background: #fc8a26;
+}
+.cssTriangle.blue span {
+  --cssTriangle-background: #4784e3;
+}
+.cssTriangle.red span {
+  --cssTriangle-background: #ec2e38;
+}
+
+
+
+

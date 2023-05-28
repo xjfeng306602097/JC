@@ -1,0 +1,15 @@
+<div class="layui-card-header">Wiki</div>
+<div class="layui-card-body">
+    <iframe src="https://wiki.makrogo.com?iframe=true" width="100%" id="wiki_iframe"></iframe>
+</div>
+<script type="text/javascript">
+    function iframeAutoHeight() {
+        var windowsHeight = $(window).height();
+        var headerHeight = $('.layui-header').height();
+        $('#wiki_iframe').height(windowsHeight - headerHeight - 75);
+    }
+    iframeAutoHeight();
+    $(window).resize(function() {
+        iframeAutoHeight();
+    });
+</script>

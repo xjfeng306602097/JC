@@ -1,0 +1,58 @@
+xm-select .xm-body .xm-option.selected .xm-option-icon.xm-icon-danx {
+    position: relative;
+    top: 0.24px;
+    left: 0.08px;
+}
+xm-select>.xm-body.relative {
+    z-index: 99;
+}
+.xm-theme-flat xm-select {
+    border: none;
+    text-align: left;
+    cursor: auto;
+}
+.xm-theme-flat xm-select>.xm-body.relative {
+    padding: 0;
+}
+.xm-theme-flat xm-select>.xm-body.relative .xm-option {
+    display: inline-block !important;
+    vertical-align: top;
+    background-color: transparent !important;
+    border: 1px solid #E6E6E6;
+    border-radius: 2px;
+    margin-right: 12px;
+}
+.xm-theme-flat xm-select .xm-body.relative .xm-option .xm-option-icon {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+}
+.xm-theme-flat xm-select>.xm-body.relative .xm-option-content {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    padding-left: 8px;
+}
+.xm-theme-flat xm-select>.xm-body.relative .xm-select-empty {
+    text-align: left;
+}
+.xm-theme-select xm-select {}
+.xm-theme-select xm-select .xm-label .xm-label-block {
+    padding: 0;
+    background-color: transparent !important;
+}
+.xm-theme-select xm-select>.xm-label .xm-label-block>span {
+    color: rgba(0, 0, 0, .85);
+}
+.xm-theme-select xm-select>.xm-body .xm-option.selected {
+    background-color: rgb(95, 184, 120) !important;
+}
+.xm-theme-select xm-select>.xm-body .xm-option.selected .xm-option-content {
+    color: rgb(255, 255, 255);
+}
+.xm-theme-select xm-select .xm-body .xm-option .xm-option-icon {
+    display: none;
+}
+.xm-theme-select xm-select>.xm-body .xm-option-content {
+    padding-left: 0;
+}

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Loading...</title>
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+        Loading...
+    </div>
+    {// 本地文件被更新到文件服务器时会把对应的文件替换，但必须在更新时把对应的文件一并上传 }
+    <script type="text/javascript" src="/html/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/html/js/common-1.0.1.js"></script>
+    <!-- <script type="text/javascript" charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
+    <script type="text/javascript" charset="utf-8" src="/html/js/liff.sdk.js"></script>
+    <script type="text/javascript">
+        var API_URL = $('meta[name="gateway"]').attr("content");
+        {// 默认传递过来的liff_id }
+        var liffID = '{$Think.config.system.line.liff_id}';
+        if (Common.url.searchParams.get('liffid')) {
+            liffID = Common.url.searchParams.get('liffid') || '';
+        }
+
+        // variable input
+        var current_mmCode = Common.url.searchParams.get('mm') || '',
+            current_state = Common.url.searchParams.get('c') || '',
+            current_pageNo = Common.url.searchParams.get('p') || '',
+            current_lineID = '',
+            current_phone = '',
+            current_email = '';
+
+        function jump() {
+            var data = {
+                mmCode: current_mmCode,
+                state: current_state,
+                pageNo: current_pageNo,
+                sub: current_lineID,
+                phone: current_phone,
+                email: current_email,
+            };
+            $.ajax({
+                url: API_URL + '/makro-stat/api/v1/line/getMailUrl',
+                type: 'GET',
+                data: data,
+                success: function(result) {
+                    if (result.code == '0000') {
+                        var url = result.msg;
+                        window.location.href = url + '&mm=' + current_mmCode + '&sub=' + current_lineID;
+                    } else {
+                        var errorText = 'Error.';
+                        errorText += '<br>url: ' + window.location.href;
+                        errorText += '<br>liff ID: ' + liffID;
+                        errorText += '<br>request: ';
+                        errorText += JSON.stringify(data);
+                        errorText += '<br>result: ';
+                        errorText += typeof result == 'object' ? JSON.stringify(result) : result;
+                        $('.main').html(errorText);
+                    }
+                },
+                error: function(xhr, error) {
+                    console.log(xhr);
+                    var errorText = 'Error.';
+                    errorText += '<br>status code: ' + xhr.status;
+                    errorText += '<br>url: ' + window.location.href;
+                    errorText += '<br>liff ID: ' + liffID;
+                    errorText += '<br>request: ';
+                    errorText += JSON.stringify(data);
+                    $('.main').html(errorText);
+                }
+            });
+        }
+        
+        $(function() {
+            liffFormat();
+            // Line Liff
+            function liffFormat() {
+                liff.init({
+                    liffId: liffID
+                }).then(() => {
+                    const idToken = liff.getDecodedIDToken();
+                    //console.log(idToken); // print decoded idToken object
+                    var userInfo = JSON.stringify(idToken);
+                    current_lineID = idToken.sub;
+                    jump();
+                }).catch((err) => {
+                    console.log(err.code, err.message);
+                    jump();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

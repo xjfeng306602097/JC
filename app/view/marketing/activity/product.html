@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Product</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15" permission="marketing:activity:product:search">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-collapse">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">Search</h2>
+                            <div class="layui-colla-content layui-show">
+                                <div class="layui-row layui-form" lay-filter="marketingProductSearch" id="marketingProductSearch">
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">MM Code</label>
+                                            <div class="layui-input-inline" style="width: 325px;">
+                                                <input type="text" name="mmCode" maxlength="50" placeholder="MM Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Status</label>
+                                            <div class="layui-input-inline">
+                                                <select name="isValid">
+                                                    <option value="1">1 Enabled</option>
+                                                    <option value="0">0 Disabled</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Page</label>
+                                            <div class="layui-input-inline">
+                                                <input type="number" name="mmPage" maxlength="50" placeholder="MM Page" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Item Code</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="itemCode" maxlength="50" placeholder="Item Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label">Product ID</label>
+                                            <div class="layui-input-inline">
+                                                <input type="text" name="productId" maxlength="50" placeholder="Product ID" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-inline">
+                                            <label class="layui-form-label"></label>
+                                            <div class="layui-input-inline">
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingProduct-front-search">
+                                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                                </button>
+                                                <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-marketingProduct-front-reset">
+                                                    Reset
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm12">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <script type="text/html" id="marketingProductToolbar">
+                            <div class="layui-btn-container">
+                                <!-- <button type="button" class="layui-btn" lay-event="add" permission="marketing:activity:product:add">Add</button> -->
+                            </div>
+                        </script>
+                        <div class="layui-row">
+                            <table id="content-marketingProduct-list" lay-filter="content-marketingProduct-list"></table>
+                            <script type="text/html" id="imgTpl">
+                                {{# if (d.pic == undefined || d.pic.thumbnailPath == null || d.pic.thumbnailPath == ''){ }}
+                                <img src="/img/none.png" class="layui-table-thumb">
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="replacePicture" permission="marketing:activity:product:picture:replace">Select</a>
+                                {{# } else { }}
+                                <img src="{{ d.pic.thumbnailPath }}" class="layui-table-thumb" lay-event="showPicture">
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="replacePicture" permission="marketing:activity:product:picture:replace">Replace</a>
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingProduct-list-action">
+                                <!-- <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit" permission="marketing:activity:product:edit">Edit</a> -->
+                                {{# if (d.parentId == null || d.parentId == ''){ }}
+                                {{# if (d.isvalid == 1){ }}
+                                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete" permission="marketing:activity:product:delete">Delete</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="restore" permission="marketing:activity:product:restore">Restore</a>
+                                {{# } }}
+                                {{# } }}
+                            </script>
+                            <script type="text/html" id="content-marketingProduct-list-link">
+                                {{# if (d.productId == null || d.productId == ''){ }}
+                                <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="bindLink" permission="marketing:activity:product:bind:link">Bind</a>
+                                {{# } else { }}
+                                <a class="layui-btn layui-btn-warm layui-btn-xs" href="{$api_gateway}/goto/product/web?itemCode={{d.itemcode}}&productId={{d.productId}}" target="_blank" title="{{d.productId}}">View</a>
+                                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="bindLink" permission="marketing:activity:product:bind:link">Replace</a>
+                                {{# } }}
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/product.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

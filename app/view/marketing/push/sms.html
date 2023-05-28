@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Push SMS</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        .layui-fluid {
+            background-color: #FFF;
+        }
+        .layui-tab {
+            margin: 0;
+        }
+        .layui-tab-title {
+            z-index: 99;
+        }
+        .layui-tab-content {
+            padding-right: 15px;
+            padding-bottom: 0;
+            border: 1px solid #EEE;
+            border-top: none;
+        }
+        .layui-form-item.layui-form-row {
+            margin-top: -46px;
+            margin-bottom: 7.5px;
+        }
+        .layui-form-item.layui-form-row .layui-form-label {
+            top: 45px;
+        }
+        .right-top {
+            display: block;
+            height: 56px;
+        }
+        .link {
+            margin-left: 10px;
+            color: #5FB878;
+        }
+        .link:hover {
+            color: #5FB878;
+            text-decoration: underline;
+        }
+        .select-item {
+            display: block;
+            margin-bottom: 15px;
+        }
+        .tags {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        .tags .tag-title {
+            margin-right: 4px;
+        }
+
+        .tags a {
+            -webkit-user-drag: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="layui-fluid">
+        <div class="layui-form" lay-filter="pushSms">
+            <div class="layui-row">
+                <div class="layui-col-sm5">
+                    <input type="hidden" name="type" value="single">
+                    <div class="layui-tab" lay-filter="pushUserTab">
+                        <ul class="layui-tab-title">
+                            <li lay-id="single" class="layui-this">Single Push</li>
+                            <li lay-id="batch">Batch Push</li>
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <input type="hidden" name="mmCustomerId">
+                                <div class="layui-form" lay-filter="filterCustomer">
+                                    <div class="layui-form-item" style="margin-bottom: 0;">
+                                        <label class="layui-form-label">Filter</label>
+                                        <div class="layui-input-block">
+                                            <div class="select-item" id="singleFilterSegment"></div>
+                                            <div class="select-item" id="singleFilterMemberType"></div>
+                                            <div class="select-item">
+                                                <input type="text" name="customerCode" maxlength="50" placeholder="Customer Code" autocomplete="off" class="layui-input">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label"></label>
+                                        <div class="layui-input-inline">
+                                            <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-filterCustomer-front-search">
+                                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                                            </button>
+                                            <button class="layui-btn layuiadmin-btn-order" lay-submit lay-filter="LAY-filterCustomer-front-reset">
+                                                Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-tab-item">
+                                <input type="hidden" name="sendList.segmentIds">
+                                <input type="hidden" name="sendList.memberTypeIds">
+                                <input type="hidden" name="sendList.customersS3Url">
+                                <input type="hidden" name="exceptList.segmentIds">
+                                <input type="hidden" name="exceptList.memberTypeIds">
+                                <input type="hidden" name="exceptList.customersS3Url">
+                                <!-- <input type="hidden" name="blacklist"> -->
+                                <!-- <input type="hidden" name="whitelist"> -->
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">Send List</label>
+                                    <div class="layui-input-block">
+                                        <div class="select-item" id="batchSendSegment"></div>
+                                        <div class="select-item" id="batchSendMemberType"></div>
+                                        <button type="button" id="uploadSendCustomerList" class="layui-btn layui-btn-warm">Upload White List</button>
+                                        <a class="link" href="/template/push-whitelist.xlsx">Example</a>
+                                        <!-- <button type="button" data-type="whitelist" class="layui-btn layui-btn-warm list-btn">White List</button> -->
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">Except List</label>
+                                    <div class="layui-input-block">
+                                        <div class="select-item" id="batchExceptSegment"></div>
+                                        <div class="select-item" id="batchExceptMemberType"></div>
+                                        <button type="button" id="uploadExceptCustomerList" class="layui-btn layui-bg-black">Upload Black List</button>
+                                        <a class="link" href="/template/push-blacklist.xlsx">Example</a>
+                                        <!-- <button type="button" data-type="blacklist" class="layui-btn layui-bg-black list-btn">Black List</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-sm7">
+                    <div class="right-top"></div>
+                    <div class="layui-col-sm12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Customers</label>
+                            <div class="layui-input-block">
+                                <div id="singleCustomer"></div>
+                                <div id="batchCustomer" class="layui-hide" style="line-height: 38px;">Options on the left</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm12">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Content</label>
+                            <div class="layui-input-inline" style="width: 250px;">
+                                <textarea name="msg" id="msg" maxlength="300" lay-verify="required" lay-reqText="The content cannot be empty" autocomplete="off" class="layui-textarea"></textarea>
+                                <div class="tags">
+                                    <span class="tag-title">Tag:</span>
+                                    <a href="javascript:tag('url');" class="layui-btn layui-btn-xs layui-btn-primary">URL</a>
+                                    <a href="javascript:tag('name');" class="layui-btn layui-btn-xs layui-btn-primary">Customer Name</a>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <button type="button" class="layui-btn layui-btn-sm" id="LAY-publish-pushSms-selectTemplate" permission="message:template:select">Select Template</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Page</label>
+                            <div class="layui-input-block">
+                                <select name="pageNo" lay-filter="pageNo" lay-verify="required">
+                                    <option value="1">1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Push Time</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="workTime" id="workTime" lay-verify="required" placeholder="yyyy-mm-dd h:i:s" autocomplete="off" class="layui-input" readonly="readonly">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-hide">
+                    <button class="layui-btn" lay-submit lay-filter="LAY-publish-pushSms-submit" id="LAY-publish-pushSms-submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/xmSelect/xm-select.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/push/push.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/push/sms.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

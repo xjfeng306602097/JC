@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Select Template</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+    html {
+        background-color: transparent;
+    }
+
+    .layui-fluid {
+        padding: 0 15px;
+    }
+
+    .tempList {
+        padding: 0;
+    }
+
+    .template-box {}
+
+    .template-box>ul {
+        width: 100%;
+        height: 405px;
+        padding: 5px 0;
+        border: 1px solid #e6e6e6;
+        border-top: 0px;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .template-box>ul>li {
+        width: 28%;
+        height: auto;
+        margin-top: 10px;
+        display: inline-block;
+        max-width: 140px;
+        margin-left: 3%;
+        cursor: pointer;
+    }
+
+    .template-box>ul>li .tempImg {
+        width: 98%;
+        height: 160px;
+        line-height: 160px;
+        border: 1px solid #EEE;
+        margin: 0px auto;
+        text-align: center;
+        background-color: #FCFCFC;
+    }
+
+    .template-box>ul>li.active .tempImg,
+    .template-box>ul>li:hover .tempImg {
+        background-color: #F3F3F3;
+        border: 1px solid #CCC;
+    }
+
+    .template-box>ul>li .tempImg>span {
+        font-size: 12px;
+        color: #333;
+        line-height: 20px;
+        display: inline-block;
+    }
+
+    .template-box>ul>li .tempName {
+        width: 100%;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 12px;
+        color: #333;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .editBox {
+        height: 512px;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .editBox label {
+        line-height: 28px;
+    }
+
+    .editBox label span {
+        float: right;
+        cursor: pointer;
+        color: #1E9FFF;
+    }
+
+    .editBox .layui-input[disabled] {
+        background-color: #F9F9F9;
+        color: #666;
+    }
+
+    .editBox .num-lock {
+        display: inline-block;
+        width: auto;
+        padding: 2px 12px;
+        border-radius: 18px;
+        margin: 0 auto;
+        line-height: 28px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .editBox .num-lock i {
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        text-align: center;
+    }
+
+    .editBox .num-lock i.layui-icon-unlink {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .editBox .num-lock span {
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 15px;
+    }
+
+    .editBox.editNone {
+        display: none;
+    }
+
+    .editBox.editDisabled em,
+    .editBox.editDisabled .num-lock {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-row layui-form" lay-filter="selectTemplate">
+            <div class="layui-card" style="box-shadow: none;">
+                <div class="layui-tab-content">
+                    <div class="layui-row layui-col-space10">
+                        <!-- 左则栅格 开始 -->
+                        <div class="layui-col-xs8">
+                            <div class="layui-tab" id="configTab">
+                                <ul class="layui-tab-title">
+                                    <li class="layui-this">Template</li>
+                                    <li>Blank Page</li>
+                                </ul>
+                                <div class="layui-tab-content tempList">
+                                    <div class="layui-tab-item layui-show template-box" id="templateData">
+                                        <ul></ul>
+                                        <div class="layui-page" id="templatePage"></div>
+                                    </div>
+                                    <div class="layui-tab-item template-box" id="presetData">
+                                        <ul></ul>
+                                        <div class="layui-page" id="presetPage"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 左则栅格 结束 -->
+                        <!-- 右则栅格 -->
+                        <div class="layui-col-xs4">
+                            <!-- 基本信息 -->
+                            <div class="layui-card editBox editDisabled editNone">
+                                <div class="layui-card-body basicInput layui-row layui-col-space4">
+                                    <input type="hidden" name="type" lay-verify="required" lay-reqText="Please select a template">
+                                    <input type="hidden" name="mmTemplateCode">
+                                    <div class="layui-col-xs12">
+                                        <label class="name">Name<em>*</em> <span></span></label>
+                                        <input type="text" name="templateName" maxlength="150" placeholder="Name" lay-verify="required" lay-reqText="The template name cannot be empty" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-col-xs6">
+                                        <label>Width<em>*</em></label>
+                                        <input type="number" name="width" maxlength="6" placeholder="Width" lay-verify="required|minValue" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-col-xs6">
+                                        <label>Unit<em>*</em></label>
+                                        <select name="unit" lay-filter="unit" lay-verify="required|unit">
+                                            <option value="0">Select Unit</option>
+                                        </select>
+                                    </div>
+                                    <input type="hidden" name="pageWidth">
+                                    <input type="hidden" name="pageHeight">
+                                    <div class="layui-col-xs6">
+                                        <label>Height<em>*</em></label>
+                                        <input type="number" name="height" maxlength="6" placeholder="Height" lay-verify="required|minValue" autocomplete="off" class="layui-input">
+                                    </div>
+                                    <div class="layui-col-xs6">
+                                        <label>DPI(px/inch)<em>*</em></label>
+                                        <input type="number" name="DPI" maxlength="3" placeholder="px/inch" lay-verify="required|checkDPI" autocomplete="off" class="layui-input" value="300">
+                                    </div>
+                                </div>
+                                <!-- 页边距 -->
+                                <div class="layui-collapse marginsInput" lay-accordion>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">
+                                            Margins <span id="marginUnit">(mm)</span>
+                                            <i class="layui-icon layui-colla-icon"></i>
+                                        </h2>
+                                        <div class="layui-colla-content layui-show">
+                                            <div class="layui-row">
+                                                <div class="layui-row layui-col-space4">
+                                                    <div class="layui-col-xs6">
+                                                        <label>Top</label>
+                                                        <input type="number" name="marginTop" maxlength="3" placeholder="Top" lay-verify="required|checkMargins" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Bottom</label>
+                                                        <input type="number" name="marginBottom" maxlength="3" placeholder="Bottom" lay-verify="required|checkMargins" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Inside</label>
+                                                        <input type="number" name="marginIn" maxlength="3" placeholder="Inside" lay-verify="required|checkMargins" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Outside</label>
+                                                        <input type="number" name="marginOut" maxlength="3" placeholder="OutSide" lay-verify="required|checkMargins" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs12" style="text-align: center;">
+                                                        <div class="num-lock" title="" id="margins_link" data="lock">
+                                                            <i class="layui-icon layui-icon-link"></i>
+                                                            <span>locked</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 出血线 -->
+                                <div class="layui-collapse bleedInput" lay-accordion>
+                                    <div class="layui-colla-item">
+                                        <h2 class="layui-colla-title">
+                                            Bleed line<span id="bleedUnit">(mm)</span>
+                                            <i class="layui-icon layui-colla-icon"></i>
+                                        </h2>
+                                        <div class="layui-colla-content layui-show">
+                                            <div class="layui-row">
+                                                <div class="layui-row layui-col-space4">
+                                                    <div class="layui-col-xs6">
+                                                        <label>Top</label>
+                                                        <input type="number" name="bleedLineTop" maxlength="3" placeholder="Top" lay-verify="required|checkBleed" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Bottom</label>
+                                                        <input type="number" name="bleedLineBottom" maxlength="3" placeholder="Bottom" lay-verify="required|checkBleed" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Inside</label>
+                                                        <input type="number" name="bleedLineIn" maxlength="3" placeholder="Inside" lay-verify="required|checkBleed" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs6">
+                                                        <label>Outside</label>
+                                                        <input type="number" name="bleedLineOut" maxlength="3" placeholder="Outside" lay-verify="required|checkBleed" autocomplete="off" class="layui-input" value="0">
+                                                    </div>
+                                                    <div class="layui-col-xs12" style="text-align: center;">
+                                                        <div class="num-lock" title="" id="bleed_link" data="lock">
+                                                            <i class="layui-icon layui-icon-link"></i>
+                                                            <span>locked</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-hide">
+                        <button class="layui-btn" lay-submit lay-filter="LAY-activity-bindTemplate-submit" id="LAY-activity-bindTemplate-submit">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/activity/selectTemplate.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

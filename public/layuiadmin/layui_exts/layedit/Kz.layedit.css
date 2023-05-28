@@ -1,0 +1,10 @@
+table {
+    font-size: 14px;
+}
+table tr {
+    height: 1.5em;
+    line-height: 1.5em;
+}
+img {
+    max-width: 100%;
+}

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Makro Mail</title>
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <style type="text/css">
+        html {
+            font-size: 4px;
+            font-size: 1vw;
+        }
+        @media screen and (min-width:600px) {
+            html {
+                font-size: 5px;
+            }
+        }
+        @media screen and (max-width:400px) {
+            html {
+                font-size: 0.85vw;
+            }
+        }
+        @media screen and (max-width:375px) {
+            html {
+                font-size: 0.7vw;
+            }
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #EEE;
+        }
+        a {
+            text-decoration: none;
+        }
+        p, span, strong {
+            font-size: 4rem;
+        }
+        .main {
+            display: block;
+            padding: 3.75rem 0;
+        }
+        .main .box {
+            display: block;
+            max-width: 600px;
+            padding: 0 2.5rem;
+            margin: 0 auto;
+        }
+        .main .search {
+            display: block;
+            margin-bottom: 2.5rem;
+        }
+        .search:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+        .search .search-input {
+            float: left;
+            display: block;
+            width: 80%;
+            padding: 2rem 2rem;
+            border-style: solid;
+            border-width: 0.5rem 0 0.5rem 0.5rem;
+            -webkit-border-radius: 1.5rem 0 0 1.5rem;
+            -moz-border-radius: 1.5rem 0 0 1.5rem;
+            border-radius: 1.5rem 0 0 1.5rem;
+            border-color: #FFF;
+            box-sizing: border-box;
+            background-color: #FFF;
+        }
+        .search .search-input input {
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            border: none;
+            outline: none;
+            font-size: 4rem;
+            line-height: 5rem;
+            color: #333;
+        }
+        .search .search-btn {
+            float: left;
+            display: block;
+            width: 20%;
+            height: 10rem;
+            -webkit-border-radius: 0 1.5rem 1.5rem 0;
+            -moz-border-radius: 0 1.5rem 1.5rem 0;
+            border-radius: 0 1.5rem 1.5rem 0;
+            font-size: 4rem;
+            line-height: 10rem;
+            background-color: #F0313C;
+            color: #FFF;
+            text-align: center;
+        }
+        .main .list {
+            font-size: 0;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            -o-column-count: 2;
+            column-width: 2;
+            -webkit-column-gap: 2.5rem;
+            -moz-column-gap: 2.5rem;
+            -o-column-gap: 2.5rem;
+            column-gap: 2.5rem;
+        }
+        .mm-item {
+            display: block;
+            width: 100%;
+            margin-bottom: 2.5rem;
+            position: relative;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .mm-item a {
+            display: block;
+            -webkit-border-radius: 1.5rem;
+            -moz-border-radius: 1.5rem;
+            border-radius: 1.5rem;
+            background-color: #FFF;
+            overflow: hidden;
+        }
+        .mm-item a .mm-image {
+            position: relative;
+            display: block;
+            width: 100%;
+            min-height: 7.5rem;
+        }
+        .mm-item a .mm-image img {
+            width: 100%;
+        }
+        .mm-item a .mm-time {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9;
+            display: block;
+            padding: 2rem 1rem 2rem 3rem;
+            background-color: rgba(240, 49, 60, .8);
+        }
+        .mm-item a .mm-time i {
+            float: left;
+        }
+        .mm-item a .mm-time i:before {
+            content: '';
+            display: block;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: url('/html/image/time.png') no-repeat;
+            background-size: 100% 100%;
+        }
+        .mm-item a .mm-time span {
+            display: block;
+            margin-left: 5rem;
+            font-size: 3rem;
+            line-height: 3.5rem;
+            color: #FFF;
+        }
+        .mm-item a .mm-info {
+            display: block;
+            padding: 2.5rem 3rem;
+        }
+        .mm-item a .mm-info strong {
+            display: block;
+            font-size: 3.75rem;
+            font-weight: normal;
+            line-height: 1.4;
+            color: #333;
+            word-break: break-all;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box search">
+            <div class="search-input">
+                <input type="text" name="searchWord" placeholder="search">
+            </div>
+            <div class="search-btn" onclick="search();">search</div>
+        </div>
+        <div class="box list" id="mm-list"></div>
+    </div>
+    <script type="text/html" id="mm-item-tpl">
+        <div class="mm-item">
+            <a href="{item.url}">
+                <div class="mm-image">
+                    <div class="mm-time"><i></i><span>{item.time}</span></div>
+                    <img src="{item.image}">
+                </div>
+                <div class="mm-info">
+                    <strong>{item.title}</strong>
+                </div>
+            </a>
+        </div>
+    </script>
+    {// 本地文件被更新到文件服务器时会把对应的文件替换，但必须在更新时把对应的文件一并上传 }
+    <script type="text/javascript" src="/html/js/uni.webview.1.5.3.js"></script>
+    <script type="text/javascript" src="/html/js/jquery-1.8.0.min.js"></script>
+    <script type="text/javascript" src="/html/js/common-1.0.1.js"></script>
+    <script type="text/javascript">
+        var API_URL = $('meta[name="gateway"]').attr("content");
+
+        // variable input
+        var current_page = 1,
+            current_memberNo = Common.url.searchParams.get('memberNo') || '',
+            current_memberType = Common.url.searchParams.get('memberType') || '',
+            current_storeCode = Common.url.searchParams.get('storeCode') || '';
+
+        // MM item template
+        var mmItemTpl = $('#mm-item-tpl').html();
+
+        var mmList = [];
+        function getList() {
+            var data = {
+                req: {
+                    memberCode: current_memberNo,
+                    memberType: current_memberType,
+                    storeCode: current_storeCode,
+                },
+                limit: 1000,
+                page: 1,
+                sortItems: [
+                    {
+                        column: 'title',
+                        asc: true,
+                    }
+                ],
+            };
+            $.ajax({
+                url: API_URL + '/makro-admin/app-api/v1/mm/page',
+                type: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: JSON.stringify(data),
+                success: function(result) {
+                    if (result.code == '0000') {
+                        var list = result.data.records;
+                        mmList = list;
+                        updateList(list);
+                    }
+                },
+                error: function(xhr, error) {
+                    console.log(xhr)
+                }
+            });
+        }
+        function updateList(list) {
+            var html = '';
+            for (var i in list) {
+                var tpl = mmItemTpl;
+                var url = list[i].url || list[i].publishUrl;
+                if (url) {
+                    url += '?s=' + current_storeCode + '&c=' + current_memberNo
+                } else {
+                    url = 'javascript:;';
+                }
+                tpl = tpl.replace('{item.url}', url);
+                tpl = tpl.replace('{item.image}', list[i].previewUrl || '');
+                tpl = tpl.replace('{item.title}', list[i].title || '');
+                var startTime = parseTime(list[i].startTime);
+                var endTime = parseTime(list[i].endTime);
+                tpl = tpl.replace('{item.time}', startTime + ' - ' + endTime);
+                html += tpl;
+            }
+            $('#mm-list').html(html);
+        }
+        function parseTime(timeStr) {
+            var time = new Date(Date.parse(timeStr.replace(/-/g,"/")));
+            var month = time.getMonth() + 1;
+            var y = time.getFullYear();
+            var m = month < 10 ? '0' + month : month;
+            var d = time.getDate() < 10 ? '0' + time.getDate() : time.getDate();
+            return `${y}-${m}-${d}`;
+        }
+        function search() {
+            var word = $('.search input[name="searchWord"]').val();
+            var list = [];
+            var reg = new RegExp(word, 'ig');
+            for (var i = 0; i < mmList.length; i++) {
+                if (reg.test(mmList[i].title)) {
+                    list.push(mmList[i]);
+                }
+            }
+            updateList(list);
+        }
+        $('.search input[name="searchWord"]').on('input propertychange change', function() {
+            var value = $(this).val();
+            if (value == '') {
+                updateList(mmList);
+            }
+        });
+        $('.search input[name="searchWord"]').keydown(function() {
+            if (event.keyCode == 13) { //回车键的键值为13
+                search();
+            }
+        });
+
+        getList();
+        
+        $(document).on('click', 'a', function (e) {
+            var url = $(this).attr('href');
+            var urlReg = /(http|https):\/\/\S*/;
+
+            if (Common.device.isApp() && urlReg.test(url)) {
+            // if (navigator.userAgent.indexOf('uni-app') >= 0 && urlReg.test(url)) {
+                Common.postMessage({
+                    action: 'openWebUrl',
+                    url: url,
+                });
+                return false;
+            }
+        });
+        $(function() {
+            if (Common.device.isApp()) {
+                var uvData = {
+                    channel: 'app',
+                    memberNo: current_memberNo,
+                };
+                Common.track('uv', uvData, function(result) {
+                    var uuid = result.msg || '';
+                    localStorage && localStorage.setItem('uuid', uuid);
+                });
+            }
+        });
+    </script>
+</body>
+</html>;

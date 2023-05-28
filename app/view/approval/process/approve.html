@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Process Approve</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <style type="text/css">
+        html {
+            background-color: transparent;
+        }
+        .layui-card, .layui-tab-card {
+            box-shadow: none !important;
+        }
+        .layui-tab-card-content {
+            border: 1px solid #e6e6e6;
+            border-top: 0px;
+        }
+        .card-scroll {
+            max-height: calc(100vh - 200px);
+            overflow-x: auto;
+        }
+        .layui-layedit.layui-layedit-disabled {
+            position: relative;
+        }
+        .layui-layedit.layui-layedit-disabled:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+        #preview [carousel-item] .item {
+            text-align: center;
+        }
+        #preview [carousel-item] .item .item-image {
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+        #preview [carousel-item] .item .item-image:after {
+            content: '';
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #preview [carousel-item] .item .item-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .process-log {
+            display: block;
+        }
+        .process-log .layui-timeline-item {
+            display: block;
+        }
+        .process-log .layui-timeline-item .layui-timeline-title span {
+            font-size: 14px;
+        }
+        .process-log .layui-timeline-item .layui-timeline-content .info {
+            margin-top: 5px;
+            color: #CCC;
+        }
+        .process-log .layui-timeline-item .layui-timeline-content .list {
+            display: block;
+            padding-top: 10px;
+            border-top: 1px solid #EEE;
+            margin-top: 10px;
+        }
+        .process-log .layui-timeline-item .layui-timeline-content .content {
+            display: block;
+        }
+        .process-log .layui-timeline-item .layui-timeline-content .content img {
+            max-width: 100%;
+            object-fit: contain;
+        }
+        .file-list ul {
+            display: block;
+            padding: 0 10px;
+        }
+        .file-list ul li {
+            position: relative;
+            display: block;
+            padding: 3px 0;
+            border-bottom: 1px solid #EEE;
+        }
+        .file-list ul li:last-child {
+            border-bottom: none;
+        }
+        .file-list ul li .file-link {
+            padding-right: 80px;
+        }
+        .file-list ul li .file-delete {
+            position: absolute;
+            top: 3px;
+            right: 0;
+        }
+        .file-list ul li p a {
+            display: block;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-tab">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">Detail</li>
+                    <li approve>Approval</li>
+                </ul>
+                <div class="layui-tab-content layui-tab-card-content">
+                    <div class="layui-tab-item layui-show">
+                        <div class="layui-carousel" id="preview">
+                            <div carousel-item></div>
+                        </div>
+                    </div>
+                    <div class="layui-tab-item">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-sm7">
+                                <div class="layui-card">
+                                    <div class="layui-card-body">
+                                        <div class="layui-form" lay-filter="processApprove" id="processApprove">
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">Result</label>
+                                                <div class="layui-input-inline">
+                                                    <select name="flowOption" lay-filter="flowOption" lay-verify="required" lay-reqText="Please select">
+                                                        <!-- <option value="">Select</option> -->
+                                                        <option value="APPROVE">Approve</option>
+                                                        <option value="REJECT">Reject</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item layui-hide" id="returnTo">
+                                                <label class="layui-form-label">Return to</label>
+                                                <div class="layui-input-inline">
+                                                    <select name="returnToStep" lay-verify="required" lay-reqText="Please select"></select>
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">Remark</label>
+                                                <div class="layui-input-block">
+                                                    <textarea type="textarea" name="remark" id="remark" autocomplete="off" class="layui-input layui-hide"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">Attachment</label>
+                                                <div class="layui-input-block">
+                                                    <input type="hidden" name="attachment">
+                                                    <button type="button" class="layui-btn" id="uploadAttachment"><i class="layui-icon layui-icon-upload"></i> Upload</button>
+                                                </div>
+                                                <div class="layui-input-block" style="min-height: 0;margin-top: 10px;" id="attachmentList">
+
+                                                </div>
+                                            </div>
+                                            <div class="layui-form-item layui-hide">
+                                                <button class="layui-btn" lay-submit lay-filter="LAY-process-approval-submit" id="LAY-process-approval-submit">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-sm5">
+                                <div class="layui-card">
+                                    <div class="layui-tab layui-tab-card">
+                                        <ul class="layui-tab-title">
+                                            <li class="layui-this">Approval Log</li>
+                                            <li>Process</li>
+                                        </ul>
+                                        <div class="layui-tab-content">
+                                            <div class="layui-tab-item layui-show">
+                                                <div class="layui-card-body card-scroll">
+                                                    <ul class="layui-timeline process-log" id="approvalLog"></ul>
+                                                </div>
+                                            </div>
+                                            <div class="layui-tab-item">
+                                                <div class="layui-card-body card-scroll">
+                                                    <ul class="layui-timeline process" id="approvalProcess"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/html" id="approvalLogTpl">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-icon-{{ d.icon == undefined ? 'circle' : d.icon }} layui-timeline-axis"></i>
+            <div class="layui-timeline-content">
+                <div class="layui-timeline-title">
+                    <h3>Step {{ d.step }}: <span>{{ d.title }}</span></h3>
+                    <div class="info">{{ d.time }} <span>{{ d.user }}</span></div>
+                </div>
+                <div class="content">{{ d.content }}</div>
+                {{# if (d.files.length > 0){ }}
+                <div class="list file-list">
+                    <span>Files: </span>
+                    <ul class="layui-bg-gray">
+                        {{# layui.each(d.files, function(index, file){ }}
+                        <li>
+                            <p><a href="{{ file }}" title="{{ file }}" target="_blank">{{ layui.url(file).pathname.slice(-1)[0] || 'Unknown' }}</a></p>
+                        </li>
+                        {{# }); }}
+                    </ul>
+                </div>
+                {{# } }}
+            </div>
+        </li>
+    </script>
+    <script type="text/html" id="approvalProcessTpl">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-icon-{{ d.icon == undefined ? 'circle' : d.icon }} layui-timeline-axis"></i>
+            <div class="layui-timeline-content">
+                <h3 class="layui-timeline-title">{{ d.title }}</h3>
+                <div class="content">{{ d.content }}</div>
+            </div>
+        </li>
+    </script>
+    <script type="text/html" id="fileTpl">
+        {{# if (d.files.length > 0){ }}
+        <div class="list file-list">
+            <span>Files: </span>
+            <ul class="layui-bg-gray">
+                {{# layui.each(d.files, function(index, file){ }}
+                <li>
+                    <p class="file-link"><a href="{{ file }}" title="{{ file }}" target="_blank">{{ file }}</a></p>
+                    <a class="file-delete" href="javascript:;"><i class="layui-icon layui-icon-delete"></i></a>
+                </li>
+                {{# }); }}
+            </ul>
+        </div>
+        {{# } }}
+    </script>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/layui_exts/layedit/ace/ace.js?t={$js_timestamp}"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/approval/process/approve.js?t={$js_timestamp}"></script>
+
+</body>
+</html>

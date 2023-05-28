@@ -1,0 +1,15 @@
+{
+    "code": "0000",
+    "msg": "请求成功",
+    "data": {
+        "list": [{
+            "name": "Email",
+            "total": 100,
+            "value": 32
+        }, {
+            "name": "LINE",
+            "total": 100,
+            "value": 32
+        }]
+    }
+}

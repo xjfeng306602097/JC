@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Page duplicate</title>
+    <base src="/makroDigital/" href="/makroDigital/">
+    <meta name="gateway" content="{$api_gateway}">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <style type="text/css">
+    html {
+        background: #fff;
+    }
+
+    .layui-col-space30>* {
+        padding: 0px;
+        width: auto;
+        overflow: scroll;
+        display: flex;
+        margin: 14px; 
+    }
+
+    .layui-col-space30 .layui-col-md4 {
+        padding: 0px;
+        margin-left: 4px;
+        margin-right: 4px;
+        display: block;
+    }
+
+    .pictureList {
+        width: 100%;
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: scroll;
+        padding: 20px;
+        padding-top: 10px;
+    }
+
+    .cmdlist-container {
+        background: #fff;
+    }
+
+    .choosePicture .info {
+        height: 30px;
+    }
+
+    .info:hover {
+        color: #ee1c1d;
+    }
+
+    .cmdlist-container img {
+        width: 100%;
+    }
+
+    .cmdlist-text {
+        padding: 10px;
+        text-align: center;
+    }
+    .cmdlist-text .list-input{
+        width: 90%;
+        margin-left: 5%;
+        display: table;
+    }
+    .cmdlist-text .list-input input{
+        width: 75%;
+        height: 25px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        color: #333;
+        line-height: 25px;
+        float: left;
+    }
+    .cmdlist-text .list-input button{
+        width: 23%;
+        height: 28px;
+        line-height: 28px;
+        float: right;
+    }
+
+
+
+    .imgBox {
+        width: auto;
+        height: 168px;
+    }
+
+    .imgBox>img {
+        object-fit: scale-down;
+        height: 100%;
+    }
+
+    #pageBox {
+        width: 95%;
+        margin-top: 20px;
+        text-align: right;
+    }
+
+    #duplicateList {
+        display: flex;
+    }
+
+    .choosePicture .cmdlist-text span {
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        width: auto;
+        height: 20px;
+        line-height: 28px;
+        border: 1px solid #eee;
+        cursor: pointer;
+        margin-left: 4px;
+        margin-right: 4px;
+        margin-top: 14px;
+        font-size: 13px;
+        border-radius: 3px;
+    }
+
+    .choosePicture .cmdlist-text span:hover {
+        color: #fff;
+        background-color: #ee1c1d;
+    }
+
+    .choosePicture .cmdlist-text span.chooseNoneclick{
+        color: #ccc;
+    }
+    .choosePicture .cmdlist-text span.chooseNoneclick:hover{
+        color: #ccc;
+        background-color: #fff;
+    }
+
+    </style>
+</head>
+<body onselectstart="return false;" unselectable="on">
+    
+    <div class="layui-row" style="position: static;">
+        <div class="layui-col-xs12">
+            <div class="pictureList">
+                <div class="layui-row layui-col-space30" id="duplicateList">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../js/base.js?t={$js_timestamp}"></script>
+    <script src="../js/marketing/config/fabric.js"></script>
+    <script src="../js/marketing/template/duplicate.js?t={$js_timestamp}"></script>
+
+</body>
+</html>
